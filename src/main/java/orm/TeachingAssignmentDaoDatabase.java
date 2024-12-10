@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import DaoExceptions.DaoConnectionException;
+import DaoExceptions.StudentDaoException;
 import DaoExceptions.TeacherDaoException;
 import DaoExceptions.TeachingAssignmentDaoException;
 import domainModel.SchoolClass;
@@ -25,31 +26,39 @@ public class TeachingAssignmentDaoDatabase implements TeachingAssignmentDao {
 	}
 
 	public TeachingAssignment getTeachingById(int id) throws TeachingAssignmentDaoException {
-		String query = "SELECT id_teaching, subject, id_teacher, class_name FROM Teachings WHERE id_teaching = " + id + ";";
-		try {
-			TeacherDaoDatabase teacherDao = new TeacherDaoDatabase(conn);
-			ResultSet rs = getResultsFromDB(query);
-			rs.next();
-			return new TeachingAssignment(
-						rs.getInt("id_teaching"), 
-						rs.getString("subject"), 
-						teacherDao.getTeacherById(rs.getInt("id_teacher")), 
-						new SchoolClass(rs.getString("class_name")));
-			}
-		catch (SQLException | TeacherDaoException e) {
-			throw new TeachingAssignmentDaoException("");
-		}
+	    String query = """
+	        SELECT id_teaching, subject, id_teacher, class_name 
+	        FROM Teachings 
+	        WHERE id_teaching = ?;
+	        """;
+
+	    try (PreparedStatement stmt = conn.prepareStatement(query)) {
+	        stmt.setInt(1, id);
+
+	        try (ResultSet rs = stmt.executeQuery()) {
+	            if (rs.next()) {
+	                TeacherDaoDatabase teacherDao = new TeacherDaoDatabase(conn);
+	                return new TeachingAssignment(
+	                    rs.getInt("id_teaching"),
+	                    rs.getString("subject"),
+	                    teacherDao.getTeacherById(rs.getInt("id_teacher")),
+	                    new SchoolClass(rs.getString("class_name"))
+	                );
+	            } else {
+	                throw new TeachingAssignmentDaoException(
+	                    "No teaching assignment found with id: " + id);
+	            }
+	        }
+	    } catch (SQLException | TeacherDaoException e) {
+	        throw new TeachingAssignmentDaoException("Error retrieving teaching assignment with id: " + id);
+	    }
 	}
 
-	private ResultSet getResultsFromDB(String query) throws SQLException {
-		PreparedStatement stmt = conn.prepareStatement(query);
-		ResultSet rs = stmt.executeQuery();
-		return rs;
-	}
 
 	@Override
 	public Iterator<TeachingAssignment> getAllStudentTeachings(Student student)
-			throws TeachingAssignmentDaoException, DaoConnectionException {
+			throws TeachingAssignmentDaoException, DaoConnectionException, StudentDaoException {
+		DaoUtils.checkStudentExist(student, conn);
 		String query = """
 	            SELECT id_teaching, subject, id_teacher, class_name 
 	            FROM Students 
@@ -81,8 +90,9 @@ public class TeachingAssignmentDaoDatabase implements TeachingAssignmentDao {
 	}
 
 	@Override
-	public Iterator<TeachingAssignment> getAllTeacherTeachings(Teacher teacher) throws TeachingAssignmentDaoException {
-	    String query = """
+	public Iterator<TeachingAssignment> getAllTeacherTeachings(Teacher teacher) throws TeachingAssignmentDaoException, TeacherDaoException {
+		DaoUtils.checkTeacherExist(teacher, conn);
+		String query = """
 	        SELECT id_teaching, subject, id_teacher, class_name 
 	        FROM Teachings 
 	        WHERE id_teacher = ?;
