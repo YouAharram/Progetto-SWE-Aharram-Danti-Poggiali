@@ -34,6 +34,8 @@ import strategyForGrade.GradeAverageStrategy;
 
 public class TeacherController {
 
+	private static final int MINIMUM_GRADE = 1;
+	private static final int MAXIMUM_GRADE = 10;
 	private DaoFactory daoFactory;
 	private Teacher teacher;
 
@@ -70,7 +72,7 @@ public class TeacherController {
 	public void assignGradeToStudentInDate(double value, String description, TeachingAssignment teaching,
 			Student student, LocalDate date)
 			throws GradeDaoException, InvalidGradeValueException, DaoConnectionException, StudentDaoException {
-		if (value >= 1 && value <= 10) {
+		if (value >= MINIMUM_GRADE && value <= MAXIMUM_GRADE) {
 			daoFactory.createGradeDao().addNewGrade(value, description, teaching, student, date);
 		} else {
 			throw new InvalidGradeValueException();
@@ -80,7 +82,7 @@ public class TeacherController {
 	public void assignGradeToStudentInDateWithWeight(double value, int weight, String description,
 			TeachingAssignment teaching, Student student, LocalDate date) throws GradeDaoException,
 			NegativeWeightException, InvalidGradeValueException, DaoConnectionException, StudentDaoException {
-		if ((value >= 1 && value <= 10) && (weight >= 0)) {
+		if ((value >= MINIMUM_GRADE && value <= MAXIMUM_GRADE) && (weight >= 0)) {
 			daoFactory.createGradeDao().addNewGradeWithWeight(value, weight, description, teaching, student, date);
 		} else {
 			if (weight < 0)
