@@ -10,7 +10,6 @@ public class LoginController {
 	public LoginController(LoginHandler teachHandler) {
 		this.teachHandler = teachHandler;
 	}
-	
 
 	public boolean login(String username, String password) {
 		return teachHandler.validationCredentials(username, password);

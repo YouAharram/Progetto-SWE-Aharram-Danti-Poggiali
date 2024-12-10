@@ -7,7 +7,6 @@ public class TeacherUsernameValidationHandler implements LoginHandler{
 	public void setNextChain(LoginHandler nextChain) {
 		this.nextChain = nextChain;
 	}
-
 	@Override
 	public boolean validationCredentials(String username, String password) {
 		if(username != null && username.charAt(0)=='T') {
