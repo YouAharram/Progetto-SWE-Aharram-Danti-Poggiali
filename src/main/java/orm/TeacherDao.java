@@ -1,6 +1,7 @@
 package orm;
 
 
+import DaoExceptions.TeacherDaoException;
 import domainModel.Teacher;
 
 public interface TeacherDao {

@@ -17,6 +17,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.DisciplinaryReportException;
+import DaoExceptions.StudentDaoException;
+import DaoExceptions.TeacherDaoException;
 import domainModel.DisciplinaryReport;
 import domainModel.SchoolClass;
 import domainModel.Student;

@@ -2,6 +2,11 @@ package orm;
 
 import java.sql.Connection;
 
+import DaoExceptions.ParentDaoException;
+import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.StudentDaoException;
+import DaoExceptions.TeacherDaoException;
+import DaoExceptions.TeachingAssignmentDaoException;
 import domainModel.Parent;
 import domainModel.SchoolClass;
 import domainModel.Student;

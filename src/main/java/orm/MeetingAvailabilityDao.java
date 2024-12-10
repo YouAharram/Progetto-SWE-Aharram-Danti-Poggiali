@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Iterator;
 
+import DaoExceptions.TeacherDaoException;
 import domainModel.MeetingAvailability;
 import domainModel.Teacher;
 import orm.MeetingAvailabilityDaoDatabase.MeetingAvailabilityDaoException;

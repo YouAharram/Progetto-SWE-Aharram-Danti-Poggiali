@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
-import orm.DaoConnectionException;
+import DaoExceptions.DaoConnectionException;
 import orm.DatabaseManager;
 
 public class TestProva {

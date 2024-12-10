@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import DaoExceptions.SchoolClassDaoException;
 import domainModel.SchoolClass;
 
 public class SchoolClassDaoDatabase implements SchoolClassDao {

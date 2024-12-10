@@ -7,6 +7,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.Before;
 import org.junit.Test;
 
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.LessonDaoException;
+import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.StudentDaoException;
+import DaoExceptions.TeacherDaoException;
 import businessLogic.TeacherController.IllegalHomeworkAccessException;
 import businessLogic.TeacherController.IllegalLessonAccessException;
 import daoFactory.DaoFactory;
@@ -14,11 +19,7 @@ import domainModel.Lesson;
 import domainModel.SchoolClass;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
-import orm.DaoConnectionException;
 import orm.LessonDao;
-import orm.LessonDaoException;
-import orm.StudentDaoException;
-import orm.TeacherDaoException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -141,7 +142,7 @@ public class TeacherControllerTest_Lesson {
 	}
 
 	@Test
-	public void testGetClassLessonsInDay() throws LessonDaoException, DaoConnectionException {
+	public void testGetClassLessonsInDay() throws LessonDaoException, DaoConnectionException, SchoolClassDaoException {
 		lessons = new ArrayList<>();
 		lesson1 = new Lesson(1, teachingAssignment, date, "esercizi", startHour, endHour);
 		lesson2 = new Lesson(2, teachingAssignment, date, "esercizi", startHour, endHour);
@@ -160,7 +161,7 @@ public class TeacherControllerTest_Lesson {
 	}
 
 	@Test
-	public void testDeleteLesson() throws IllegalHomeworkAccessException {
+	public void testDeleteLesson() throws LessonDaoException, IllegalLessonAccessException {
 		Lesson lesson = new Lesson(1, teachingAssignment, date, "Description", endHour, startHour);
 
 		lessonDaoMock.deleteLesson(lesson);
@@ -174,7 +175,7 @@ public class TeacherControllerTest_Lesson {
 
 	@Test
 	public void testDeleteLesson_WithAnotherTeacher()
-	        throws IllegalHomeworkAccessException {
+	        throws IllegalLessonAccessException {
 	    Teacher otherTeacher = new Teacher(-1, "Other", "Teacher");
 	    TeachingAssignment otherTeachingAssignment = new TeachingAssignment(0, "History", otherTeacher, schoolClass);
 	    Lesson lesson = new Lesson(1, otherTeachingAssignment, date, "Description", endHour, startHour);
@@ -182,7 +183,7 @@ public class TeacherControllerTest_Lesson {
 	    replay(factoryMock);
 
 	    assertThatThrownBy(() -> teacherController.deleteLesson(lesson))
-	            .isInstanceOf(IllegalHomeworkAccessException.class);
+	            .isInstanceOf(IllegalLessonAccessException.class);
 
 	    verify(factoryMock);
 	}

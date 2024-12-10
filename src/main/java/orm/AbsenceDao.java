@@ -3,6 +3,9 @@ package orm;
 import java.time.LocalDate;
 import java.util.Iterator;
 
+import DaoExceptions.AbsenceDaoException;
+import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.StudentDaoException;
 import domainModel.Absence;
 import domainModel.SchoolClass;
 import domainModel.Student;

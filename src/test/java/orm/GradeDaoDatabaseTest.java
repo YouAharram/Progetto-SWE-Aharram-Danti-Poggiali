@@ -7,6 +7,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.GradeDaoException;
+import DaoExceptions.StudentDaoException;
+import DaoExceptions.TeachingAssignmentDaoException;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;

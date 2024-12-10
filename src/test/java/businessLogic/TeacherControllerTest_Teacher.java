@@ -6,17 +6,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.StudentDaoException;
+import DaoExceptions.TeacherDaoException;
 import daoFactory.DaoFactory;
 import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
-import orm.DaoConnectionException;
 import orm.SchoolClassDao;
-import orm.SchoolClassDaoException;
 import orm.StudentDao;
-import orm.StudentDaoException;
-import orm.TeacherDaoException;
 import orm.TeachingAssignmentDao;
 
 import java.util.ArrayList;
@@ -96,23 +96,8 @@ public class TeacherControllerTest_Teacher {
 		verify(factoryMock, teachingAssignmentDaoMock);
 	}
 
-	
 	@Test
-	public void testGetClassByTeaching()
-			throws SchoolClassDaoException, DaoConnectionException, StudentDaoException, TeacherDaoException {
-		Iterator<SchoolClass> classesIterator = classes.iterator();
-
-		expect(schoolClassDaoMock.getAllSchoolClassesByTeaching(teachingAssignment1)).andReturn(classesIterator).once();
-
-		replay(factoryMock, schoolClassDaoMock);
-
-		assertThat(teacherController.getClassByTeaching(teachingAssignment1)).toIterable().containsExactlyInAnyOrder(schoolClass1, schoolClass2);
-
-		verify(factoryMock, schoolClassDaoMock);
-	}
-
-	@Test
-	public void testGetStudentByClass() throws DaoConnectionException, StudentDaoException, TeacherDaoException {
+	public void testGetStudentByClass() throws DaoConnectionException, StudentDaoException, TeacherDaoException, SchoolClassDaoException {
 		Iterator<Student> studentsIterator = students.iterator();
 
 		expect(studentDaoMock.getStudentsByClass(schoolClassForStudents)).andReturn(studentsIterator).once();

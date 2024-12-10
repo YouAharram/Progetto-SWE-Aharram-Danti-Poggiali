@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import DaoExceptions.TeacherDaoException;
 import domainModel.MeetingAvailability;
 import domainModel.Teacher;
 

@@ -11,6 +11,15 @@ import java.util.Iterator;
 import org.junit.Before;
 import org.junit.Test;
 
+import DaoExceptions.AbsenceDaoException;
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.DisciplinaryReportException;
+import DaoExceptions.GradeDaoException;
+import DaoExceptions.HomeworkDaoException;
+import DaoExceptions.LessonDaoException;
+import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.StudentDaoException;
+import DaoExceptions.TeachingAssignmentDaoException;
 import daoFactory.DaoFactory;
 import domainModel.Absence;
 import domainModel.DisciplinaryReport;
@@ -21,21 +30,12 @@ import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.TeachingAssignment;
 import orm.AbsenceDao;
-import orm.AbsenceDaoException;
-import orm.DaoConnectionException;
 import orm.DisciplinaryReportDao;
-import orm.DisciplinaryReportException;
 import orm.GradeDao;
-import orm.GradeDaoException;
 import orm.HomeworkDao;
-import orm.HomeworkDaoException;
 import orm.LessonDao;
-import orm.LessonDaoException;
-import orm.SchoolClassDaoException;
 import orm.StudentDao;
-import orm.StudentDaoException;
 import orm.TeachingAssignmentDao;
-import orm.TeachingAssignmentDaoException;
 
 public class StudentControllerTestConMock {
 

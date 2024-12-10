@@ -3,6 +3,10 @@ package orm;
 import static org.junit.Assert.*; 
 import org.junit.Test;
 
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.LessonDaoException;
+import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.TeachingAssignmentDaoException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

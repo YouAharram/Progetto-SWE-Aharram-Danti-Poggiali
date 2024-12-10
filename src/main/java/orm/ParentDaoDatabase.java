@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.ParentDaoException;
+import DaoExceptions.StudentDaoException;
 import domainModel.Parent;
 import domainModel.Student;
 import domainModel.Teacher;

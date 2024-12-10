@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import DaoExceptions.AbsenceDaoException;
+import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.StudentDaoException;
 import domainModel.Absence;
 import domainModel.SchoolClass;
 import domainModel.Student;

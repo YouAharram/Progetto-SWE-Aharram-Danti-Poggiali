@@ -1,4 +1,4 @@
-package orm;
+package DaoExceptions;
 
 public class DaoConnectionException extends Exception {
 

@@ -1,4 +1,4 @@
-package orm;
+package DaoExceptions;
 
 public class TeacherDaoException extends Exception {
 

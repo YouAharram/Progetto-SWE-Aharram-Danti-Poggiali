@@ -1,6 +1,6 @@
 package daoFactory;
+import DaoExceptions.DaoConnectionException;
 import orm.AbsenceDao;
-import orm.DaoConnectionException;
 import orm.DisciplinaryReportDao;
 import orm.GradeDao;
 import orm.HomeworkDao;

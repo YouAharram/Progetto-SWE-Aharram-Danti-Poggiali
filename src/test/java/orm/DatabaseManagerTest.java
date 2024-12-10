@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
+import DaoExceptions.DaoConnectionException;
+
 public class DatabaseManagerTest {
 
 	@Test

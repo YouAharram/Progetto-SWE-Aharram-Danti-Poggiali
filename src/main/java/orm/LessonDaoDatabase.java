@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.LessonDaoException;
+import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.TeachingAssignmentDaoException;
 import domainModel.Lesson;
 import domainModel.SchoolClass;
 import domainModel.TeachingAssignment;

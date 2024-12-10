@@ -6,17 +6,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+import DaoExceptions.AbsenceDaoException;
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.StudentDaoException;
+import DaoExceptions.TeacherDaoException;
 import daoFactory.DaoFactory;
 import domainModel.Absence;
 import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.Teacher;
 import orm.AbsenceDao;
-import orm.AbsenceDaoException;
-import orm.DaoConnectionException;
-import orm.SchoolClassDaoException;
-import orm.StudentDaoException;
-import orm.TeacherDaoException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -12,6 +12,12 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import DaoExceptions.AbsenceDaoException;
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.StudentDaoException;
+import DaoExceptions.TeacherDaoException;
 import domainModel.SchoolClass;
 import domainModel.Student;
 

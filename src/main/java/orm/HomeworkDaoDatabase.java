@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import DaoExceptions.HomeworkDaoException;
+import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.TeachingAssignmentDaoException;
 import domainModel.Homework;
 import domainModel.SchoolClass;
 import domainModel.TeachingAssignment;

@@ -10,6 +10,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.SchoolClassDaoException;
 import domainModel.SchoolClass;
 
 public class SchoolClassDaoDatabaseTest {

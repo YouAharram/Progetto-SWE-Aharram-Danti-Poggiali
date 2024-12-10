@@ -7,19 +7,19 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.Before;
 import org.junit.Test;
 
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.HomeworkDaoException;
+import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.StudentDaoException;
+import DaoExceptions.TeacherDaoException;
+import DaoExceptions.TeachingAssignmentDaoException;
 import businessLogic.TeacherController.IllegalHomeworkAccessException;
 import daoFactory.DaoFactory;
 import domainModel.Homework;
 import domainModel.SchoolClass;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
-import orm.DaoConnectionException;
 import orm.HomeworkDao;
-import orm.HomeworkDaoException;
-import orm.SchoolClassDaoException;
-import orm.StudentDaoException;
-import orm.TeacherDaoException;
-import orm.TeachingAssignmentDaoException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

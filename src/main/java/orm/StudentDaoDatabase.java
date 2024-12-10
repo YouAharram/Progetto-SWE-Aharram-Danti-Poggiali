@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.StudentDaoException;
 import domainModel.SchoolClass;
 import domainModel.Student;
 

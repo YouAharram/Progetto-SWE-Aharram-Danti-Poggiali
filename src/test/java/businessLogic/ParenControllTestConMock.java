@@ -13,6 +13,13 @@ import java.util.Iterator;
 import org.junit.Before;
 import org.junit.Test;
 
+import DaoExceptions.AbsenceDaoException;
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.GradeDaoException;
+import DaoExceptions.ParentDaoException;
+import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.StudentDaoException;
+import DaoExceptions.TeacherDaoException;
 import businessLogic.ParentController.AlreadyBookedMeetingException;
 import daoFactory.DaoFactory;
 import domainModel.Absence;
@@ -23,19 +30,12 @@ import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.Teacher;
 import orm.AbsenceDao;
-import orm.AbsenceDaoException;
-import orm.DaoConnectionException;
-import orm.GradeDaoException;
 import orm.MeetingAvailabilityDao;
 import orm.MeetingAvailabilityDaoDatabase.MeetingAvailabilityDaoException;
 import orm.MeetingDao;
 import orm.ParentDao;
-import orm.ParentDaoException;
 import orm.SchoolClassDao;
-import orm.SchoolClassDaoException;
 import orm.StudentDao;
-import orm.StudentDaoException;
-import orm.TeacherDaoException;
 
 public class ParenControllTestConMock {
 	

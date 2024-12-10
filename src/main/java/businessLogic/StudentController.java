@@ -4,6 +4,15 @@ import java.time.LocalDate;
 
 import java.util.Iterator;
 
+import DaoExceptions.AbsenceDaoException;
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.DisciplinaryReportException;
+import DaoExceptions.GradeDaoException;
+import DaoExceptions.HomeworkDaoException;
+import DaoExceptions.LessonDaoException;
+import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.StudentDaoException;
+import DaoExceptions.TeachingAssignmentDaoException;
 import daoFactory.DaoFactory;
 import domainModel.Absence;
 import domainModel.DisciplinaryReport;
@@ -13,15 +22,6 @@ import domainModel.Lesson;
 import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.TeachingAssignment;
-import orm.AbsenceDaoException;
-import orm.DaoConnectionException;
-import orm.DisciplinaryReportException;
-import orm.GradeDaoException;
-import orm.HomeworkDaoException;
-import orm.LessonDaoException;
-import orm.SchoolClassDaoException;
-import orm.StudentDaoException;
-import orm.TeachingAssignmentDaoException;
 import strategyForGrade.GradeAverageStrategy;
 
 public class StudentController {

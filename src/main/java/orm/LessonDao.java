@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Iterator;
 
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.LessonDaoException;
+import DaoExceptions.SchoolClassDaoException;
 import domainModel.Lesson;
 import domainModel.SchoolClass;
 import domainModel.TeachingAssignment;
