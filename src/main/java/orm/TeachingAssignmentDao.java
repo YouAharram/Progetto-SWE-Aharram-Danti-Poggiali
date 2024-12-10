@@ -13,5 +13,5 @@ public interface TeachingAssignmentDao {
 	Iterator<TeachingAssignment> getAllStudentTeachings(Student student)
 			throws TeachingAssignmentDaoException, DaoConnectionException;
 
-	Iterator<TeachingAssignment> getAllTeacherTeachings(Teacher teacher);z
+	Iterator<TeachingAssignment> getAllTeacherTeachings(Teacher teacher) throws TeachingAssignmentDaoException;
 }
