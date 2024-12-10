@@ -17,42 +17,44 @@ public class ParentDaoDatabase implements ParentDao {
 		this.conn = conn;
 	}
 
-	@Override
+	
 	public Parent getParentById(int id) throws ParentDaoException, StudentDaoException, DaoConnectionException {
-
-		String query = "SELECT * FROM Parents WHERE id_parent = " + id;
-		try {
-			PreparedStatement stmt = conn.prepareStatement(query);
+		String query = "SELECT id_parent, surname, name, id_student FROM Parents WHERE id_parent = ?";
+		try (PreparedStatement stmt = conn.prepareStatement(query)) {
+			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
 
 			if (!rs.next())
-				throw new ParentDaoException("Parent with id " + id + "dosen't exist.");
+				throw new ParentDaoException("Parent doesn't exist");
 
 			Student son = new StudentDaoDatabase(conn).getStudentById(rs.getInt("id_student"));
 
-			return new Parent(rs.getString("name"), rs.getString("surname"), id, son);
+			return new Parent(id, rs.getString("name"), rs.getString("surname"), son);
 		} catch (SQLException e) {
-			throw new ParentDaoException("Database error while fetching teachers data.");
+			throw new ParentDaoException("Database error while fetching parent data");
 		}
 	}
 
-	public Student getStudentOfParentByParentId(int parentId) throws DaoConnectionException, ParentDaoException, StudentDaoException {
-	    String query = "SELECT id_student FROM Parents WHERE id_parent = ?;";
-	    try (PreparedStatement stmt = conn.prepareStatement(query)) {
-	        stmt.setInt(1, parentId);
-	        ResultSet rs = stmt.executeQuery();
 
-	        if (!rs.next()) {
-	            throw new ParentDaoException("No student associated with parent ID " + parentId);
-	        }
+	@Override
+	public Parent getParentByUsernameWithPassword(String username, String password) throws ParentDaoException, StudentDaoException {
+		
+		String query = "SELECT id_parent, surname, name, id_student FROM Parents WHERE username = ? AND password = ?";
+		try (PreparedStatement stmt = conn.prepareStatement(query)){
+			stmt.setString(1, username);
+			stmt.setString(2, password);
+			ResultSet rs = stmt.executeQuery();
 
-	        int studentId = rs.getInt("id_student");
+			if (!rs.next())
+				throw new ParentDaoException("Wrong credentials");
+			
+			Student son = new StudentDaoDatabase(conn).getStudentById(rs.getInt("id_student"));
 
-	        return new StudentDaoDatabase(conn).getStudentById(studentId);
-
-	    } catch (SQLException e) {
-	        throw new DaoConnectionException();
-	    }
+			return new Parent(rs.getInt("id_parent"), rs.getString("name"), rs.getString("surname"), son);
+		} catch (SQLException e) {
+			throw new ParentDaoException("Database error while fetching parent credential");
+		}
 	}
+
 
 }
