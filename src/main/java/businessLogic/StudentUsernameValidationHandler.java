@@ -8,7 +8,6 @@ import daoFactory.DaoFactory;
 import domainModel.Student;
 
 public class StudentUsernameValidationHandler implements LoginHandler {
-
 	private LoginHandler nextChain;
 	private DaoFactory daoFactory;
 
@@ -20,6 +19,7 @@ public class StudentUsernameValidationHandler implements LoginHandler {
 	public void setNextChain(LoginHandler nextChain) {
 		this.nextChain = nextChain;
 	}
+	
 	@Override
 	public boolean validationCredentials(String username, String password) throws StudentDaoException, DaoConnectionException, TeacherDaoException, ParentDaoException {
 		if(username != null && username.charAt(0)=='S') {

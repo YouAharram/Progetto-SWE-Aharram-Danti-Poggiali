@@ -32,8 +32,7 @@ import DaoExceptions.MeetingAvailabilityDaoException;
 import DaoExceptions.MeetingDaoException;
 import strategyForGrade.GradeAverageStrategy;
 
-public class ParentController {
-
+public final class ParentController {
 	private StudentController studentController;
 	private Parent parent;
 	private DaoFactory daoFactory;

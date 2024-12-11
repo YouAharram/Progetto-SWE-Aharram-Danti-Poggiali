@@ -2,8 +2,7 @@ package domainModel;
 
 import java.util.Objects;
 
-public class Teacher {
-
+public final class Teacher {
 	private String name;
 	private String surname;
 	private int id;

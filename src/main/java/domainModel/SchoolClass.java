@@ -2,10 +2,9 @@ package domainModel;
 
 import java.util.Objects;
 
-public class SchoolClass {
+public final class SchoolClass {
 	private String className;
 	
-
 	public SchoolClass(String className) {
 		this.className = className;
 	}

@@ -2,8 +2,7 @@ package domainModel;
 
 import java.util.Objects;
 
-public class Meeting {
-	
+public final class Meeting {
 	private Parent parent;
 	private MeetingAvailability meetingAvailability;
 	

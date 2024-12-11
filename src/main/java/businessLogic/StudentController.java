@@ -24,8 +24,7 @@ import domainModel.Student;
 import domainModel.TeachingAssignment;
 import strategyForGrade.GradeAverageStrategy;
 
-public class StudentController {
-
+public final class StudentController {
 	private Student student;
 	private DaoFactory daoFactory;
 

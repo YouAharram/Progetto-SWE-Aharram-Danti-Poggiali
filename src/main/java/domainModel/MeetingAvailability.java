@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class MeetingAvailability {
+public final class MeetingAvailability {
 	private Teacher teacher;
 	private LocalDate date;
 	private LocalTime hour;

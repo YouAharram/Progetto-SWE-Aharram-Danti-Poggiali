@@ -3,8 +3,7 @@ package domainModel;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Homework {
-	
+public final class Homework {
 	private int id;
 	private TeachingAssignment teaching;
 	private LocalDate date;

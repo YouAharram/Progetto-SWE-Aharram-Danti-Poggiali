@@ -2,7 +2,7 @@ package domainModel;
 
 import java.util.Objects;
 
-public class TeachingAssignment {
+public final class TeachingAssignment {
 	private int id;
 	private String subject;
 	private Teacher teacher;
@@ -48,6 +48,5 @@ public class TeachingAssignment {
 		return id == other.id && Objects.equals(schoolClass, other.schoolClass)
 				&& Objects.equals(subject, other.subject) && Objects.equals(teacher, other.teacher);
 	}
-	
 	
 }

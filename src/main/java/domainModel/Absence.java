@@ -3,7 +3,7 @@ package domainModel;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Absence {
+public final class Absence {
     private Student student;
     private LocalDate date;
     private boolean isJustified;

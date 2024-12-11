@@ -5,7 +5,7 @@ import DaoExceptions.ParentDaoException;
 import DaoExceptions.StudentDaoException;
 import DaoExceptions.TeacherDaoException;
 
-public class LoginController {
+public final class LoginController {
 	
 	private LoginHandler userHandler;
 

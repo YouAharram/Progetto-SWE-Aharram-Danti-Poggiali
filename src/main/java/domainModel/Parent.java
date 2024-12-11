@@ -2,7 +2,7 @@ package domainModel;
 
 import java.util.Objects;
 
-public class Parent {
+public final class Parent {
 	private String name;
 	private String surname;
 	private int id;

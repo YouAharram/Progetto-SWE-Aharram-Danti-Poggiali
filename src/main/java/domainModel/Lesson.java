@@ -5,8 +5,7 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 
-public class Lesson {
-	
+public final class Lesson {
 	private int id;
 	private TeachingAssignment teaching;
 	private LocalDate date;

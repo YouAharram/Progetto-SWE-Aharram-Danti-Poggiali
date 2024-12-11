@@ -34,8 +34,7 @@ import DaoExceptions.MeetingAvailabilityDaoException;
 import DaoExceptions.MeetingDaoException;
 import strategyForGrade.GradeAverageStrategy;
 
-public class TeacherController {
-
+public final class TeacherController {
 	private static final int MINIMUM_GRADE = 1;
 	private static final int MAXIMUM_GRADE = 10;
 	private DaoFactory daoFactory;
