@@ -80,9 +80,6 @@ public class ParentDaoDatabaseTest {
     @Test
     public void testGetParentById() throws Exception {
         Parent selectedParent = parentDao.getParentById(parent.getId());
-        System.out.println(selectedParent.getId() + " " + selectedParent.getName() + " " + selectedParent.getSurname() + " " + selectedParent.getStudent());
-        System.out.println(parent.getId() + " " + parent.getName() + " " + parent.getSurname() + " " + parent.getStudent());
-
         
         assertThat(selectedParent).isEqualTo(parent);
     }

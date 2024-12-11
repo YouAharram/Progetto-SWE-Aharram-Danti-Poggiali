@@ -2,6 +2,7 @@ package orm;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.*;
 
@@ -24,7 +25,7 @@ import org.junit.Test;
 import DaoExceptions.TeacherDaoException;
 import domainModel.MeetingAvailability;
 import domainModel.Teacher;
-import orm.MeetingAvailabilityDaoDatabase.MeetingAvailabilityDaoException;
+import DaoExceptions.MeetingAvailabilityDaoException;
 
 public class MeetingAvailabilityDaoDatabaseTest {
 

@@ -1,13 +1,13 @@
 package orm;
 
 import java.time.LocalDate;
+import DaoExceptions.MeetingAvailabilityDaoException;
 import java.time.LocalTime;
 import java.util.Iterator;
 
 import DaoExceptions.TeacherDaoException;
 import domainModel.MeetingAvailability;
 import domainModel.Teacher;
-import orm.MeetingAvailabilityDaoDatabase.MeetingAvailabilityDaoException;
 
 public interface MeetingAvailabilityDao {
 

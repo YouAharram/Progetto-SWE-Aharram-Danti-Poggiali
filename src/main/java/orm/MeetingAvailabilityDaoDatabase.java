@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import DaoExceptions.MeetingAvailabilityDaoException;
 import DaoExceptions.TeacherDaoException;
 import domainModel.MeetingAvailability;
 import domainModel.Teacher;
@@ -118,7 +119,13 @@ public class MeetingAvailabilityDaoDatabase implements MeetingAvailabilityDao {
 			stmt.setInt(3, teacher.getId());
 			
 			try (ResultSet rs = stmt.executeQuery()){
-				return new MeetingAvailability(teacher, date, hour, rs.getBoolean("isBooked"));
+				if(rs.next()) {
+					return new MeetingAvailability(teacher, date, hour, rs.getBoolean("isBooked"));
+				}
+				else {
+					throw new MeetingAvailabilityDaoException("Meeting availability doesn't exist");
+				}
+
 			}
 		}
 		catch (SQLException e) {
@@ -127,16 +134,4 @@ public class MeetingAvailabilityDaoDatabase implements MeetingAvailabilityDao {
 		
 	}
 	
-	public class MeetingAvailabilityDaoException extends Exception {
-
-		private static final long serialVersionUID = 1L;
-
-		public MeetingAvailabilityDaoException(String message) {
-			super(message);
-		}
-		
-		
-		
-	}
-
 }

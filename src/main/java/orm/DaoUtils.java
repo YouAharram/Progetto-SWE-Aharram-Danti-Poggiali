@@ -1,18 +1,19 @@
 package orm;
 
 import java.sql.Connection;
+
 import DaoExceptions.ParentDaoException;
 import DaoExceptions.SchoolClassDaoException;
 import DaoExceptions.StudentDaoException;
 import DaoExceptions.TeacherDaoException;
 import DaoExceptions.TeachingAssignmentDaoException;
+import DaoExceptions.MeetingAvailabilityDaoException;
 import domainModel.MeetingAvailability;
 import domainModel.Parent;
 import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
-import orm.MeetingAvailabilityDaoDatabase.MeetingAvailabilityDaoException;
 
 class DaoUtils {
 	
@@ -57,7 +58,7 @@ class DaoUtils {
 		try {
 			parentDaoDatabase.getParentById(parent.getId());
 		} catch (Exception e) {
-			throw new ParentDaoException("Teaching doesn't exist");
+			throw new ParentDaoException("Parent doesn't exist");
 		}
 	}
 	
