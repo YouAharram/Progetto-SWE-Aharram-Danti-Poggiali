@@ -29,6 +29,5 @@ public class TeacherUsernameValidationHandler implements LoginHandler{
 			nextChain.validationCredentials(username, password);
 		}
 		return false;
-		
 	}
 }

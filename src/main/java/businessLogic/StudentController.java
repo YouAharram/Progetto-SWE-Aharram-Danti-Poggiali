@@ -40,7 +40,7 @@ public class StudentController {
 	
 	//TEACHINGS
 	
-	public Iterator<TeachingAssignment> getTeachings() throws TeachingAssignmentDaoException, DaoConnectionException {
+	public Iterator<TeachingAssignment> getTeachings() throws TeachingAssignmentDaoException, DaoConnectionException, StudentDaoException {
 		return daoFactory.createTeachingAssignmentDao().getAllStudentTeachings(student);
 	}
 	
