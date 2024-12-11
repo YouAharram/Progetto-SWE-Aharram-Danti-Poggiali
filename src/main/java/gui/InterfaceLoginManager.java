@@ -9,7 +9,17 @@ import javafx.stage.Stage;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.ParentDaoException;
+import DaoExceptions.StudentDaoException;
+import DaoExceptions.TeacherDaoException;
 import businessLogic.LoginController;
+import businessLogic.LoginHandler;
+import businessLogic.ParentUsernameValidationHandler;
+import businessLogic.StudentUsernameValidationHandler;
+import businessLogic.TeacherUsernameValidationHandler;
+import daoFactory.DaoFactory;
+import daoFactory.DatabaseDaoFactory;
 
 public class InterfaceLoginManager {
 	@FXML
@@ -17,6 +27,8 @@ public class InterfaceLoginManager {
 	@FXML
 	private TextField txtPassword;
 
+	private DaoFactory daoFactory = new DatabaseDaoFactory();
+	
 	public static String hashString(String input) {
 		try {
 			// Crea un'istanza di MessageDigest per l'algoritmo SHA-256
@@ -41,11 +53,20 @@ public class InterfaceLoginManager {
 	}
 
 	@FXML
-	public void login() {
+	public void login() throws TeacherDaoException, DaoConnectionException, StudentDaoException, ParentDaoException {
 		String username = txtUsername.getText();
 		String password = txtPassword.getText();
-
-		LoginController loginController = new LoginController();
+		
+		
+		
+		
+		LoginHandler teacherHandler = new TeacherUsernameValidationHandler(daoFactory);
+		LoginHandler studentHandler = new StudentUsernameValidationHandler(daoFactory);
+		LoginHandler parentHandler = new ParentUsernameValidationHandler(daoFactory);
+		teacherHandler.setNextChain(studentHandler);
+		studentHandler.setNextChain(parentHandler);
+		
+		LoginController loginController = new LoginController(teacherHandler);
 
 		if (loginController.login(username, password)) {
 			try {

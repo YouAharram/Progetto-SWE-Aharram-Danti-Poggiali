@@ -1,6 +1,6 @@
 package businessLogic;
 
-import java.time.LocalDate;
+import java.time.LocalDate; 
 
 
 import java.util.Iterator;
@@ -25,7 +25,6 @@ import domainModel.Lesson;
 import domainModel.Meeting;
 import domainModel.MeetingAvailability;
 import domainModel.Parent;
-import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;

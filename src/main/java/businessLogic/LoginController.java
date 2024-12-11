@@ -1,17 +1,19 @@
 package businessLogic;
 
-import orm.MockUserDao;
+import DaoExceptions.DaoConnectionException;
+import DaoExceptions.ParentDaoException;
+import DaoExceptions.StudentDaoException;
+import DaoExceptions.TeacherDaoException;
 
 public class LoginController {
 	
-	private LoginHandler teachHandler;
-	MockUserDao dao = new MockUserDao();
+	private LoginHandler userHandler;
 
-	public LoginController(LoginHandler teachHandler) {
-		this.teachHandler = teachHandler;
+	public LoginController(LoginHandler userHandler) {
+		this.userHandler = userHandler;
 	}
 
-	public boolean login(String username, String password) {
-		return teachHandler.validationCredentials(username, password);
+	public boolean login(String username, String password) throws TeacherDaoException, DaoConnectionException, StudentDaoException, ParentDaoException {
+		return userHandler.validationCredentials(username, password);
 	}
 }
