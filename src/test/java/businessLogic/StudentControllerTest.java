@@ -37,7 +37,7 @@ import orm.LessonDao;
 import orm.StudentDao;
 import orm.TeachingAssignmentDao;
 
-public class StudentControllerTestConMock {
+public class StudentControllerTest {
 
 	private DaoFactory factoryMock;
 	private StudentDao studentDaoMock;

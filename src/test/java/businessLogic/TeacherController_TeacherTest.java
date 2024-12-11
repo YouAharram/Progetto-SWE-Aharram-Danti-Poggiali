@@ -23,7 +23,7 @@ import orm.TeachingAssignmentDao;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class TeacherControllerTest_Teacher {
+public class TeacherController_TeacherTest {
 
 	private DaoFactory factoryMock;
 	private StudentDao studentDaoMock;

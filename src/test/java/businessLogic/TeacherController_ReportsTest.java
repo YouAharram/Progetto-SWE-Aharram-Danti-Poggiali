@@ -25,7 +25,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class TeacherControllerTest_Reports {
+public class TeacherController_ReportsTest {
 
 	private DaoFactory factoryMock;
 	private Teacher teacher;

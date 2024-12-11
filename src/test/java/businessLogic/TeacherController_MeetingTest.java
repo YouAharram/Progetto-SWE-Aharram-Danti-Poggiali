@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class TeacherControllerTest_Meeting {
+public class TeacherController_MeetingTest {
 
 	private DaoFactory factoryMock;
 	private Teacher teacher;

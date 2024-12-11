@@ -22,7 +22,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class TeacherControllerTest_Absences {
+public class TeacherController_AbsencesTest {
 
 	private DaoFactory factoryMock;
 	private Teacher teacher;

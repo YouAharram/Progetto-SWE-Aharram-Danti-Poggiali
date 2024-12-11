@@ -37,7 +37,7 @@ import DaoExceptions.MeetingAvailabilityDaoException;
 import DaoExceptions.MeetingDaoException;
 import orm.MeetingDao;
 
-public class ParenControllTestConMock {
+public class ParenControllTest {
 	
 	private DaoFactory factoryMock;
 	private Parent parent;
