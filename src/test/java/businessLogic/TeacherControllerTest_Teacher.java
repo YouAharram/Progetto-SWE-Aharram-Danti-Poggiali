@@ -10,6 +10,7 @@ import DaoExceptions.DaoConnectionException;
 import DaoExceptions.SchoolClassDaoException;
 import DaoExceptions.StudentDaoException;
 import DaoExceptions.TeacherDaoException;
+import DaoExceptions.TeachingAssignmentDaoException;
 import daoFactory.DaoFactory;
 import domainModel.SchoolClass;
 import domainModel.Student;
@@ -83,7 +84,7 @@ public class TeacherControllerTest_Teacher {
 	}
 
 	@Test
-	public void testGetAllMyTeachings() {
+	public void testGetAllMyTeachings() throws TeachingAssignmentDaoException, TeacherDaoException {
 		Iterator<TeachingAssignment> teachingsIterator = teachingAssignments.iterator();
 
 		expect(teachingAssignmentDaoMock.getAllTeacherTeachings(teacher)).andReturn(teachingsIterator).once();

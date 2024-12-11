@@ -1,6 +1,7 @@
 package businessLogic;
 
 import static org.easymock.EasyMock.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -12,7 +13,6 @@ import DaoExceptions.LessonDaoException;
 import DaoExceptions.SchoolClassDaoException;
 import DaoExceptions.StudentDaoException;
 import DaoExceptions.TeacherDaoException;
-import businessLogic.TeacherController.IllegalHomeworkAccessException;
 import businessLogic.TeacherController.IllegalLessonAccessException;
 import daoFactory.DaoFactory;
 import domainModel.Lesson;

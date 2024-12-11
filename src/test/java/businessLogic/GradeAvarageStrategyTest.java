@@ -1,6 +1,7 @@
 package businessLogic;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
@@ -27,7 +28,6 @@ import domainModel.TeachingAssignment;
 import orm.GradeDao;
 import strategyForGrade.ArithmeticGradeAverageStrategy;
 import strategyForGrade.GeometricGradeAverageStrategy;
-import strategyForGrade.GradeAverageStrategy;
 import strategyForGrade.WeightedGradeAverageStrategy;
 
 public class GradeAvarageStrategyTest {

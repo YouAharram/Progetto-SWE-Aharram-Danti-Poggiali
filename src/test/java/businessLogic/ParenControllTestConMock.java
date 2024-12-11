@@ -1,6 +1,8 @@
 package businessLogic;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import static org.easymock.EasyMock.*;
@@ -31,21 +33,14 @@ import domainModel.Student;
 import domainModel.Teacher;
 import orm.AbsenceDao;
 import orm.MeetingAvailabilityDao;
-import orm.MeetingAvailabilityDaoDatabase.MeetingAvailabilityDaoException;
+import DaoExceptions.MeetingAvailabilityDaoException;
+import DaoExceptions.MeetingDaoException;
 import orm.MeetingDao;
-import orm.ParentDao;
-import orm.SchoolClassDao;
-import orm.StudentDao;
 
 public class ParenControllTestConMock {
 	
 	private DaoFactory factoryMock;
 	private Parent parent;
-	private ParentDao parentDaoMock;
-	private int parentId;
-	private int studentId;
-	private StudentDao studentDaoMock;
-	private SchoolClassDao schoolClassDaoMock;
 	private Student student;
 	private ParentController parentController;
 	private MeetingAvailabilityDao meetingAvailabilityDaoMock;
@@ -121,7 +116,7 @@ public class ParenControllTestConMock {
     }
 
     @Test
-    public void testGetAllMyMeetings() {
+    public void testGetAllMyMeetings() throws MeetingDaoException, ParentDaoException, TeacherDaoException, MeetingAvailabilityDaoException {
         ArrayList<Meeting> meetings = new ArrayList<>();
         Meeting meeting1 = new Meeting(parent, null);
         Meeting meeting2 = new Meeting(parent, null);

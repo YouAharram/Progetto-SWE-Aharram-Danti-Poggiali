@@ -28,7 +28,8 @@ import domainModel.Parent;
 import domainModel.Student;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
-import orm.MeetingAvailabilityDaoDatabase.MeetingAvailabilityDaoException;
+import DaoExceptions.MeetingAvailabilityDaoException;
+import DaoExceptions.MeetingDaoException;
 import strategyForGrade.GradeAverageStrategy;
 
 public class ParentController {
@@ -102,7 +103,7 @@ public class ParentController {
 		return daoFactory.createMeetingAvailabilityDao().getAllMeetingsAvaialabilityByTeacher(teacher);
 	}
 
-	public void bookAMeeting(MeetingAvailability meetingAvailability) throws AlreadyBookedMeetingException, MeetingAvailabilityDaoException {
+	public void bookAMeeting(MeetingAvailability meetingAvailability) throws AlreadyBookedMeetingException, MeetingAvailabilityDaoException, MeetingDaoException, ParentDaoException {
 		if (meetingAvailability.isBooked()) {
 			throw new AlreadyBookedMeetingException();
 		}
@@ -110,7 +111,7 @@ public class ParentController {
 		daoFactory.createMeetingAvailabilityDao().editBooking(meetingAvailability);
 	}
 
-	public Iterator<Meeting> getAllMyMeetings() {
+	public Iterator<Meeting> getAllMyMeetings() throws MeetingDaoException, ParentDaoException, TeacherDaoException, MeetingAvailabilityDaoException {
 		return daoFactory.createMeetingDao().getAllMeetingsByParent(parent);
 	}
 

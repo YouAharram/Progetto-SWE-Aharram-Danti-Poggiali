@@ -2,6 +2,7 @@ package businessLogic;
 
 import java.time.LocalDate;
 
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,7 +30,8 @@ import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
-import orm.MeetingAvailabilityDaoDatabase.MeetingAvailabilityDaoException;
+import DaoExceptions.MeetingAvailabilityDaoException;
+import DaoExceptions.MeetingDaoException;
 import strategyForGrade.GradeAverageStrategy;
 
 public class TeacherController {
@@ -51,7 +53,7 @@ public class TeacherController {
 
 	// TEACHINGS
 
-	public Iterator<TeachingAssignment> getAllMyTeachings() {
+	public Iterator<TeachingAssignment> getAllMyTeachings() throws TeachingAssignmentDaoException, TeacherDaoException {
 		return daoFactory.createTeachingAssignmentDao().getAllTeacherTeachings(teacher);
 	}
 
@@ -255,7 +257,7 @@ public class TeacherController {
 		return unboockedMeetings.iterator();
 	}
 
-	public Iterator<Meeting> getBookedMeetings() {
+	public Iterator<Meeting> getBookedMeetings() throws DaoConnectionException, TeacherDaoException, MeetingDaoException {
 		return daoFactory.createMeetingDao().getMeetingsByTeacher(teacher);
 	}
 

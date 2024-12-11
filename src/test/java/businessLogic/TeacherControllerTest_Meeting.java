@@ -1,6 +1,7 @@
 package businessLogic;
 
 import static org.easymock.EasyMock.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -16,7 +17,8 @@ import domainModel.Meeting;
 import domainModel.MeetingAvailability;
 import domainModel.Teacher;
 import orm.MeetingAvailabilityDao;
-import orm.MeetingAvailabilityDaoDatabase.MeetingAvailabilityDaoException;
+import DaoExceptions.MeetingAvailabilityDaoException;
+import DaoExceptions.MeetingDaoException;
 import orm.MeetingDao;
 
 import java.time.LocalDate;
@@ -84,7 +86,7 @@ public class TeacherControllerTest_Meeting {
 	}
 
 	@Test
-	public void testGetBookedMeetings() {
+	public void testGetBookedMeetings() throws DaoConnectionException, TeacherDaoException, MeetingDaoException {
 		Meeting meeting1 = new Meeting(null, null);
 	    Meeting meeting2 = new Meeting(null, null);
 		List<Meeting> meetingList = Arrays.asList(meeting1, meeting2);

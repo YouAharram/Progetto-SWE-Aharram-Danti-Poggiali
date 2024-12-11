@@ -1,6 +1,7 @@
 package orm;
 
 import static org.junit.Assert.*; 
+
 import org.junit.Test;
 
 import DaoExceptions.DaoConnectionException;
@@ -9,17 +10,13 @@ import DaoExceptions.SchoolClassDaoException;
 import DaoExceptions.TeachingAssignmentDaoException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.lang.annotation.Annotation;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -28,23 +25,18 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
-import domainModel.Absence;
 import domainModel.Lesson;
 import domainModel.SchoolClass;
-import domainModel.Student;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
 
 public class LessonDaoDatabaseTest {
 	
-	//DA RIFARE COMPLETAMENTE
 
 	private Connection conn;
 	private String url = "jdbc:sqlite:database/testDB.db";
 	private LessonDaoDatabase lessonDao;
-	private TeachingAssignment teachingAssignment;
 	private TeachingAssignment teaching;
 	private Lesson lesson;
 	private SchoolClass schoolClass;
@@ -58,20 +50,7 @@ public class LessonDaoDatabaseTest {
 	
 	private void createTestData() throws SQLException {
 
-		String deleteHomeworksQuery = "DELETE FROM Annotations;";
-		conn.createStatement().executeUpdate(deleteHomeworksQuery);
-		
-		String deleteTeachingsQuery = "DELETE FROM Teachings;";
-		conn.createStatement().executeUpdate(deleteTeachingsQuery);
-		
-		String deleteStudentsQuery = "DELETE FROM Students;";
-		conn.createStatement().executeUpdate(deleteStudentsQuery);
-
-		String deleteTeachersQuery = "DELETE FROM Teachers;";
-		conn.createStatement().executeUpdate(deleteTeachersQuery);
-		
-		String deleteClassesQuery = "DELETE FROM Classes;";
-		conn.createStatement().executeUpdate(deleteClassesQuery);
+		deleteTestData();
 		
 		String insertClassQuery = "INSERT INTO Classes (name, classroom) "
 				+ "VALUES ('1A', 'A01');";
