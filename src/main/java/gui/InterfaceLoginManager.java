@@ -1,11 +1,14 @@
 package gui;
 
-import javafx.scene.Parent;
+import javafx.scene.Parent;  
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.scene.Node;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -22,12 +25,17 @@ import daoFactory.DaoFactory;
 import daoFactory.DatabaseDaoFactory;
 
 public class InterfaceLoginManager {
-	@FXML
-	private TextField txtUsername;
-	@FXML
-	private TextField txtPassword;
+//	@FXML
+//	private TextField txtUsername;
+//	@FXML
+//	private TextField txtPassword;
 
 	private DaoFactory daoFactory = new DatabaseDaoFactory();
+	private Scene sceneManager;
+	
+    public void setMainController(SceneController mainsceneManager) {
+		this.sceneManager = sceneManager;
+    }
 	
 	public static String hashString(String input) {
 		try {
@@ -52,39 +60,41 @@ public class InterfaceLoginManager {
 		}
 	}
 
-	@FXML
-	public void login() throws TeacherDaoException, DaoConnectionException, StudentDaoException, ParentDaoException {
-		String username = txtUsername.getText();
-		String password = txtPassword.getText();
+	
+	public void login(ActionEvent event) throws IOException{
+		System.out.println("suuuuuu");
 		
-		
-		
-		
-		LoginHandler teacherHandler = new TeacherUsernameValidationHandler(daoFactory);
-		LoginHandler studentHandler = new StudentUsernameValidationHandler(daoFactory);
-		LoginHandler parentHandler = new ParentUsernameValidationHandler(daoFactory);
-		teacherHandler.setNextChain(studentHandler);
-		studentHandler.setNextChain(parentHandler);
-		
-		LoginController loginController = new LoginController(teacherHandler);
-
-		if (loginController.login(username, password)) {
-			try {
+//		String username = txtUsername.getText();
+//		String password = txtPassword.getText();
+//		
+//		LoginHandler teacherHandler = new TeacherUsernameValidationHandler(daoFactory);
+//		LoginHandler studentHandler = new StudentUsernameValidationHandler(daoFactory);
+//		LoginHandler parentHandler = new ParentUsernameValidationHandler(daoFactory);
+//		teacherHandler.setNextChain(studentHandler);
+//		studentHandler.setNextChain(parentHandler);
+//		
+//		LoginController loginController = new LoginController(teacherHandler);
+//		System.out.println("leccare la figa");
+//		if (loginController.login(username, password)) {
+//			try {
 				// Carica la nuova scena
-				Parent loader = FXMLLoader.load(getClass().getResource("../resources/InterfacciaTeacher.fxml"));
-				Scene secondaryScene = new Scene(loader);
-				Stage newWindow = new Stage();
-				newWindow.setTitle("Teacher...");
-				newWindow.setScene(secondaryScene);
+//				Parent loader = FXMLLoader.load(getClass().getResource("../resources/InterfacciaTeacher.fxml"));
+//				Scene secondaryScene = new Scene(loader);
+//				Stage newWindow = new Stage();
+//				newWindow.setTitd.getText();
+//				le("Teacher...");
+//				newWindow.setScene(secondaryScene);
 
 				// Ottieni lo stage corrente e chiudilo
-				Stage currentStage = (Stage) txtUsername.getScene().getWindow();
-				currentStage.close();
+//				Stage currentStage = (Stage) txtUsername.getScene().getWindow();
+//				Stage currentStage =  (Stage)((Node) event.getSource()).getScene().getWindow();
+//				sceneManager.switchToTeacherScene(currentStage);
+//				currentStage.close();
 				// Mostra la nuova finestra
-				newWindow.show();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+//				newWindow.show();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
 	}
 }

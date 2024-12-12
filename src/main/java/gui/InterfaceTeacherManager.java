@@ -1,6 +1,6 @@
 package gui;
 
-import javafx.scene.Parent;
+import javafx.scene.Parent; 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -13,6 +13,13 @@ import java.security.NoSuchAlgorithmException;
 public class InterfaceTeacherManager {
 	@FXML
 	private Button btnLesson;
+	private SceneController mainController;
+	
+    public void setMainController(SceneController mainController) {
+		this.mainController = mainController;
+		this.mainController = mainController;
+    }
+	
 	@FXML
 	public void openLesson() {
 		openWindow("../resources/LessonInterface.fxml", "Lesson");
