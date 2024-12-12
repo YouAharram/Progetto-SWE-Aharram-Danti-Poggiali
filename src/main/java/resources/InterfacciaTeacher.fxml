@@ -15,7 +15,7 @@
 <Scene fx:id="teacherScene" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InterfaceTeacherManager">
     <AnchorPane prefHeight="200" prefWidth="200">
       <children>
-         <HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="979.0">
+         <HBox fx:id="root" layoutX="-4.0" layoutY="-3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="671.0" prefWidth="983.0">
             <children>
                <AnchorPane prefHeight="668.0" prefWidth="360.0">
                   <children>

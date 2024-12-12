@@ -66,20 +66,17 @@ public class InterfaceLoginManager {
 
 	
 	public void login() throws IOException{
-
-		
-		
 		String username = txtUsername.getText();
 		
 		if(username.charAt(0) == 'T') {
-			root = FXMLLoader.load(getClass().getResource("TeacherInterface.fxml"));
+			root = FXMLLoader.load(getClass().getResource("../resources/TeacherInterface.fxml"));
 			stage = (Stage) txtUsername.getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
 		}
 		if(username.charAt(0) == 'S') {
-			root = FXMLLoader.load(getClass().getResource("StudentInterface.fxml"));
+			root = FXMLLoader.load(getClass().getResource("../resources/StudentInterface.fxml"));
 			stage = (Stage) txtUsername.getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);

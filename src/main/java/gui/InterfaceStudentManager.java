@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class InterfaceStudentManager {
-	
 	 private Stage stage;
 	 private Scene scene;
 	 private Parent root;
@@ -22,6 +21,4 @@ public class InterfaceStudentManager {
 		stage.setScene(scene);
 		stage.show();
 	}
-
-
 }
