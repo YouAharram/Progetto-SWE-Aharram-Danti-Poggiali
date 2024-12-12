@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HomeworkTeacherManager">
    <children>
       <Pane prefHeight="85.0" prefWidth="777.0" style="-fx-background-color: black;" />
       <Label layoutX="24.0" layoutY="20.0" text="HomeWork" textFill="WHITE">
@@ -23,5 +22,6 @@
       <Button layoutX="516.0" layoutY="209.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="129.0" text="Button" />
       <DatePicker layoutX="361.0" layoutY="139.0" prefHeight="45.0" prefWidth="220.0" />
       <TextArea layoutX="182.0" layoutY="298.0" prefHeight="200.0" prefWidth="410.0" />
+      <Button fx:id="btnBack" layoutX="14.0" layoutY="94.0" mnemonicParsing="false" onAction="#backAtTeacherScene" prefHeight="32.0" prefWidth="92.0" text="Back" />
    </children>
 </AnchorPane>

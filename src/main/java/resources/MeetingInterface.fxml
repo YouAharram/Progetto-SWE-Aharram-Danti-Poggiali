@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MeetingTeacherManager">
    <children>
       <Pane prefHeight="46.0" prefWidth="600.0" style="-fx-background-color: black;">
          <children>
@@ -25,5 +24,10 @@
          </font>
       </Button>
       <TextArea layoutX="136.0" layoutY="186.0" prefHeight="181.0" prefWidth="347.0" />
+      <Button fx:id="btnBack" layoutX="14.0" layoutY="57.0" mnemonicParsing="false" onAction="#backAtTeacherScene" prefHeight="40.0" prefWidth="161.0" text="Back">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
