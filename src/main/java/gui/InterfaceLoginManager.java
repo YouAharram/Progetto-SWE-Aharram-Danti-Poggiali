@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import orm.StudentDao;
 import javafx.scene.Node;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -34,8 +35,8 @@ public class InterfaceLoginManager {
 	private Scene scene;
 	private Parent root;
 
-//	@FXML
-//	private TextField txtPassword;
+	@FXML
+	private TextField txtPassword;
 
 	private DaoFactory daoFactory = new DatabaseDaoFactory();
 	private Scene sceneManager;
@@ -70,13 +71,16 @@ public class InterfaceLoginManager {
 	
 	public void login() throws IOException, StudentDaoException, DaoConnectionException{
 		String username = txtUsername.getText();
+		String password = txtPassword.getText();
 		
 		if(username.charAt(0) == 'T') {
 			root = FXMLLoader.load(getClass().getResource("../resources/TeacherInterface.fxml"));
 			stage = (Stage) txtUsername.getScene().getWindow();
 		}
 		if(username.charAt(0) == 'S') {
-			StudentController studentController = new StudentController(new Student(1, "mario", "gino", new SchoolClass("1A")), daoFactory);
+			StudentDao dao = daoFactory.createStudentDao();
+			Student student = dao.getStudentByUsernameAndPassword(username, password);
+			StudentController studentController = new StudentController(student, daoFactory);
 			StudentSceneManager.setController(studentController);
 			root = FXMLLoader.load(getClass().getResource("../resources/StudentInterface.fxml"));
 			stage = (Stage) txtUsername.getScene().getWindow();

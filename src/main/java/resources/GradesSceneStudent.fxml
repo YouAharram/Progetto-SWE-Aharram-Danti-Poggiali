@@ -19,7 +19,7 @@
             <TableColumn fx:id="semester" minWidth="4.800048828125" prefWidth="373.0" text="Description" />
          </columns>
       </TableView>
-      <ChoiceBox layoutX="52.0" layoutY="239.0" prefHeight="18.0" prefWidth="149.0" />
+      <ChoiceBox fx:id="subjectsChoiceBox" layoutX="52.0" layoutY="239.0" prefHeight="18.0" prefWidth="149.0" />
       <Label layoutX="52.0" layoutY="204.0" prefHeight="32.0" prefWidth="189.0" text="Subjects:">
          <font>
             <Font size="20.0" />

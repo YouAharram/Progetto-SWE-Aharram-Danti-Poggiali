@@ -19,10 +19,11 @@ public class StudentSceneManager {
 	private static StudentController studentController;
 	
 	@FXML
-    private Label nameLabel; // Collegato al fx:id "nameLabel" nel file FXML
+    private Label nameLabel;
     @FXML
-    private Label surnameLabel; // Collegato al fx:id "surnameLabel" nel file FXML
-	
+    private Label surnameLabel;
+	@FXML
+    private Label classLabel;
 	@FXML
 	private Button gradesButton;
 	@FXML
@@ -40,17 +41,26 @@ public class StudentSceneManager {
 	
 	public void initialize() {
         if (studentController != null) {
-            // Ottieni nome e cognome dallo StudentController
+        	setControllerForAllScene();
             String name = studentController.getStudent().getName();
             String surname = studentController.getStudent().getSurname();
-
-            // Popola le etichette
+            String className = studentController.getStudent().getSchoolClass().getClassName();
             nameLabel.setText(name);
             surnameLabel.setText(surname);
+            classLabel.setText(className);
         } else {
             System.out.println("StudentController non è stato inizializzato.");
         }
     }
+
+
+	private void setControllerForAllScene() {
+		AbsenceStudentSceneController.setController(studentController);
+		AvarageGradeStudentScene.setController(studentController);
+		DisciplinaryReportStudentSceneManager.setController(studentController);
+		GradesStuentSceneManager.setController(studentController);
+		HomeworkLessonSceneManager.setController(studentController);
+	}
 
 
 	public void switchToGradesScene() throws IOException {
@@ -59,22 +69,14 @@ public class StudentSceneManager {
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-		showGrades();
 	}
 
-	
-	
-	public void showGrades() {
-		// TODO
-	}
-	
 	public void switchToHomeworkAndLessonScene() throws IOException {
 		root = FXMLLoader.load(getClass().getResource("../resources/HomeworkAndLessonSceneStudent.fxml"));
 		stage = (Stage) homeworkAndLessonButton.getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-		showGrades();
 	}
 	
 	public void switchToDisciplinaryReportScene() throws IOException {
@@ -83,7 +85,6 @@ public class StudentSceneManager {
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-		showGrades();
 	}
 	
 	public void switchToAbsenceScene() throws IOException {
@@ -92,7 +93,6 @@ public class StudentSceneManager {
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-		showGrades();
 	}
 	
 	public void switchToAvarageGradeScene() throws IOException {
@@ -101,7 +101,6 @@ public class StudentSceneManager {
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-		showGrades();
 	}
 	
 	public static void setController(StudentController studentController) {

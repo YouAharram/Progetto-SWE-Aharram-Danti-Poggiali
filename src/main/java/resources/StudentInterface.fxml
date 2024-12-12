@@ -28,7 +28,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="388.0" layoutY="50.0" prefHeight="36.0" prefWidth="114.0" text="Name class">
+      <Label fx:id="classLabel" layoutX="388.0" layoutY="50.0" prefHeight="36.0" prefWidth="114.0" text="Name class">
          <font>
             <Font size="20.0" />
          </font>
