@@ -7,11 +7,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DisciplinaryReportStudentSceneManager">
    <children>
-      <TableView layoutX="45.0" layoutY="63.0" prefHeight="505.0" prefWidth="915.0">
+      <TableView fx:id="tableView" layoutX="45.0" layoutY="63.0" prefHeight="505.0" prefWidth="915.0">
          <columns>
-            <TableColumn fx:id="semester1" minWidth="4.800048828125" prefWidth="136.0" text="Date" />
-            <TableColumn fx:id="semester11" minWidth="4.800048828125" prefWidth="181.0" text="Teacher" />
-            <TableColumn fx:id="semester12" minWidth="4.800048828125" prefWidth="597.0" text="Description" />
+            <TableColumn fx:id="dateColumn" minWidth="4.800048828125" prefWidth="136.0" text="Date" />
+            <TableColumn fx:id="teacherColumn" minWidth="4.800048828125" prefWidth="181.0" text="Teacher" />
+            <TableColumn fx:id="descriptionColumn" minWidth="4.800048828125" prefWidth="597.0" text="Description" />
          </columns>
       </TableView>
       <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToStudentScene" prefHeight="30.0" prefWidth="90.0" text="Back" />
