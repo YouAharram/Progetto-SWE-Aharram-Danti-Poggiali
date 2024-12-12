@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS School;
-CREATE DATABASE IF NOT EXISTS School;
-USE School;
+DROP DATABASE IF EXISTS classFlowDB;
+CREATE DATABASE IF NOT EXISTS classFlowDB;
+USE classFlowDB;
 
 CREATE TABLE IF NOT EXISTS Teachers (
     id_teacher INT AUTO_INCREMENT PRIMARY KEY,
@@ -73,8 +73,8 @@ CREATE TABLE IF NOT EXISTS Annotations (
     type ENUM('lesson', 'homework') NOT NULL,
     description TEXT NOT NULL,
     date DATE NOT NULL,
-    start_hour TIME,
-    end_hour TIME,
+    start_hour VARCHAR(30),
+    end_hour VARCHAR(30),
     submission_date DATE,
     FOREIGN KEY (id_teaching) REFERENCES Teachings(id_teaching) ON DELETE CASCADE
 );
@@ -97,11 +97,11 @@ CREATE TABLE IF NOT EXISTS MeetingsAvailability (
 );
 
 CREATE TABLE IF NOT EXISTS Meetings (
-	id_meeting INT PRIMARY KEY AUTO_INCREMENT,
     date DATE NOT NULL,
     hour VARCHAR(30) NOT NULL,
     id_teacher INT NOT NULL,
     id_parent INT NOT NULL,
+	PRIMARY KEY (date, hour, id_teacher, id_parent),
     FOREIGN KEY (date, hour, id_teacher) REFERENCES MeetingsAvailability(date, hour, id_teacher) ON DELETE CASCADE,
     FOREIGN KEY (id_parent) REFERENCES Parents(id_parent) ON DELETE CASCADE
 );

@@ -95,11 +95,11 @@ CREATE TABLE IF NOT EXISTS MeetingsAvailability (
 );
 
 CREATE TABLE IF NOT EXISTS Meetings (
-    id_meeting INTEGER PRIMARY KEY AUTOINCREMENT,
     date DATE NOT NULL,
     hour TEXT NOT NULL,
     id_teacher INTEGER NOT NULL,
     id_parent INTEGER NOT NULL,
+    PRIMARY KEY (date, hour, id_teacher, id_parent),
     FOREIGN KEY (date, hour, id_teacher) REFERENCES MeetingsAvailability(date, hour, id_teacher) ON DELETE CASCADE,
     FOREIGN KEY (id_parent) REFERENCES Parents(id_parent) ON DELETE CASCADE
 );
