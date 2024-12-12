@@ -98,11 +98,11 @@ public final class ParentController {
 
 	//MEETINGS
 
-	public Iterator<MeetingAvailability> getAllMeetingsAvaialabilityByTeacher(Teacher teacher) throws TeacherDaoException, MeetingAvailabilityDaoException {
+	public Iterator<MeetingAvailability> getAllMeetingsAvaialabilityByTeacher(Teacher teacher) throws TeacherDaoException, MeetingAvailabilityDaoException, DaoConnectionException {
 		return daoFactory.createMeetingAvailabilityDao().getAllMeetingsAvaialabilityByTeacher(teacher);
 	}
 
-	public void bookAMeeting(MeetingAvailability meetingAvailability) throws AlreadyBookedMeetingException, MeetingAvailabilityDaoException, MeetingDaoException, ParentDaoException {
+	public void bookAMeeting(MeetingAvailability meetingAvailability) throws AlreadyBookedMeetingException, MeetingAvailabilityDaoException, MeetingDaoException, ParentDaoException, DaoConnectionException {
 		if (meetingAvailability.isBooked()) {
 			throw new AlreadyBookedMeetingException();
 		}
@@ -110,7 +110,7 @@ public final class ParentController {
 		daoFactory.createMeetingAvailabilityDao().editBooking(meetingAvailability);
 	}
 
-	public Iterator<Meeting> getAllMyMeetings() throws MeetingDaoException, ParentDaoException, TeacherDaoException, MeetingAvailabilityDaoException {
+	public Iterator<Meeting> getAllMyMeetings() throws MeetingDaoException, ParentDaoException, TeacherDaoException, MeetingAvailabilityDaoException, DaoConnectionException {
 		return daoFactory.createMeetingDao().getAllMeetingsByParent(parent);
 	}
 
@@ -121,7 +121,7 @@ public final class ParentController {
 		return studentController.getAllStudentAbsences();
 	}
 
-	public void justifyAbsence(Absence absence) throws AbsenceDaoException {
+	public void justifyAbsence(Absence absence) throws AbsenceDaoException, DaoConnectionException {
 		daoFactory.createAbsenceDao().justifyAbsence(absence);
 	}
 	

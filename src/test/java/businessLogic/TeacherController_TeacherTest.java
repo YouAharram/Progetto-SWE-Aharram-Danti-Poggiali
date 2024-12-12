@@ -84,7 +84,7 @@ public class TeacherController_TeacherTest {
 	}
 
 	@Test
-	public void testGetAllMyTeachings() throws TeachingAssignmentDaoException, TeacherDaoException {
+	public void testGetAllMyTeachings() throws TeachingAssignmentDaoException, TeacherDaoException, DaoConnectionException {
 		Iterator<TeachingAssignment> teachingsIterator = teachingAssignments.iterator();
 
 		expect(teachingAssignmentDaoMock.getAllTeacherTeachings(teacher)).andReturn(teachingsIterator).once();

@@ -52,7 +52,7 @@ public final class TeacherController {
 
 	// TEACHINGS
 
-	public Iterator<TeachingAssignment> getAllMyTeachings() throws TeachingAssignmentDaoException, TeacherDaoException {
+	public Iterator<TeachingAssignment> getAllMyTeachings() throws TeachingAssignmentDaoException, TeacherDaoException, DaoConnectionException {
 		return daoFactory.createTeachingAssignmentDao().getAllTeacherTeachings(teacher);
 	}
 
@@ -129,7 +129,7 @@ public final class TeacherController {
 	}
 
 	public void deleteDisciplinaryReport(DisciplinaryReport report)
-			throws IllegalReportAccessException, DisciplinaryReportException {
+			throws IllegalReportAccessException, DisciplinaryReportException, DaoConnectionException {
 		if (report.getTeacher().equals(teacher)) {
 			daoFactory.createDisciplinaryReportDao().deleteReport(report);
 		} else {
@@ -162,12 +162,12 @@ public final class TeacherController {
 	// HOMEWORKS
 
 	public void assignNewHomework(TeachingAssignment teaching, LocalDate date, String description,
-			LocalDate subissionDate) throws HomeworkDaoException, TeachingAssignmentDaoException {
+			LocalDate subissionDate) throws HomeworkDaoException, TeachingAssignmentDaoException, DaoConnectionException {
 		daoFactory.createHomeworkDao().addHomework(teaching, date, description, subissionDate);
 	}
 
 	public void editHomeworkDescription(Homework homework, String description)
-			throws HomeworkDaoException, IllegalHomeworkAccessException {
+			throws HomeworkDaoException, IllegalHomeworkAccessException, DaoConnectionException {
 		if (homework.getTeaching().getTeacher().equals(teacher)) {
 			daoFactory.createHomeworkDao().editHomeworkDescription(homework, description);
 		} else {
@@ -176,7 +176,7 @@ public final class TeacherController {
 	}
 
 	public void editHomeworkSubmissionDate(Homework homework, LocalDate date)
-			throws HomeworkDaoException, IllegalHomeworkAccessException {
+			throws HomeworkDaoException, IllegalHomeworkAccessException, DaoConnectionException {
 		if (homework.getTeaching().getTeacher().equals(teacher)) {
 			daoFactory.createHomeworkDao().editHomeworkSubmissionDate(homework, date);
 		} else {
@@ -189,7 +189,7 @@ public final class TeacherController {
 		return daoFactory.createHomeworkDao().getHomeworksBySubmissionDate(date, schoolClass);
 	}
 
-	public void deleteHomework(Homework homework) throws IllegalHomeworkAccessException, HomeworkDaoException {
+	public void deleteHomework(Homework homework) throws IllegalHomeworkAccessException, HomeworkDaoException, DaoConnectionException {
 		if (homework.getTeaching().getTeacher().equals(teacher)) {
 			daoFactory.createHomeworkDao().deleteHomework(homework);
 		} else {
@@ -227,7 +227,7 @@ public final class TeacherController {
 		return daoFactory.createLessonDao().getLessonsInDay(date, schoolClass);
 	}
 
-	public void deleteLesson(Lesson lesson) throws LessonDaoException, IllegalLessonAccessException {
+	public void deleteLesson(Lesson lesson) throws LessonDaoException, IllegalLessonAccessException, DaoConnectionException {
 		if (lesson.getTeaching().getTeacher().equals(teacher)) {
 			daoFactory.createLessonDao().deleteLesson(lesson);
 		} else {
@@ -238,12 +238,12 @@ public final class TeacherController {
 	// MEETING
 
 	public void addNewMeetingAvailabilityInDate(LocalDate date, LocalTime time)
-			throws TeacherDaoException, MeetingAvailabilityDaoException {
+			throws TeacherDaoException, MeetingAvailabilityDaoException, DaoConnectionException {
 		daoFactory.createMeetingAvailabilityDao().addMeetingAvailabilityInDate(teacher, date, time);
 	}
 
 	public Iterator<MeetingAvailability> getMeetingAvailabilities()
-			throws TeacherDaoException, MeetingAvailabilityDaoException {
+			throws TeacherDaoException, MeetingAvailabilityDaoException, DaoConnectionException {
 		List<MeetingAvailability> unboockedMeetings = new ArrayList<MeetingAvailability>();
 		Iterator<MeetingAvailability> allMeetings = daoFactory.createMeetingAvailabilityDao()
 				.getAllMeetingsAvaialabilityByTeacher(teacher);
@@ -261,7 +261,7 @@ public final class TeacherController {
 	}
 
 	public void deleteMeetingAvailability(MeetingAvailability meetingAvailability)
-			throws MeetingAlreadyBookedException, MeetingAvailabilityDaoException, TeacherDaoException {
+			throws MeetingAlreadyBookedException, MeetingAvailabilityDaoException, TeacherDaoException, DaoConnectionException {
 		if (!meetingAvailability.isBooked()) {
 			daoFactory.createMeetingAvailabilityDao().deleteMeetingAvailability(meetingAvailability);
 		} else {

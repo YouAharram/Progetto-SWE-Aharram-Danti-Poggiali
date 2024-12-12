@@ -161,7 +161,7 @@ public class TeacherController_LessonTest {
 	}
 
 	@Test
-	public void testDeleteLesson() throws LessonDaoException, IllegalLessonAccessException {
+	public void testDeleteLesson() throws LessonDaoException, IllegalLessonAccessException, DaoConnectionException {
 		Lesson lesson = new Lesson(1, teachingAssignment, date, "Description", endHour, startHour);
 
 		lessonDaoMock.deleteLesson(lesson);

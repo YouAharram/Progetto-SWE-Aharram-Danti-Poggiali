@@ -76,7 +76,7 @@ public class ParenControllTest {
 	}
 	
 	@Test
-	public void testGetAllMeetingsAvailabilityByTeacher() throws TeacherDaoException, MeetingAvailabilityDaoException {
+	public void testGetAllMeetingsAvailabilityByTeacher() throws TeacherDaoException, MeetingAvailabilityDaoException, DaoConnectionException {
 		ArrayList<MeetingAvailability> meetingsAvailability = new ArrayList<MeetingAvailability>();
 		MeetingAvailability meetingAvailability1 = new MeetingAvailability(teacher, date, hour, false);
 		MeetingAvailability meetingAvailability2 = new MeetingAvailability(teacher, date, hour, false);
@@ -116,7 +116,7 @@ public class ParenControllTest {
     }
 
     @Test
-    public void testGetAllMyMeetings() throws MeetingDaoException, ParentDaoException, TeacherDaoException, MeetingAvailabilityDaoException {
+    public void testGetAllMyMeetings() throws MeetingDaoException, ParentDaoException, TeacherDaoException, MeetingAvailabilityDaoException, DaoConnectionException {
         ArrayList<Meeting> meetings = new ArrayList<>();
         Meeting meeting1 = new Meeting(parent, null);
         Meeting meeting2 = new Meeting(parent, null);
@@ -134,7 +134,7 @@ public class ParenControllTest {
     }
     
     @Test
-    public void testJustifyAbsence() throws AbsenceDaoException {
+    public void testJustifyAbsence() throws AbsenceDaoException, DaoConnectionException {
         Absence absence = new Absence(student, date, false);
 
         expect(factoryMock.createAbsenceDao()).andReturn(absenceDaoMock);

@@ -55,7 +55,7 @@ public class TeacherController_MeetingTest {
 	}
 	
 	@Test
-	public void testAddNewMeetingAvailabilityInDate() throws TeacherDaoException, MeetingAvailabilityDaoException {
+	public void testAddNewMeetingAvailabilityInDate() throws TeacherDaoException, MeetingAvailabilityDaoException, DaoConnectionException {
 	    LocalDate meetingDate = date;
 	    LocalTime meetingHour = hour;
 
@@ -68,7 +68,7 @@ public class TeacherController_MeetingTest {
 	}
 	
 	@Test
-	public void testGetMeetingAvailabilities() throws TeacherDaoException, MeetingAvailabilityDaoException {
+	public void testGetMeetingAvailabilities() throws TeacherDaoException, MeetingAvailabilityDaoException, DaoConnectionException {
 	    MeetingAvailability unbookedMeeting1 = new MeetingAvailability(teacher, date, hour, false);
 	    MeetingAvailability unbookedMeeting2 = new MeetingAvailability(teacher, date, hour, true);
 	    List<MeetingAvailability> allMeetings = Arrays.asList(unbookedMeeting1, unbookedMeeting2);
@@ -104,7 +104,7 @@ public class TeacherController_MeetingTest {
 
 
 	@Test
-	public void testDeleteMeetingAvailability() throws MeetingAlreadyBookedException, MeetingAvailabilityDaoException, TeacherDaoException {
+	public void testDeleteMeetingAvailability() throws MeetingAlreadyBookedException, MeetingAvailabilityDaoException, TeacherDaoException, DaoConnectionException {
 	    MeetingAvailability unbookedMeeting = new MeetingAvailability(teacher, date, hour, false);
 
 	    meetingAvailabilityDaoMock.deleteMeetingAvailability(unbookedMeeting);
