@@ -22,7 +22,7 @@
                         <Font name="Arial Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Label fx:id="studentsCount" layoutX="105.0" layoutY="18.0" text="NameTeacher">
+                  <Label fx:id="lblTeacherName" layoutX="105.0" layoutY="18.0" text="NameTeacher">
                      <font>
                         <Font name="Arial Bold" size="16.0" />
                      </font>
@@ -37,9 +37,9 @@
                         <Font name="Arial Bold" size="16.0" />
                      </font>
                   </Label>
-                  <ChoiceBox layoutX="16.0" layoutY="97.0" prefHeight="44.0" prefWidth="162.0" />
-                  <ChoiceBox layoutX="211.0" layoutY="97.0" prefHeight="44.0" prefWidth="171.0" />
-                  <Button layoutX="16.0" layoutY="163.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="162.0" text="Show grades" />
+                  <ChoiceBox fx:id="cbTeachings" layoutX="16.0" layoutY="97.0" prefHeight="44.0" prefWidth="162.0" />
+                  <ChoiceBox fx:id="cbClasses" layoutX="211.0" layoutY="97.0" prefHeight="44.0" prefWidth="171.0" />
+                  <Button fx:id="btnShowGrades" layoutX="16.0" layoutY="163.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="162.0" text="Show grades" />
                   <Button layoutX="211.0" layoutY="163.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="171.0" text="Show students" />
                   <Button layoutX="14.0" layoutY="255.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="162.0" text="Show absences" />
                   <Button layoutX="16.0" layoutY="407.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="162.0" text="Set attendance" />

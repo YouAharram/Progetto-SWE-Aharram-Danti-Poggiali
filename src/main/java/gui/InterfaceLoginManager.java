@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import orm.StudentDao;
+import orm.TeacherDao;
 import javafx.scene.Node;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -22,11 +23,13 @@ import businessLogic.LoginHandler;
 import businessLogic.ParentUsernameValidationHandler;
 import businessLogic.StudentController;
 import businessLogic.StudentUsernameValidationHandler;
+import businessLogic.TeacherController;
 import businessLogic.TeacherUsernameValidationHandler;
 import daoFactory.DaoFactory;
 import daoFactory.DatabaseDaoFactory;
 import domainModel.SchoolClass;
 import domainModel.Student;
+import domainModel.Teacher;
 
 public class InterfaceLoginManager {
 	@FXML
@@ -69,11 +72,15 @@ public class InterfaceLoginManager {
 	}
 
 	
-	public void login() throws IOException, StudentDaoException, DaoConnectionException{
+	public void login() throws IOException, StudentDaoException, DaoConnectionException, TeacherDaoException{
 		String username = txtUsername.getText();
 		String password = txtPassword.getText();
 		
 		if(username.charAt(0) == 'T') {
+			TeacherDao dao = daoFactory.creatTeacherDao();
+			Teacher teacher = dao.getTeacherByUsernameAndPassword(username, password);
+			TeacherController teacherController = new TeacherController(teacher, daoFactory);
+			InterfaceTeacherManager.setController(teacherController);
 			root = FXMLLoader.load(getClass().getResource("../resources/TeacherInterface.fxml"));
 			stage = (Stage) txtUsername.getScene().getWindow();
 		}
