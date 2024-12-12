@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AbsenceStudentSceneController">
+   <children>
+      <TableView layoutX="392.0" layoutY="55.0" prefHeight="505.0" prefWidth="366.0">
+         <columns>
+            <TableColumn fx:id="semester1" minWidth="4.800048828125" prefWidth="181.0" text="Date" />
+            <TableColumn fx:id="semester11" minWidth="4.800048828125" prefWidth="184.0" text="Status" />
+         </columns>
+      </TableView>
+      <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToStudentScene" prefHeight="30.0" prefWidth="90.0" text="Back" />
+      <DatePicker layoutX="81.0" layoutY="410.0" />
+      <Label layoutX="81.0" layoutY="392.0" prefHeight="18.0" prefWidth="147.0" text="Select data" />
+      <Button layoutX="105.0" layoutY="214.0" mnemonicParsing="false" text="Show all attendance" />
+   </children>
+</AnchorPane>

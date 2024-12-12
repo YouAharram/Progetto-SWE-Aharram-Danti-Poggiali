@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GradesStuentSceneManager">
+   <children>
+      <TableView fx:id="tableView" layoutX="221.0" layoutY="6.0" prefHeight="591.0" prefWidth="741.0">
+         <columns>
+            <TableColumn fx:id="fnum" minWidth="0.0" prefWidth="0.0" />
+            <TableColumn fx:id="egn" prefWidth="120.0" text="Date" />
+            <TableColumn fx:id="fname" prefWidth="116.0" text="Value" />
+            <TableColumn fx:id="lname" minWidth="9.60003662109375" prefWidth="131.0" text="Weight" />
+            <TableColumn fx:id="semester" minWidth="4.800048828125" prefWidth="373.0" text="Description" />
+         </columns>
+      </TableView>
+      <ChoiceBox layoutX="52.0" layoutY="239.0" prefHeight="18.0" prefWidth="149.0" />
+      <Label layoutX="52.0" layoutY="204.0" prefHeight="32.0" prefWidth="189.0" text="Subjects:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToStudentScene" prefHeight="30.0" prefWidth="90.0" text="Back" />
+   </children>
 </AnchorPane>
-

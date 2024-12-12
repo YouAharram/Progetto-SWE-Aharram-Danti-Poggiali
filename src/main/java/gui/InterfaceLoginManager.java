@@ -19,10 +19,13 @@ import DaoExceptions.TeacherDaoException;
 import businessLogic.LoginController;
 import businessLogic.LoginHandler;
 import businessLogic.ParentUsernameValidationHandler;
+import businessLogic.StudentController;
 import businessLogic.StudentUsernameValidationHandler;
 import businessLogic.TeacherUsernameValidationHandler;
 import daoFactory.DaoFactory;
 import daoFactory.DatabaseDaoFactory;
+import domainModel.SchoolClass;
+import domainModel.Student;
 
 public class InterfaceLoginManager {
 	@FXML
@@ -37,9 +40,9 @@ public class InterfaceLoginManager {
 	private DaoFactory daoFactory = new DatabaseDaoFactory();
 	private Scene sceneManager;
 	
-    public void setMainController(SceneController mainsceneManager) {
-		this.sceneManager = sceneManager;
-    }
+//    public void setMainController(SceneController mainsceneManager) {
+//		this.sceneManager = sceneManager;
+//    }
 	
 	public static String hashString(String input) {
 		try {
@@ -65,26 +68,25 @@ public class InterfaceLoginManager {
 	}
 
 	
-	public void login() throws IOException{
+	public void login() throws IOException, StudentDaoException, DaoConnectionException{
 		String username = txtUsername.getText();
 		
 		if(username.charAt(0) == 'T') {
 			root = FXMLLoader.load(getClass().getResource("../resources/TeacherInterface.fxml"));
 			stage = (Stage) txtUsername.getScene().getWindow();
-			scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
 		}
 		if(username.charAt(0) == 'S') {
+			StudentController studentController = new StudentController(new Student(1, "mario", "gino", new SchoolClass("1A")), daoFactory);
+			StudentSceneManager.setController(studentController);
 			root = FXMLLoader.load(getClass().getResource("../resources/StudentInterface.fxml"));
 			stage = (Stage) txtUsername.getScene().getWindow();
-			scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
 		}
 		if(username.charAt(0) == 'P') {
 			
 		}
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 		
 //		String password = txtPassword.getText();
 		
