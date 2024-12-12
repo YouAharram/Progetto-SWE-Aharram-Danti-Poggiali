@@ -1,21 +1,34 @@
 package daoFactory;
 
+import java.sql.Connection;
+
 import DaoExceptions.DaoConnectionException;
+import DaoExceptions.MeetingDaoException;
 import orm.AbsenceDao;
+import orm.AbsenceDaoDatabase;
 import orm.DatabaseManager;
 import orm.DisciplinaryReportDao;
+import orm.DisciplinaryReportDaoDatabase;
 import orm.GradeDao;
+import orm.GradeDaoDatabase;
 import orm.HomeworkDao;
+import orm.HomeworkDaoDatabase;
 import orm.LessonDao;
+import orm.LessonDaoDatabase;
 import orm.MeetingAvailabilityDao;
+import orm.MeetingAvailabilityDaoDatabase;
 import orm.MeetingDao;
+import orm.MeetingDaoDatabase;
 import orm.ParentDao;
+import orm.ParentDaoDatabase;
 import orm.SchoolClassDao;
+import orm.SchoolClassDaoDatabase;
 import orm.StudentDao;
 import orm.StudentDaoDatabase;
 import orm.TeacherDao;
 import orm.TeacherDaoDatabase;
 import orm.TeachingAssignmentDao;
+import orm.TeachingAssignmentDaoDatabase;
 
 public class DatabaseDaoFactory implements DaoFactory {
 
@@ -30,59 +43,52 @@ public class DatabaseDaoFactory implements DaoFactory {
 	}
 
 	@Override
-	public GradeDao createGradeDao() {
-		return null;
+	public GradeDao createGradeDao() throws DaoConnectionException {
+		return new GradeDaoDatabase(DatabaseManager.getInstance().getConnection());
 	}
 
 	@Override
-	public DisciplinaryReportDao createDisciplinaryReportDao() {
-		return null;
+	public DisciplinaryReportDao createDisciplinaryReportDao() throws DaoConnectionException {
+		return new DisciplinaryReportDaoDatabase(DatabaseManager.getInstance().getConnection());
 	}
 
 	@Override
-	public SchoolClassDao createSchoolClassDao() {
-		return null;
+	public SchoolClassDao createSchoolClassDao() throws DaoConnectionException {
+		return new SchoolClassDaoDatabase(DatabaseManager.getInstance().getConnection());
 	}
 
 	@Override
-	public AbsenceDao createAbsenceDao() {
-		// TODO Auto-generated method stub
-		return null;
+	public AbsenceDao createAbsenceDao() throws DaoConnectionException {
+		return new AbsenceDaoDatabase(DatabaseManager.getInstance().getConnection());
 	}
 
 	@Override
-	public HomeworkDao createHomeworkDao() {
-		// TODO Auto-generated method stub
-		return null;
+	public HomeworkDao createHomeworkDao() throws DaoConnectionException {
+		return new HomeworkDaoDatabase(DatabaseManager.getInstance().getConnection());
 	}
 
 	@Override
-	public LessonDao createLessonDao() {
-		// TODO Auto-generated method stub
-		return null;
+	public LessonDao createLessonDao() throws DaoConnectionException {
+		return new LessonDaoDatabase(DatabaseManager.getInstance().getConnection());
 	}
 
 	@Override
-	public ParentDao createParentDao() {
-		// TODO Auto-generated method stub
-		return null;
+	public ParentDao createParentDao() throws DaoConnectionException {
+		return new ParentDaoDatabase(DatabaseManager.getInstance().getConnection());
 	}
 
 	@Override
-	public TeachingAssignmentDao createTeachingAssignmentDao() {
-		// TODO Auto-generated method stub
-		return null;
+	public TeachingAssignmentDao createTeachingAssignmentDao() throws DaoConnectionException {
+		return new TeachingAssignmentDaoDatabase(DatabaseManager.getInstance().getConnection());
 	}
 
 	@Override
-	public MeetingAvailabilityDao createMeetingAvailabilityDao() {
-		// TODO Auto-generated method stub
-		return null;
+	public MeetingAvailabilityDao createMeetingAvailabilityDao() throws DaoConnectionException {
+		return new MeetingAvailabilityDaoDatabase(DatabaseManager.getInstance().getConnection());
 	}
 
 	@Override
-	public MeetingDao createMeetingDao() {
-		// TODO Auto-generated method stub
-		return null;
+	public MeetingDao createMeetingDao() throws DaoConnectionException {
+		return new MeetingDaoDatabase(DatabaseManager.getInstance().getConnection());
 	}
 }

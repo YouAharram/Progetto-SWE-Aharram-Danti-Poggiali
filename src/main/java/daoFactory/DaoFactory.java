@@ -16,14 +16,14 @@ import orm.TeachingAssignmentDao;
 public interface DaoFactory {
 	StudentDao createStudentDao() throws DaoConnectionException;
 	TeacherDao creatTeacherDao() throws DaoConnectionException;
-	GradeDao createGradeDao();
-	DisciplinaryReportDao createDisciplinaryReportDao();
-	SchoolClassDao createSchoolClassDao();
-	AbsenceDao createAbsenceDao();
-	HomeworkDao createHomeworkDao();
-	LessonDao createLessonDao();
-	ParentDao createParentDao();
-	TeachingAssignmentDao createTeachingAssignmentDao();
-	MeetingAvailabilityDao createMeetingAvailabilityDao();
-	MeetingDao createMeetingDao();
+	GradeDao createGradeDao() throws DaoConnectionException;
+	DisciplinaryReportDao createDisciplinaryReportDao() throws DaoConnectionException;
+	SchoolClassDao createSchoolClassDao() throws DaoConnectionException;
+	AbsenceDao createAbsenceDao() throws DaoConnectionException;
+	HomeworkDao createHomeworkDao() throws DaoConnectionException;
+	LessonDao createLessonDao() throws DaoConnectionException;
+	ParentDao createParentDao() throws DaoConnectionException;
+	TeachingAssignmentDao createTeachingAssignmentDao() throws DaoConnectionException;
+	MeetingAvailabilityDao createMeetingAvailabilityDao() throws DaoConnectionException;
+	MeetingDao createMeetingDao() throws DaoConnectionException;
 }
