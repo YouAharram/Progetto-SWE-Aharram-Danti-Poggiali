@@ -25,8 +25,12 @@ import daoFactory.DaoFactory;
 import daoFactory.DatabaseDaoFactory;
 
 public class InterfaceLoginManager {
-//	@FXML
-//	private TextField txtUsername;
+	@FXML
+	private TextField txtUsername;
+	private Stage stage;
+	private Scene scene;
+	private Parent root;
+
 //	@FXML
 //	private TextField txtPassword;
 
@@ -61,12 +65,28 @@ public class InterfaceLoginManager {
 	}
 
 	
-	public void login(ActionEvent event) throws IOException{
-		System.out.println("suuuuuu");
+	public void login() throws IOException{
+
 		
-//		String username = txtUsername.getText();
+		
+		String username = txtUsername.getText();
+		
+		if(username.charAt(0) == 'T') {
+			root = FXMLLoader.load(getClass().getResource("TeacherInterface.fxml"));
+			stage = (Stage) txtUsername.getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		}
+		if(username.charAt(0) == 'S') {
+			
+		}
+		if(username.charAt(0) == 'P') {
+			
+		}
+		
 //		String password = txtPassword.getText();
-//		
+		
 //		LoginHandler teacherHandler = new TeacherUsernameValidationHandler(daoFactory);
 //		LoginHandler studentHandler = new StudentUsernameValidationHandler(daoFactory);
 //		LoginHandler parentHandler = new ParentUsernameValidationHandler(daoFactory);
@@ -74,7 +94,6 @@ public class InterfaceLoginManager {
 //		studentHandler.setNextChain(parentHandler);
 //		
 //		LoginController loginController = new LoginController(teacherHandler);
-//		System.out.println("leccare la figa");
 //		if (loginController.login(username, password)) {
 //			try {
 				// Carica la nuova scena
