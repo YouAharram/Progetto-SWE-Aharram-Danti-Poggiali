@@ -79,7 +79,11 @@ public class InterfaceLoginManager {
 			stage.show();
 		}
 		if(username.charAt(0) == 'S') {
-			
+			root = FXMLLoader.load(getClass().getResource("StudentInterface.fxml"));
+			stage = (Stage) txtUsername.getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
 		}
 		if(username.charAt(0) == 'P') {
 			
