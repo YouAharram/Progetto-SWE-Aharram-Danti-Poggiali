@@ -96,11 +96,9 @@ public class AbsenceStudentSceneController {
         LocalDate selectedDate = datePicker.getValue();
 
         try {
-            // Ottieni il risultato (assente o presente)
             boolean isAbsent = studentController.checkStudentAttendanceInDay(selectedDate);
             String statusText = isAbsent ? "Absent" : "Present";
 
-            // Mostra il risultato nella label
             attendanceStatusLabel.setText("Date: " + selectedDate.toString() + " - " + statusText);
         } catch (Exception e) {
             showError("Error checking attendance: " + e.getMessage());
