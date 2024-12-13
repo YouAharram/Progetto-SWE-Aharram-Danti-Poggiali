@@ -54,7 +54,7 @@ public class InterfaceTeacherManager {
 		
 	}
 
-	private void populateTeachings() {
+	public void populateTeachings() {
 		if (teacherController != null) {
 			Iterator<TeachingAssignment> teachings = null;
 			try {
@@ -68,44 +68,35 @@ public class InterfaceTeacherManager {
 		}
 	}
 	
-	private void populateClass() {
-		if (teacherController != null) {
-			List<TeachingAssignment> classes = null;
-			try {
-				Iterator<TeachingAssignment> teachings = null;
-				String subject = cbTeachings.getValue();
-				teachings = teacherController.getAllMyTeachings();
-			classes = StreamSupport.stream(
-					    Spliterators.spliteratorUnknownSize(teachings, Spliterator.ORDERED), false)
-					    .filter(t -> t.getSubject().equals(subject))
-					    .collect(Collectors.toList());
-			} catch (TeachingAssignmentDaoException | TeacherDaoException | DaoConnectionException e) {
-				e.printStackTrace();
-			}
-//			while (classes.hasNext()) {
-//				cbClasses.getItems().add(classes.next().getSchoolClass().getClassName());
+//	private void populateClass() {
+//		if (teacherController != null) {
+//			List<TeachingAssignment> classes = null;
+//			try {
+//				Iterator<TeachingAssignment> teachings = null;
+//				String subject = cbTeachings.getValue();
+//				teachings = teacherController.getAllMyTeachings();
+//			classes = StreamSupport.stream(
+//					    Spliterators.spliteratorUnknownSize(teachings, Spliterator.ORDERED), false)
+//					    .filter(t -> t.getSubject().equals(subject))
+//					    .collect(Collectors.toList());
+//			} catch (TeachingAssignmentDaoException | TeacherDaoException | DaoConnectionException e) {
+//				e.printStackTrace();
 //			}
-			for (TeachingAssignment ta : classes) {
-			    // Fai qualcosa con teaching
-				System.out.println(ta.getSchoolClass().getClassName());
-				cbClasses.getItems().add(ta.getSchoolClass().getClassName());
-			}
-		}
-	}
-	
-	private void showGrades() {
-//		idTeaching = cbClasses.get  
-		 
-	}
-	
-	private void elementChoosed() {
-		System.out.println("funge");
-		populateClass();
-	}
+////			while (classes.hasNext()) {
+////				cbClasses.getItems().add(classes.next().getSchoolClass().getClassName());
+////			}
+//			for (TeachingAssignment ta : classes) {
+//			    // Fai qualcosa con teaching
+//				System.out.println(ta.getSchoolClass().getClassName());
+//				cbClasses.getItems().add(ta.getSchoolClass().getClassName());
+//			}
+//		}
+//	}
+//	
+
 	
 	@FXML
 	public void openLesson() throws IOException {
-		System.out.println("XSA");
 		openWindow("../resources/LessonInterface.fxml", "Lesson");
 	}
 
