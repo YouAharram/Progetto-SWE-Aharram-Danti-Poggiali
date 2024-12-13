@@ -2,27 +2,35 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import DaoExceptions.DaoConnectionException;
+import DaoExceptions.MeetingAvailabilityDaoException;
+import DaoExceptions.MeetingDaoException;
+import DaoExceptions.ParentDaoException;
 import DaoExceptions.StudentDaoException;
+import DaoExceptions.TeacherDaoException;
 import DaoExceptions.TeachingAssignmentDaoException;
 import businessLogic.ParentController;
 import domainModel.Meeting;
 import domainModel.MeetingAvailability;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -72,9 +80,24 @@ public class ParentMeetingSceneController {
 
     public void initialize() {
         // Configura le colonne della tabella Disponibilità
+        if (dateColumn == null) {
+            showError("dateColumn is null");
+        }
+        if (timeColumn == null) {
+            showError("timeColumn is null");
+        }
+        if (statusColumn == null) {
+            showError("statusColumn is null");
+        }
+    	
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));        
-        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        timeColumn.setCellValueFactory(new PropertyValueFactory<>("hour"));        
+        statusColumn.setCellValueFactory(cellData -> {
+            boolean isBooked = cellData.getValue().isBooked(); // Ottiene il valore boolean
+            String status = isBooked ? "booked" : "available"; // Converte in stringa
+            return new SimpleStringProperty(status);          // Ritorna una proprietà osservabile
+        });
+
 
         // Configura la colonna "Prenota" per contenere i bottoni
         bookColumn.setCellFactory(col -> new TableCell<MeetingAvailability, Void>() {
@@ -125,7 +148,7 @@ public class ParentMeetingSceneController {
         });
 
         // Carica gli appuntamenti già fissati
-        loadAppointments();
+        loadMeetings();
     }
 
     @FXML
@@ -137,28 +160,51 @@ public class ParentMeetingSceneController {
         stage.show();
     }
     private void loadTeachers() {
-    	List<Teacher> teachersList = new ArrayList<>();
-    	try {
+    	List<Teacher> teachersList = getAllTeachers();
+        teachers.addAll(teachersList.stream()
+        		.map(teacher -> teacher.getSurname() + " " + teacher.getName()).toList()); 
+    }
+
+	private List<Teacher> getAllTeachers() {
+		List<Teacher> teachersList = new ArrayList<>();
+		try {
 			parentController.getTeachings().forEachRemaining(teaching -> teachersList.add(teaching.getTeacher()));
-		} catch (TeachingAssignmentDaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (DaoConnectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (StudentDaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (TeachingAssignmentDaoException | DaoConnectionException | StudentDaoException e) {
+			showError(e.getMessage());
 		}
-        teachers.addAll(teachersList.stream().map(teacher -> teacher.getSurname() + " " + teacher.getName()).toList()); 
+		return teachersList;
+	}
+
+    private void loadAvailabilities(String teacherNameSurname) {
+    	availabilities.clear();
+    	List<Teacher> teachers = getAllTeachers();
+    	Iterator<MeetingAvailability> availabilitiesIterator = null;
+    	for (Teacher teacherElement : teachers) {
+			if ((teacherElement.getSurname() + " " + teacherElement.getName()).equals(teacherNameSurname)) {
+				try {
+					availabilitiesIterator = parentController.getAllMeetingsAvaialabilityByTeacher(teacherElement);
+				} catch (TeacherDaoException | MeetingAvailabilityDaoException | DaoConnectionException e) {
+					showError(e.getMessage());
+				}
+			}
+		}
+    	if (availabilitiesIterator != null) {
+        	availabilitiesIterator.forEachRemaining(availability -> availabilities.add(availability));
+    	}
+    	else {
+    		showError("No teachers for student selected");
+    	}
+
     }
 
-    private void loadAvailabilities(String teacher) {
-
-    }
-
-    private void loadAppointments() {
- 
+    private void loadMeetings() {
+//    	try {
+//			parentController.getAllMyMeetings().forEachRemaining(meeting -> meetings.add(meeting));
+//		} catch (MeetingDaoException | ParentDaoException | TeacherDaoException | MeetingAvailabilityDaoException
+//				| DaoConnectionException e) {
+//			showError(e.getMessage());
+//		}
+    	
     }
 
     private void bookAppointment(MeetingAvailability availability) {
@@ -167,5 +213,12 @@ public class ParentMeetingSceneController {
 
 	public static void setParentController(ParentController parentController) {
 		ParentMeetingSceneController.parentController = parentController;
+	}
+	
+	private void showError(String message) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Error");
+		alert.setContentText(message);
+		alert.showAndWait();
 	}
 }

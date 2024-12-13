@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,24 +8,23 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ParentMeetingSceneController">
    <children>
-      <TableView layoutX="217.0" layoutY="45.0" prefHeight="149.0" prefWidth="358.0">
+      <TableView fx:id="availabilityTable" layoutX="217.0" layoutY="45.0" prefHeight="149.0" prefWidth="358.0">
         <columns>
-            <TableColumn prefWidth="75.0" text="Date" />
-          <TableColumn prefWidth="142.4000244140625" text="Hour" />
-            <TableColumn prefWidth="75.199951171875" text="Status" />
-            <TableColumn prefWidth="63.2000732421875" text="Book" />
+            <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date" />
+          <TableColumn fx:id="timeColumn" prefWidth="142.4000244140625" text="Hour" />
+            <TableColumn fx:id="statusColumn" prefWidth="75.199951171875" text="Status" />
+            <TableColumn fx:id="bookColumn" prefWidth="63.2000732421875" text="Book" />
         </columns>
       </TableView>
       <Text layoutX="49.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="79.04925537109375" />
-      <Label layoutX="74.0" layoutY="50.0" prefHeight="44.0" prefWidth="134.0" text="Teacher " />
-      <ChoiceBox layoutX="34.0" layoutY="94.0" prefWidth="150.0" />
+      <ComboBox fx:id="teacherComboBox" layoutX="34.0" layoutY="94.0" prefWidth="150.0" promptText="Select a teacher" />
       <Text layoutX="63.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book a meeting" />
       <Text layoutX="58.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booked meetings" />
-      <TableView layoutX="184.0" layoutY="227.0" prefHeight="150.0" prefWidth="315.0">
+      <TableView fx:id="appointmentsTable" layoutX="184.0" layoutY="227.0" prefHeight="150.0" prefWidth="315.0">
          <columns>
-            <TableColumn prefWidth="128.79998779296875" text="Teacher" />
-            <TableColumn prefWidth="93.60003662109375" text="Date" />
-            <TableColumn prefWidth="91.19999999999999" text="Hour" />
+            <TableColumn fx:id="teacherColumn" prefWidth="128.79998779296875" text="Teacher" />
+            <TableColumn fx:id="appointmentDateColumn" prefWidth="93.60003662109375" text="Date" />
+            <TableColumn fx:id="appointmentTimeColumn" prefWidth="91.19999999999999" text="Hour" />
          </columns>
       </TableView>
    </children>
