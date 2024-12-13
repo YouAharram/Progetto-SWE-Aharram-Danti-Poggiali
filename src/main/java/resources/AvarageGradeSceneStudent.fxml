@@ -7,18 +7,29 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AvarageGradeStudentScene">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AvarageGradeStudentScene">
    <children>
-      <TableView fx:id="tableView" layoutX="392.0" layoutY="55.0" prefHeight="505.0" prefWidth="366.0">
+      <!-- Tabella per visualizzare i soggetti e la loro media -->
+      <TableView fx:id="tableView" layoutX="251.0" layoutY="55.0" prefHeight="400.0" prefWidth="700.0">
          <columns>
-            <TableColumn fx:id="subjectColumn" minWidth="4.800048828125" prefWidth="181.0" text="Subject" />
-            <TableColumn fx:id="averageColumn" minWidth="4.800048828125" prefWidth="184.0" text="Average" />
+            <TableColumn fx:id="subjectColumn" minWidth="4.8" prefWidth="350.0" text="Subject" />
+            <TableColumn fx:id="averageColumn" minWidth="4.8" prefWidth="350.0" text="Average" />
          </columns>
       </TableView>
+
+      <!-- Pulsante per tornare alla scena principale -->
       <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToStudentScene" prefHeight="30.0" prefWidth="90.0" text="Back" />
-      <ChoiceBox fx:id="strategyChoiceBox" layoutX="59.0" layoutY="114.0" prefWidth="150.0" />
+
+      <!-- ChoiceBox per scegliere la strategia -->
+      <ChoiceBox fx:id="strategyChoiceBox" layoutX="54.0" layoutY="128.0" prefWidth="150.0" />
+
+      <!-- Etichetta per indicare la scelta della strategia -->
       <Label layoutX="59.0" layoutY="96.0" prefHeight="18.0" prefWidth="102.0" text="Strategy" />
-      <Button fx:id="showButton" layoutX="83.0" layoutY="246.0" mnemonicParsing="false" onAction="#updateTableWithStrategy" prefHeight="26.0" prefWidth="102.0" text="Show" />
-      <Label fx:id="totalAverageLabel" layoutX="59.0" layoutY="300.0" prefHeight="18.0" prefWidth="200.0" text="Total Average: 0.0" />
+
+      <!-- Bottone per aggiornare la tabella con la strategia selezionata -->
+      <Button fx:id="showButton" layoutX="53.0" layoutY="205.0" mnemonicParsing="false" onAction="#updateTableWithStrategy" prefHeight="26.0" prefWidth="102.0" text="Show" />
+
+      <!-- Etichetta per visualizzare la media totale -->
+      <Label fx:id="totalAverageLabel" layoutX="55.0" layoutY="267.0" prefHeight="18.0" prefWidth="200.0" text="Total Average: 0.0" />
    </children>
 </AnchorPane>

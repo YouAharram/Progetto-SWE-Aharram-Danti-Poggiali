@@ -6,8 +6,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HomeworkLessonSceneManager">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HomeworkLessonSceneManager">
    <children>
+      <!-- Tabella per visualizzare le lezioni -->
       <TableView fx:id="lessonsTableView" layoutX="46.0" layoutY="63.0" prefHeight="245.0" prefWidth="914.0">
          <columns>
             <TableColumn fx:id="subjectLessonColumn" prefWidth="125.0" text="Subject" />
@@ -17,7 +18,11 @@
             <TableColumn fx:id="descriptionLessonColumn" prefWidth="447.0" text="Description" />
          </columns>
       </TableView>
-      <DatePicker fx:id="datePicker" layoutX="706.0" layoutY="20.0" />
+
+      <!-- DatePicker per selezionare una data -->
+      <DatePicker fx:id="datePicker" layoutX="740.0" layoutY="20.0" prefHeight="30.0" prefWidth="150.0" />
+
+      <!-- Tabella per visualizzare i compiti -->
       <TableView fx:id="homeworkTableView" layoutX="46.0" layoutY="323.0" prefHeight="245.0" prefWidth="914.0">
          <columns>
             <TableColumn fx:id="subjectHomeworkColumn" prefWidth="120.0" text="Subject" />
@@ -25,7 +30,11 @@
             <TableColumn fx:id="descriptionHomeworkColumn" prefWidth="629.0" text="Description" />
          </columns>
       </TableView>
+
+      <!-- Pulsante per tornare alla scena principale -->
       <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToStudentScene" prefHeight="30.0" prefWidth="90.0" text="Back" />
-      <Button fx:id="showButton" layoutX="907.0" layoutY="20.0" mnemonicParsing="false" onAction="#showAnnotations" text="Show" />
+
+      <!-- Pulsante per mostrare le annotazioni -->
+      <Button fx:id="showButton" layoutX="907.0" layoutY="14.0" mnemonicParsing="false" onAction="#showAnnotations" text="Show" />
    </children>
 </AnchorPane>
