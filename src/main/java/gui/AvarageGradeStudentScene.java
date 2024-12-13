@@ -32,20 +32,28 @@ import DaoExceptions.StudentDaoException;
 import DaoExceptions.TeachingAssignmentDaoException;
 
 public class AvarageGradeStudentScene {
+	
 	@FXML
 	private Button back;
+	
 	@FXML
 	private TableView<SubjectAverage> tableView;
+	
 	@FXML
 	private TableColumn<SubjectAverage, String> subjectColumn;
+	
 	@FXML
 	private TableColumn<SubjectAverage, Double> averageColumn;
+	
 	@FXML
 	private ChoiceBox<String> strategyChoiceBox;
+	
 	@FXML
 	private Label totalAverageLabel;
+	
 	@FXML
 	private Button showButton;
+	
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
@@ -66,10 +74,8 @@ public class AvarageGradeStudentScene {
 	@FXML
 	public void initialize() {
 		strategyChoiceBox.getItems().addAll("Arithmetic", "Geometric", "Weighted");
-
 		subjectColumn.setCellValueFactory(cellData -> cellData.getValue().getSubject());
 		averageColumn.setCellValueFactory(cellData -> cellData.getValue().getAverage().asObject());
-
 		showButton.setOnAction(event -> updateTableWithStrategy());
 	}
 
@@ -86,7 +92,7 @@ public class AvarageGradeStudentScene {
 		try {
 			teachingIterator = studentController.getTeachings();
 		} catch (TeachingAssignmentDaoException | DaoConnectionException | StudentDaoException e) {
-			e.printStackTrace();
+			HandlerError.showError(e.getMessage());
 		}
 
 		ObservableList<SubjectAverage> data = FXCollections.observableArrayList();
@@ -99,7 +105,7 @@ public class AvarageGradeStudentScene {
 				average = studentController.calculateTeachingGradeAverage(teaching, strategy);
 			} catch (GradeDaoException | DaoConnectionException | StudentDaoException
 					| TeachingAssignmentDaoException e) {
-				e.printStackTrace();
+				HandlerError.showError(e.getMessage());
 			}
 
 			data.add(new SubjectAverage(teaching.getSubject(), average));
@@ -111,7 +117,7 @@ public class AvarageGradeStudentScene {
 		try {
 			totalAverage = studentController.calculateTotalGradeAverage(strategy);
 		} catch (GradeDaoException | DaoConnectionException | StudentDaoException e) {
-			e.printStackTrace();
+			HandlerError.showError(e.getMessage());
 		}
 		totalAverageLabel.setText("Total Average: " + totalAverage);
 	}

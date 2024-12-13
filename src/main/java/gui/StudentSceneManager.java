@@ -1,9 +1,6 @@
 package gui;
 
-import java.awt.event.ActionEvent; 
 import java.io.IOException;
-
-
 import businessLogic.StudentController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,11 +45,8 @@ public class StudentSceneManager {
             nameLabel.setText(name);
             surnameLabel.setText(surname);
             classLabel.setText(className);
-        } else {
-            System.out.println("StudentController non è stato inizializzato.");
         }
     }
-
 
 	private void setControllerForAllScene() {
 		AbsenceStudentSceneController.setController(studentController);
@@ -61,7 +55,6 @@ public class StudentSceneManager {
 		GradesStuentSceneManager.setController(studentController);
 		HomeworkLessonSceneManager.setController(studentController);
 	}
-
 
 	public void switchToGradesScene() throws IOException {
 		root = FXMLLoader.load(getClass().getResource("../resources/GradesSceneStudent.fxml"));

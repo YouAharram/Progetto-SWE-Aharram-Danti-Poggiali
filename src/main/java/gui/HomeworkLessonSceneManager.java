@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import DaoExceptions.AbsenceDaoException;
 import DaoExceptions.DaoConnectionException;
 import DaoExceptions.HomeworkDaoException;
 import DaoExceptions.LessonDaoException;
 import DaoExceptions.SchoolClassDaoException;
+import DaoExceptions.StudentDaoException;
 import businessLogic.StudentController;
 import domainModel.Homework;
 import domainModel.Lesson;
@@ -22,6 +24,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
@@ -31,6 +34,9 @@ public class HomeworkLessonSceneManager {
     @FXML
     private Button showButton;
 
+    @FXML
+    private Label attendanceLabel;
+    
     @FXML
     private Button back;
 
@@ -85,15 +91,21 @@ public class HomeworkLessonSceneManager {
         if (datePicker.getValue() == null) {
             return;
         }
-
+        
         LocalDate selectedDate = datePicker.getValue();
 
+        try {
+			String status = (studentController.checkStudentAttendanceInDay(selectedDate)) ? "Present" : "Absent";
+			attendanceLabel.setText(status);
+		} catch (AbsenceDaoException | DaoConnectionException | StudentDaoException e) {
+			HandlerError.showError(e.getMessage());
+		}
+        
         Iterator<Lesson> lessonsIterator = null;
 		try {
 			lessonsIterator = studentController.getLessonInDate(selectedDate);
 		} catch (DaoConnectionException | LessonDaoException |  SchoolClassDaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			HandlerError.showError(e.getMessage());
 		}
 		
         List<Lesson> lessons = new ArrayList<>();
@@ -111,8 +123,7 @@ public class HomeworkLessonSceneManager {
 		try {
 			homeworkIterator = studentController.getHomeworksBySubmissionDate(selectedDate);
 		} catch (DaoConnectionException | HomeworkDaoException | SchoolClassDaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			HandlerError.showError(e.getMessage());
 		}
 		
         List<Homework> homeworks = new ArrayList<>();

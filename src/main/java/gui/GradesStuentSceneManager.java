@@ -76,8 +76,6 @@ public class GradesStuentSceneManager {
 
         if (selectedSubject != null) {
             updateGradesTable(selectedSubject);
-        } else {
-            System.out.println("Seleziona una materia!");
         }
     }
 
@@ -86,7 +84,7 @@ public class GradesStuentSceneManager {
         try {
             teachingsIterator = studentController.getTeachings();
         } catch (TeachingAssignmentDaoException | DaoConnectionException | StudentDaoException e) {
-            e.printStackTrace();
+			HandlerError.showError(e.getMessage());
             return;
         }
 
@@ -99,11 +97,10 @@ public class GradesStuentSceneManager {
                 try {
                     gradesIterator = studentController.getGradesByTeaching(teaching);
                 } catch (GradeDaoException | DaoConnectionException | StudentDaoException | TeachingAssignmentDaoException e) {
-                    e.printStackTrace();
+        			HandlerError.showError(e.getMessage());
                     return;
                 }
 
-                // Aggiungi i voti alla lista
                 while (gradesIterator != null && gradesIterator.hasNext()) {
                     Grade grade = gradesIterator.next();
                     grades.add(grade);
@@ -111,7 +108,6 @@ public class GradesStuentSceneManager {
             }
         }
 
-        // Popola la TableView con i voti
         tableView.setItems(grades);
     }
 
@@ -121,14 +117,14 @@ public class GradesStuentSceneManager {
             try {
                 subjectsIterator = studentController.getTeachings();
             } catch (TeachingAssignmentDaoException | DaoConnectionException | StudentDaoException e) {
-                e.printStackTrace();
+    			HandlerError.showError(e.getMessage());
             }
             subjectsChoiceBox.getItems().clear();
 
             while (subjectsIterator != null && subjectsIterator.hasNext()) {
                 TeachingAssignment teaching = subjectsIterator.next();
                 teachings.add(teaching);
-                subjectsChoiceBox.getItems().add(teaching.getSubject());  // Aggiungi ogni materia
+                subjectsChoiceBox.getItems().add(teaching.getSubject());
             }
         }
     }
