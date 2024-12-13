@@ -9,15 +9,17 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AbsenceStudentSceneController">
    <children>
-      <TableView layoutX="392.0" layoutY="55.0" prefHeight="505.0" prefWidth="366.0">
+      <TableView fx:id="absenceTableView" layoutX="392.0" layoutY="55.0" prefHeight="505.0" prefWidth="366.0">
          <columns>
-            <TableColumn fx:id="semester1" minWidth="4.800048828125" prefWidth="181.0" text="Date" />
-            <TableColumn fx:id="semester11" minWidth="4.800048828125" prefWidth="184.0" text="Status" />
+            <TableColumn fx:id="dateColumn" minWidth="4.800048828125" prefWidth="181.0" text="Date" />
+            <TableColumn fx:id="statusColumn" minWidth="4.800048828125" prefWidth="184.0" text="Status" />
          </columns>
       </TableView>
+      <Label fx:id="attendanceStatusLabel" layoutX="81.0" layoutY="450.0" prefHeight="18.0" prefWidth="300.0" text="Status will appear here" />
       <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToStudentScene" prefHeight="30.0" prefWidth="90.0" text="Back" />
-      <DatePicker layoutX="81.0" layoutY="410.0" />
-      <Label layoutX="81.0" layoutY="392.0" prefHeight="18.0" prefWidth="147.0" text="Select data" />
-      <Button layoutX="105.0" layoutY="214.0" mnemonicParsing="false" text="Show all attendance" />
+      <DatePicker fx:id="datePicker" layoutX="81.0" layoutY="410.0" />
+      <Label layoutX="81.0" layoutY="392.0" prefHeight="18.0" prefWidth="147.0" text="Select date" />
+      <Button fx:id="showAllButton" layoutX="105.0" layoutY="214.0" mnemonicParsing="false" onAction="#showAllAbsences" text="Show all attendance" />
+      <Button fx:id="showByDateButton" layoutX="277.0" layoutY="410.0" mnemonicParsing="false" onAction="#showAbsenceByDate" text="Show" />
    </children>
 </AnchorPane>
