@@ -2,11 +2,11 @@ package businessLogic;
 
 import java.time.LocalDate;
 
-
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import DaoExceptions.AbsenceDaoException;
 import DaoExceptions.DaoConnectionException;
@@ -50,20 +50,15 @@ public final class TeacherController {
 		return teacher;
 	}
 
-	// TEACHINGS
-
-	public Iterator<TeachingAssignment> getAllMyTeachings() throws TeachingAssignmentDaoException, TeacherDaoException, DaoConnectionException {
+	public Iterator<TeachingAssignment> getAllMyTeachings()
+			throws TeachingAssignmentDaoException, TeacherDaoException, DaoConnectionException {
 		return daoFactory.createTeachingAssignmentDao().getAllTeacherTeachings(teacher);
 	}
-
-	// STUDENTS
 
 	public Iterator<Student> getStudentsByClass(SchoolClass schoolClass)
 			throws StudentDaoException, DaoConnectionException, SchoolClassDaoException {
 		return daoFactory.createStudentDao().getStudentsByClass(schoolClass);
 	}
-
-	// GRADES
 
 	public Iterator<Grade> getAllStudentGradesByTeaching(Student student, TeachingAssignment teaching)
 			throws GradeDaoException, DaoConnectionException, StudentDaoException, TeachingAssignmentDaoException {
@@ -73,24 +68,16 @@ public final class TeacherController {
 	public void assignGradeToStudentInDate(double value, String description, TeachingAssignment teaching,
 			Student student, LocalDate date)
 			throws GradeDaoException, InvalidGradeValueException, DaoConnectionException, StudentDaoException {
-		if (value >= MINIMUM_GRADE && value <= MAXIMUM_GRADE) {
-			daoFactory.createGradeDao().addNewGrade(value, description, teaching, student, date);
-		} else {
-			throw new InvalidGradeValueException();
-		}
+		validateGradeValue(value);
+		daoFactory.createGradeDao().addNewGrade(value, description, teaching, student, date);
 	}
 
 	public void assignGradeToStudentInDateWithWeight(double value, int weight, String description,
 			TeachingAssignment teaching, Student student, LocalDate date) throws GradeDaoException,
 			NegativeWeightException, InvalidGradeValueException, DaoConnectionException, StudentDaoException {
-		if ((value >= MINIMUM_GRADE && value <= MAXIMUM_GRADE) && (weight >= 0)) {
-			daoFactory.createGradeDao().addNewGradeWithWeight(value, weight, description, teaching, student, date);
-		} else {
-			if (weight < 0)
-				throw new NegativeWeightException();
-			else
-				throw new InvalidGradeValueException();
-		}
+		validateWeight(weight);
+		validateGradeValue(value);
+		daoFactory.createGradeDao().addNewGradeWithWeight(value, weight, description, teaching, student, date);
 	}
 
 	public void editGradeValue(Grade oldGrade, double value) throws GradeDaoException, DaoConnectionException {
@@ -116,8 +103,6 @@ public final class TeacherController {
 		return gradeAverageStrategy.getAverage(getAllStudentGradesByTeaching(student, teaching));
 	}
 
-	// REPORTS
-
 	public Iterator<DisciplinaryReport> getStudentDisciplinaryReports(Student student)
 			throws DisciplinaryReportException, DaoConnectionException, StudentDaoException {
 		return daoFactory.createDisciplinaryReportDao().getDisciplinaryReportsByStudent(student);
@@ -130,14 +115,11 @@ public final class TeacherController {
 
 	public void deleteDisciplinaryReport(DisciplinaryReport report)
 			throws IllegalReportAccessException, DisciplinaryReportException, DaoConnectionException {
-		if (report.getTeacher().equals(teacher)) {
-			daoFactory.createDisciplinaryReportDao().deleteReport(report);
-		} else {
+		checkTeacher(report.getTeacher(), () -> {
 			throw new IllegalReportAccessException();
-		}
+		});
+		daoFactory.createDisciplinaryReportDao().deleteReport(report);
 	}
-
-	// ABSENCES
 
 	public Iterator<Absence> getAbsencesByClassInDate(SchoolClass schoolClass, LocalDate date)
 			throws AbsenceDaoException, DaoConnectionException, SchoolClassDaoException {
@@ -159,29 +141,26 @@ public final class TeacherController {
 		daoFactory.createAbsenceDao().deleteAbsence(student, date);
 	}
 
-	// HOMEWORKS
-
 	public void assignNewHomework(TeachingAssignment teaching, LocalDate date, String description,
-			LocalDate subissionDate) throws HomeworkDaoException, TeachingAssignmentDaoException, DaoConnectionException {
+			LocalDate subissionDate)
+			throws HomeworkDaoException, TeachingAssignmentDaoException, DaoConnectionException {
 		daoFactory.createHomeworkDao().addHomework(teaching, date, description, subissionDate);
 	}
 
 	public void editHomeworkDescription(Homework homework, String description)
 			throws HomeworkDaoException, IllegalHomeworkAccessException, DaoConnectionException {
-		if (homework.getTeaching().getTeacher().equals(teacher)) {
-			daoFactory.createHomeworkDao().editHomeworkDescription(homework, description);
-		} else {
+		checkTeacher(homework.getTeaching().getTeacher(), () -> {
 			throw new IllegalHomeworkAccessException();
-		}
+		});
+		daoFactory.createHomeworkDao().editHomeworkDescription(homework, description);
 	}
 
 	public void editHomeworkSubmissionDate(Homework homework, LocalDate date)
 			throws HomeworkDaoException, IllegalHomeworkAccessException, DaoConnectionException {
-		if (homework.getTeaching().getTeacher().equals(teacher)) {
-			daoFactory.createHomeworkDao().editHomeworkSubmissionDate(homework, date);
-		} else {
+		checkTeacher(homework.getTeaching().getTeacher(), () -> {
 			throw new IllegalHomeworkAccessException();
-		}
+		});
+		daoFactory.createHomeworkDao().editHomeworkSubmissionDate(homework, date);
 	}
 
 	public Iterator<Homework> getClassHomeworksSubmissionDate(LocalDate date, SchoolClass schoolClass)
@@ -189,15 +168,13 @@ public final class TeacherController {
 		return daoFactory.createHomeworkDao().getHomeworksBySubmissionDate(date, schoolClass);
 	}
 
-	public void deleteHomework(Homework homework) throws IllegalHomeworkAccessException, HomeworkDaoException, DaoConnectionException {
-		if (homework.getTeaching().getTeacher().equals(teacher)) {
-			daoFactory.createHomeworkDao().deleteHomework(homework);
-		} else {
+	public void deleteHomework(Homework homework)
+			throws IllegalHomeworkAccessException, HomeworkDaoException, DaoConnectionException {
+		checkTeacher(homework.getTeaching().getTeacher(), () -> {
 			throw new IllegalHomeworkAccessException();
-		}
+		});
+		daoFactory.createHomeworkDao().deleteHomework(homework);
 	}
-
-	// LESSONS
 
 	public void addNewLesson(TeachingAssignment teaching, LocalDate date, String description, LocalTime startHour,
 			LocalTime endHour) throws LessonDaoException, DaoConnectionException {
@@ -206,20 +183,18 @@ public final class TeacherController {
 
 	public void editLessonDescription(Lesson lesson, String description)
 			throws LessonDaoException, DaoConnectionException, IllegalLessonAccessException {
-		if (lesson.getTeaching().getTeacher().equals(teacher)) {
-			daoFactory.createLessonDao().editLessonDescription(lesson, description);
-		} else {
+		checkTeacher(lesson.getTeaching().getTeacher(), () -> {
 			throw new IllegalLessonAccessException();
-		}
+		});
+		daoFactory.createLessonDao().editLessonDescription(lesson, description);
 	}
 
 	public void editLessonDateTime(Lesson lesson, LocalDate date, LocalTime startHour, LocalTime endHour)
 			throws LessonDaoException, DaoConnectionException, IllegalLessonAccessException {
-		if (lesson.getTeaching().getTeacher().equals(teacher)) {
-			daoFactory.createLessonDao().editLessonDateTime(lesson, date, startHour, endHour);
-		} else {
+		checkTeacher(lesson.getTeaching().getTeacher(), () -> {
 			throw new IllegalLessonAccessException();
-		}
+		});
+		daoFactory.createLessonDao().editLessonDateTime(lesson, date, startHour, endHour);
 	}
 
 	public Iterator<Lesson> getClassLessonsInDay(LocalDate date, SchoolClass schoolClass)
@@ -227,15 +202,13 @@ public final class TeacherController {
 		return daoFactory.createLessonDao().getLessonsInDay(date, schoolClass);
 	}
 
-	public void deleteLesson(Lesson lesson) throws LessonDaoException, IllegalLessonAccessException, DaoConnectionException {
-		if (lesson.getTeaching().getTeacher().equals(teacher)) {
-			daoFactory.createLessonDao().deleteLesson(lesson);
-		} else {
+	public void deleteLesson(Lesson lesson)
+			throws LessonDaoException, IllegalLessonAccessException, DaoConnectionException {
+		checkTeacher(lesson.getTeaching().getTeacher(), () -> {
 			throw new IllegalLessonAccessException();
-		}
+		});
+		daoFactory.createLessonDao().deleteLesson(lesson);
 	}
-
-	// MEETING
 
 	public void addNewMeetingAvailabilityInDate(LocalDate date, LocalTime time)
 			throws TeacherDaoException, MeetingAvailabilityDaoException, DaoConnectionException {
@@ -244,29 +217,49 @@ public final class TeacherController {
 
 	public Iterator<MeetingAvailability> getMeetingAvailabilities()
 			throws TeacherDaoException, MeetingAvailabilityDaoException, DaoConnectionException {
-		List<MeetingAvailability> unboockedMeetings = new ArrayList<MeetingAvailability>();
+		List<MeetingAvailability> unbookedMeetings = new ArrayList<MeetingAvailability>();
 		Iterator<MeetingAvailability> allMeetings = daoFactory.createMeetingAvailabilityDao()
 				.getAllMeetingsAvaialabilityByTeacher(teacher);
-		while (allMeetings.hasNext()) {
-			MeetingAvailability meetingAvailability = allMeetings.next();
-			if (!meetingAvailability.isBooked()) {
-				unboockedMeetings.add(meetingAvailability);
-			}
-		}
-		return unboockedMeetings.iterator();
+		allMeetings.forEachRemaining(unbookedMeetings::add);
+
+		return unbookedMeetings.stream().filter(this::isNotBooked)
+				.collect(Collectors.toList()).iterator();
 	}
 
-	public Iterator<Meeting> getBookedMeetings() throws DaoConnectionException, TeacherDaoException, MeetingDaoException {
+	public Iterator<Meeting> getBookedMeetings()
+			throws DaoConnectionException, TeacherDaoException, MeetingDaoException {
 		return daoFactory.createMeetingDao().getMeetingsByTeacher(teacher);
 	}
 
-	public void deleteMeetingAvailability(MeetingAvailability meetingAvailability)
-			throws MeetingAlreadyBookedException, MeetingAvailabilityDaoException, TeacherDaoException, DaoConnectionException {
-		if (!meetingAvailability.isBooked()) {
+	public void deleteMeetingAvailability(MeetingAvailability meetingAvailability) throws MeetingAlreadyBookedException,
+			MeetingAvailabilityDaoException, TeacherDaoException, DaoConnectionException {
+		if (isNotBooked(meetingAvailability))
 			daoFactory.createMeetingAvailabilityDao().deleteMeetingAvailability(meetingAvailability);
-		} else {
-			throw new MeetingAlreadyBookedException();
+		else throw new MeetingAlreadyBookedException();
+	}
+
+	private void validateGradeValue(double value) throws InvalidGradeValueException {
+		if (value < MINIMUM_GRADE || value > MAXIMUM_GRADE) {
+			throw new InvalidGradeValueException();
 		}
+	}
+
+	private void validateWeight(int weight) throws NegativeWeightException {
+		if (weight < 0) {
+			throw new NegativeWeightException();
+		}
+	}
+
+	private <E extends Exception> void checkTeacher(Teacher otherTeacher, ExceptionSupplier<E> exceptionSupplier)
+			throws E {
+		if (!teacher.equals(otherTeacher)) {
+			exceptionSupplier.throwException();
+			System.out.println("un la lancia");
+		}
+	}
+	
+	private boolean isNotBooked(MeetingAvailability meeting) {
+		return !meeting.isBooked();
 	}
 
 	public class MeetingAlreadyBookedException extends Exception {
@@ -286,14 +279,15 @@ public final class TeacherController {
 	}
 
 	public class InvalidGradeValueException extends Exception {
-
 		private static final long serialVersionUID = 1L;
-
 	}
+
 	public class NegativeWeightException extends Exception {
-
 		private static final long serialVersionUID = 1L;
-
 	}
 
+	@FunctionalInterface
+	public interface ExceptionSupplier<E extends Exception> {
+		void throwException() throws E;
+	}
 }

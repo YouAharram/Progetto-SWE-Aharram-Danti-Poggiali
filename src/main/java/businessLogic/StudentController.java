@@ -1,9 +1,7 @@
 package businessLogic;
 
 import java.time.LocalDate;
-
 import java.util.Iterator;
-
 import DaoExceptions.AbsenceDaoException;
 import DaoExceptions.DaoConnectionException;
 import DaoExceptions.DisciplinaryReportException;
@@ -19,7 +17,6 @@ import domainModel.DisciplinaryReport;
 import domainModel.Grade;
 import domainModel.Homework;
 import domainModel.Lesson;
-import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.TeachingAssignment;
 import strategyForGrade.GradeAverageStrategy;
@@ -37,13 +34,9 @@ public final class StudentController {
 		return student;
 	}
 	
-	//TEACHINGS
-	
 	public Iterator<TeachingAssignment> getTeachings() throws TeachingAssignmentDaoException, DaoConnectionException, StudentDaoException {
 		return daoFactory.createTeachingAssignmentDao().getAllStudentTeachings(student);
 	}
-	
-	//GRADES
 	
 	public Iterator<Grade> getGradesByTeaching(TeachingAssignment teaching) throws GradeDaoException, DaoConnectionException, StudentDaoException, TeachingAssignmentDaoException {
 		return daoFactory.createGradeDao().getStudentGradesByTeaching(student, teaching);
@@ -61,28 +54,17 @@ public final class StudentController {
 		return gradeAverageStrategy.getAverage(getAllStudentGrades());
 	}
 	
-	//REPORTS
-	
 	public Iterator<DisciplinaryReport> getDisciplinaryReports() throws DisciplinaryReportException, DaoConnectionException, StudentDaoException {
 		return daoFactory.createDisciplinaryReportDao().getDisciplinaryReportsByStudent(student);
 	}
-	
-	
-	//HOMEWORK
 	
 	public Iterator<Homework> getHomeworksBySubmissionDate(LocalDate date) throws DaoConnectionException, HomeworkDaoException, SchoolClassDaoException {
 		return daoFactory.createHomeworkDao().getHomeworksBySubmissionDate(date, student.getSchoolClass());
 	}
 	
-	
-	//LESSON
-	
 	public Iterator<Lesson> getLessonInDate(LocalDate date) throws DaoConnectionException, LessonDaoException, SchoolClassDaoException {
 		return daoFactory.createLessonDao().getLessonsInDay(date, student.getSchoolClass());
 	}
-	
-	
-	//ABSENCES
 	
 	public Iterator<Absence> getAllStudentAbsences() throws AbsenceDaoException, DaoConnectionException, StudentDaoException {
 		return daoFactory.createAbsenceDao().getAbsencesByStudent(student);
@@ -92,5 +74,4 @@ public final class StudentController {
 		return daoFactory.createAbsenceDao().checkStudentAttendanceInDay(student, date);
 	}
 
-	
 }
