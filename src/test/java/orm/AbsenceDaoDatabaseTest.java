@@ -213,9 +213,9 @@ public class AbsenceDaoDatabaseTest {
 	    LocalDate existingAbsenceDate = absence.getDate();
 	    LocalDate nonExistingAbsenceDate = LocalDate.of(2023, 10, 10);
 	    
-	    assertThat(absenceDao.checkStudentAttendanceInDay(student, existingAbsenceDate)).isTrue();
+	    assertThat(absenceDao.checkStudentAttendanceInDay(student, existingAbsenceDate)).isFalse();
 	
-	    assertThat(absenceDao.checkStudentAttendanceInDay(student, nonExistingAbsenceDate)).isFalse();	    
+	    assertThat(absenceDao.checkStudentAttendanceInDay(student, nonExistingAbsenceDate)).isTrue();	    
 	}
 	
 	@Test

@@ -1,9 +1,6 @@
 package daoFactory;
 
-import java.sql.Connection;
-
 import DaoExceptions.DaoConnectionException;
-import DaoExceptions.MeetingDaoException;
 import orm.AbsenceDao;
 import orm.AbsenceDaoDatabase;
 import orm.DatabaseManager;

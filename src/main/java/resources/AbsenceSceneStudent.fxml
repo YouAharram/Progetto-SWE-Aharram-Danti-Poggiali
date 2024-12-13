@@ -19,23 +19,23 @@
       </TableView>
 
       <!-- Label per mostrare lo status dell'assenza -->
-      <Label fx:id="attendanceStatusLabel" layoutX="81.0" layoutY="534.0" prefHeight="18.0" prefWidth="300.0" />
+      <Label fx:id="attendanceStatusLabel" layoutX="15.0" layoutY="534.0" prefHeight="18.0" prefWidth="300.0" />
 
       <!-- Bottone per tornare alla scena principale -->
       <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToStudentScene" prefHeight="30.0" prefWidth="90.0" text="Back" />
 
       <!-- DatePicker per selezionare una data -->
-      <DatePicker fx:id="datePicker" layoutX="81.0" layoutY="500.0" />
+      <DatePicker fx:id="datePicker" layoutX="13.0" layoutY="500.0" />
 
       <!-- Etichetta per indicare l'uso del DatePicker -->
-      <Label layoutX="81.0" layoutY="475.0" prefHeight="18.0" prefWidth="147.0" text="Select date" />
+      <Label layoutX="13.0" layoutY="475.0" prefHeight="18.0" prefWidth="147.0" text="Select date" />
 
       <!-- Contenitore HBox per disporre i pulsanti orizzontalmente -->
       <HBox alignment="CENTER" layoutX="500.0" layoutY="500.0" spacing="20">
          <!-- Pulsante per mostrare tutte le assenze -->
-         <Button fx:id="showAllButton" mnemonicParsing="false" onAction="#showAllAbsences" prefHeight="50.0" prefWidth="200.0" text="Show all attendance" />
-         <!-- Pulsante per mostrare le assenze per data -->
-         <Button fx:id="showByDateButton" mnemonicParsing="false" onAction="#showAbsenceByDate" prefHeight="50.0" prefWidth="200.0" text="Show" />
+         <Button fx:id="showAllButton" mnemonicParsing="false" onAction="#showAllAbsences" prefHeight="50.0" prefWidth="200.0" text="Show all absences" />
       </HBox>
+      <!-- Pulsante per mostrare le assenze per data -->
+      <Button fx:id="showByDateButton" layoutX="293.0" layoutY="500.0" mnemonicParsing="false" onAction="#showAbsenceByDate" prefHeight="50.0" prefWidth="200.0" text="Show" />
    </children>
 </AnchorPane>

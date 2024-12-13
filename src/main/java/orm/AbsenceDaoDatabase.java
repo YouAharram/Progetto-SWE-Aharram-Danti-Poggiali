@@ -101,7 +101,7 @@ public class AbsenceDaoDatabase implements AbsenceDao {
 	            stmt.setDate(2, Date.valueOf(date));
 
 	            try (ResultSet rs = stmt.executeQuery()) {
-	                return rs.next();
+	                return !rs.next();
 	            }
 	        }
 	    } catch (SQLException e) {
