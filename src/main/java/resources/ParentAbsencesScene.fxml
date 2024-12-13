@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="95.0" layoutY="120.0" prefHeight="200.0" prefWidth="426.0">
+        <columns>
+          <TableColumn prefWidth="167.20001220703125" text="Date" />
+            <TableColumn prefWidth="136.79998779296875" text="Status" />
+            <TableColumn prefWidth="123.20001220703125" text="Justify" />
+        </columns>
+      </TableView>
+      <Label layoutX="225.0" layoutY="32.0" prefHeight="41.0" prefWidth="203.0" text="Absences for student" />
+   </children>
+</AnchorPane>

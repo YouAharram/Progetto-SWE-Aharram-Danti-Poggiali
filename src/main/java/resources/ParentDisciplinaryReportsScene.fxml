@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="48.0" layoutY="75.0" prefHeight="298.0" prefWidth="518.0">
+        <columns>
+          <TableColumn prefWidth="115.20001220703125" text="Teacher" />
+          <TableColumn prefWidth="68.79998779296875" text="Date" />
+            <TableColumn prefWidth="332.8000244140625" text="Description" />
+        </columns>
+      </TableView>
+      <Label layoutX="102.0" layoutY="31.0" text="Disciplinary reports for student" />
+   </children>
+</AnchorPane>

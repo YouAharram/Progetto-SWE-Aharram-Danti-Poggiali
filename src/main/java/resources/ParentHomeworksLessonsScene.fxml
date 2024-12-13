@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="tableView" layoutX="56.0" layoutY="73.0" prefHeight="245.0" prefWidth="914.0">
+         <columns>
+            <TableColumn fx:id="egn" prefWidth="125.0" text="Subject" />
+            <TableColumn fx:id="fname" prefWidth="111.0" text="Start Hour" />
+            <TableColumn fx:id="lname" minWidth="9.60003662109375" prefWidth="131.0" text="End Hour" />
+            <TableColumn fx:id="semester" minWidth="4.800048828125" prefWidth="373.0" text="Description" />
+            <TableColumn fx:id="fnum2" minWidth="0.0" prefWidth="0.0" />
+         </columns>
+      </TableView>
+      <DatePicker layoutX="781.0" layoutY="30.0" />
+      <TableView layoutX="56.0" layoutY="333.0" prefHeight="245.0" prefWidth="914.0">
+         <columns>
+            <TableColumn fx:id="fnum1" minWidth="0.0" prefWidth="0.0" />
+            <TableColumn fx:id="egn1" prefWidth="120.0" text="Subject" />
+            <TableColumn fx:id="fname1" prefWidth="116.0" text="Teacher" />
+            <TableColumn fx:id="semester1" minWidth="4.800048828125" prefWidth="677.0" text="Description" />
+         </columns>
+      </TableView>
+      <Button fx:id="back" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#switchToStudentScene" prefHeight="30.0" prefWidth="90.0" text="Back" />
+   </children>
+</AnchorPane>
