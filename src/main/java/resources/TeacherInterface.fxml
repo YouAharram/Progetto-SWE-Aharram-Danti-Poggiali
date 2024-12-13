@@ -4,16 +4,15 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1131.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InterfaceTeacherManager">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="789.0" prefWidth="1283.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InterfaceTeacherManager">
    <children>
-      <HBox prefHeight="703.0" prefWidth="1131.0">
+      <HBox prefHeight="789.0" prefWidth="1283.0">
          <children>
             <AnchorPane prefHeight="703.0" prefWidth="431.0" stylesheets="@InterfacciaTeacherFrontEnd.css">
                <children>
@@ -37,7 +36,7 @@
                         <Font name="Arial Bold" size="16.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="cbTeachings" layoutX="16.0" layoutY="97.0" onMouseClicked="#elementChoosed" prefHeight="44.0" prefWidth="162.0" />
+                  <ChoiceBox fx:id="cbTeachings" layoutX="16.0" layoutY="97.0" prefHeight="44.0" prefWidth="162.0" />
                   <ChoiceBox fx:id="cbClasses" layoutX="211.0" layoutY="97.0" prefHeight="44.0" prefWidth="171.0" />
                   <Button fx:id="btnShowGrades" layoutX="16.0" layoutY="163.0" mnemonicParsing="false" onAction="#showGrades" prefHeight="44.0" prefWidth="162.0" text="Show grades" />
                   <Button layoutX="211.0" layoutY="163.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="171.0" text="Show students" />
@@ -55,15 +54,7 @@
                   <ChoiceBox layoutX="211.0" layoutY="407.0" prefHeight="44.0" prefWidth="171.0" />
                </children>
             </AnchorPane>
-            <TableView fx:id="tableView" prefHeight="703.0" prefWidth="701.0">
-               <columns>
-                  <TableColumn fx:id="fnum" prefWidth="40.799925208091736" />
-                  <TableColumn fx:id="egn" prefWidth="152.79999542236328" text="Name" />
-                  <TableColumn fx:id="fname" prefWidth="149.5999755859375" text="Surname" />
-                  <TableColumn fx:id="lname" minWidth="9.60003662109375" prefWidth="121.5999755859375" text="Attendance" />
-                  <TableColumn fx:id="semester" minWidth="4.800048828125" prefWidth="175.99996948242188" text="Date of Birth" />
-               </columns>
-            </TableView>
+            <TableView fx:id="tvGradesStudents" prefHeight="728.0" prefWidth="854.0" />
          </children>
       </HBox>
    </children>

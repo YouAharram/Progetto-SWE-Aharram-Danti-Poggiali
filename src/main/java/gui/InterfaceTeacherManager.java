@@ -11,6 +11,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -24,11 +27,14 @@ import java.util.stream.StreamSupport;
 
 import DaoExceptions.DaoConnectionException;
 import DaoExceptions.GradeDaoException;
+import DaoExceptions.SchoolClassDaoException;
 import DaoExceptions.StudentDaoException;
 import DaoExceptions.TeacherDaoException;
 import DaoExceptions.TeachingAssignmentDaoException;
 import businessLogic.TeacherController;
 import domainModel.Grade;
+import domainModel.SchoolClass;
+import domainModel.Student;
 import domainModel.TeachingAssignment;
 
 public class InterfaceTeacherManager {
@@ -43,6 +49,8 @@ public class InterfaceTeacherManager {
 	private ChoiceBox<String> cbTeachings;
 	@FXML
 	private ChoiceBox<String> cbClasses;
+	@FXML
+	private TableView<String> tvGradesStudents = new TableView<>();
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
@@ -50,8 +58,19 @@ public class InterfaceTeacherManager {
 
 	@FXML
 	public void initialize() {
+		cbTeachings.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				handleChoiceBoxChange(newValue);
+			}
+		});
 		populateTeachings();
-		
+		ConfigureColumn();
+
+	}
+
+	private void handleChoiceBoxChange(String newValue) {
+		System.out.println("suuu " + newValue);
+		populateClass();
 	}
 
 	public void populateTeachings() {
@@ -67,34 +86,53 @@ public class InterfaceTeacherManager {
 			}
 		}
 	}
-	
-//	private void populateClass() {
-//		if (teacherController != null) {
-//			List<TeachingAssignment> classes = null;
-//			try {
-//				Iterator<TeachingAssignment> teachings = null;
-//				String subject = cbTeachings.getValue();
-//				teachings = teacherController.getAllMyTeachings();
-//			classes = StreamSupport.stream(
-//					    Spliterators.spliteratorUnknownSize(teachings, Spliterator.ORDERED), false)
-//					    .filter(t -> t.getSubject().equals(subject))
-//					    .collect(Collectors.toList());
-//			} catch (TeachingAssignmentDaoException | TeacherDaoException | DaoConnectionException e) {
-//				e.printStackTrace();
-//			}
-////			while (classes.hasNext()) {
-////				cbClasses.getItems().add(classes.next().getSchoolClass().getClassName());
-////			}
-//			for (TeachingAssignment ta : classes) {
-//			    // Fai qualcosa con teaching
-//				System.out.println(ta.getSchoolClass().getClassName());
-//				cbClasses.getItems().add(ta.getSchoolClass().getClassName());
-//			}
-//		}
-//	}
-//	
 
+	private void populateClass() {
+		if (teacherController != null) {
+			List<TeachingAssignment> classes = null;
+			try {
+				Iterator<TeachingAssignment> teachings = null;
+				String subject = cbTeachings.getValue();
+				teachings = teacherController.getAllMyTeachings();
+				classes = StreamSupport
+						.stream(Spliterators.spliteratorUnknownSize(teachings, Spliterator.ORDERED), false)
+						.filter(t -> t.getSubject().equals(subject)).collect(Collectors.toList());
+			} catch (TeachingAssignmentDaoException | TeacherDaoException | DaoConnectionException e) {
+				e.printStackTrace();
+			}
+			for (TeachingAssignment ta : classes) {
+				// Fai qualcosa con teaching
+				System.out.println(ta.getSchoolClass().getClassName());
+				cbClasses.getItems().add(ta.getSchoolClass().getClassName());
+			}
+		}
+	}
 	
+	@FXML
+	public void showGrades() throws StudentDaoException, DaoConnectionException, SchoolClassDaoException, GradeDaoException, TeachingAssignmentDaoException {
+		Iterator<Student> students = teacherController.getStudentsByClass(new SchoolClass(cbClasses.getValue()));
+		while(students.hasNext()) {
+			teacherController.getAllStudentGradesByTeaching(students.next(), new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex(), cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
+		}
+	}
+	
+	private void ConfigureColumn() {
+		int size = 15;
+		TableColumn<String, String> student = new TableColumn<String, String>("Student");
+		tvGradesStudents.getColumns().add(student);
+		for(int i=0; i < size ; i++) {
+			String columnName = "Grade "+(i+1)+"°";
+			TableColumn<String, String> column = new TableColumn<String, String>(columnName);
+			//column.setCellValueFactory(cellData -> cellData.getValue().getda);
+			tvGradesStudents.getColumns().add(column);
+		}
+		tvGradesStudents.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+		ScrollPane scrollPane = new ScrollPane(tvGradesStudents);
+        scrollPane.setFitToWidth(false); // Permette lo scorrimento orizzontale
+        scrollPane.setFitToHeight(true);
+
+	}
+
 	@FXML
 	public void openLesson() throws IOException {
 		openWindow("../resources/LessonInterface.fxml", "Lesson");
