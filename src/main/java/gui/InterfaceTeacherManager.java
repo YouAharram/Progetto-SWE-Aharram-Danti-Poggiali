@@ -5,6 +5,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -14,11 +16,19 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import DaoExceptions.DaoConnectionException;
+import DaoExceptions.GradeDaoException;
+import DaoExceptions.StudentDaoException;
 import DaoExceptions.TeacherDaoException;
 import DaoExceptions.TeachingAssignmentDaoException;
 import businessLogic.TeacherController;
+import domainModel.Grade;
 import domainModel.TeachingAssignment;
 
 public class InterfaceTeacherManager {
@@ -36,11 +46,12 @@ public class InterfaceTeacherManager {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	private int idTeaching;
 
 	@FXML
 	public void initialize() {
 		populateTeachings();
-		populateClass();
+		
 	}
 
 	private void populateTeachings() {
@@ -59,18 +70,39 @@ public class InterfaceTeacherManager {
 	
 	private void populateClass() {
 		if (teacherController != null) {
-			Iterator<TeachingAssignment> classes = null;
+			List<TeachingAssignment> classes = null;
 			try {
-				classes = teacherController.getAllMyTeachings();
+				Iterator<TeachingAssignment> teachings = null;
+				String subject = cbTeachings.getValue();
+				teachings = teacherController.getAllMyTeachings();
+			classes = StreamSupport.stream(
+					    Spliterators.spliteratorUnknownSize(teachings, Spliterator.ORDERED), false)
+					    .filter(t -> t.getSubject().equals(subject))
+					    .collect(Collectors.toList());
 			} catch (TeachingAssignmentDaoException | TeacherDaoException | DaoConnectionException e) {
 				e.printStackTrace();
 			}
-			while (classes.hasNext()) {
-				cbClasses.getItems().add(classes.next().getSchoolClass().getClassName());
+//			while (classes.hasNext()) {
+//				cbClasses.getItems().add(classes.next().getSchoolClass().getClassName());
+//			}
+			for (TeachingAssignment ta : classes) {
+			    // Fai qualcosa con teaching
+				System.out.println(ta.getSchoolClass().getClassName());
+				cbClasses.getItems().add(ta.getSchoolClass().getClassName());
 			}
 		}
 	}
-
+	
+	private void showGrades() {
+//		idTeaching = cbClasses.get  
+		 
+	}
+	
+	private void elementChoosed() {
+		System.out.println("funge");
+		populateClass();
+	}
+	
 	@FXML
 	public void openLesson() throws IOException {
 		System.out.println("XSA");
