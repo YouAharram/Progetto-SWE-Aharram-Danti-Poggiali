@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InterfaceParentManager">
    <children>
-      <Button layoutX="169.0" layoutY="104.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="281.0" text="Grades" />
-      <Button layoutX="169.0" layoutY="154.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="281.0" text="Homeworks and Lessons" />
-      <Button layoutX="169.0" layoutY="204.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="281.0" text="Disciplinary Reports" />
-      <Button layoutX="169.0" layoutY="254.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="281.0" text="Absences" />
-      <Button layoutX="169.0" layoutY="304.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="281.0" text="Meetings" />
+      <Button fx:id="gradesButton" layoutX="169.0" layoutY="118.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="281.0" text="Grades" />
+      <Button fx:id="homeworksLessonsButton" layoutX="169.0" layoutY="168.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="281.0" text="Homeworks and Lessons" />
+      <Button fx:id="reportsButton" layoutX="169.0" layoutY="218.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="281.0" text="Disciplinary Reports" />
+      <Button fx:id="absencesButton" layoutX="169.0" layoutY="268.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="281.0" text="Absences" />
+      <Button fx:id="meetingsButton" layoutX="169.0" layoutY="318.0" mnemonicParsing="false" onAction="#switchToMeetingsScene" prefHeight="49.0" prefWidth="281.0" text="Meetings" />
+      <Label layoutX="198.0" layoutY="18.0" text="Parent:" />
+      <Label fx:id="nameParent" layoutX="255.0" layoutY="18.0" text="Name Parent" />
+      <Label layoutX="194.0" layoutY="47.0" text="Student:" />
+      <Label fx:id="nameStudent" layoutX="256.0" layoutY="47.0" text="Name student" />
+      <Label layoutX="201.0" layoutY="73.0" text="Class:" />
+      <Label fx:id="nameClass" layoutX="255.0" layoutY="73.0" text="Name class" />
    </children>
 </AnchorPane>

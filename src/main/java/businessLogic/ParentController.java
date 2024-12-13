@@ -38,7 +38,7 @@ public final class ParentController {
 	private DaoFactory daoFactory;
 
 	public ParentController(Parent parent, DaoFactory daoFactory)
-			throws StudentDaoException, SchoolClassDaoException, DaoConnectionException, ParentDaoException {
+			throws StudentDaoException, DaoConnectionException, ParentDaoException {
 		this.parent = parent;
 		this.daoFactory = daoFactory;
 		Student student = parent.getStudent();

@@ -1,11 +1,13 @@
 package gui;
 
-import javafx.scene.Parent;  
+import javafx.scene.Parent; 
+ 
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import orm.ParentDao;
 import orm.StudentDao;
 import orm.TeacherDao;
 import javafx.scene.Node;
@@ -20,6 +22,7 @@ import DaoExceptions.StudentDaoException;
 import DaoExceptions.TeacherDaoException;
 import businessLogic.LoginController;
 import businessLogic.LoginHandler;
+import businessLogic.ParentController;
 import businessLogic.ParentUsernameValidationHandler;
 import businessLogic.StudentController;
 import businessLogic.StudentUsernameValidationHandler;
@@ -72,7 +75,7 @@ public class InterfaceLoginManager {
 	}
 
 	
-	public void login() throws IOException, StudentDaoException, DaoConnectionException, TeacherDaoException{
+	public void login() throws IOException, StudentDaoException, DaoConnectionException, TeacherDaoException, ParentDaoException{
 		String username = txtUsername.getText();
 		String password = txtPassword.getText();
 		
@@ -93,6 +96,12 @@ public class InterfaceLoginManager {
 			stage = (Stage) txtUsername.getScene().getWindow();
 		}
 		if(username.charAt(0) == 'P') {
+			ParentDao parentDao = daoFactory.createParentDao();
+			domainModel.Parent parent = parentDao.getParentByUsernameWithPassword(username, password);
+			ParentController parentController = new ParentController(parent, daoFactory);
+			InterfaceParentManager.setController(parentController);
+			root = FXMLLoader.load(getClass().getResource("../resources/ParentInterface.fxml"));
+			stage = (Stage) txtUsername.getScene().getWindow();
 			
 		}
 		scene = new Scene(root);
