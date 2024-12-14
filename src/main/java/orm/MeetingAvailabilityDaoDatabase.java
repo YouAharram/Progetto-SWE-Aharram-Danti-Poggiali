@@ -111,7 +111,6 @@ public class MeetingAvailabilityDaoDatabase implements MeetingAvailabilityDao {
 	
 	public MeetingAvailability getMeetingAvailabilityByDateHourTeacher(LocalDate date, LocalTime hour, Teacher teacher) throws TeacherDaoException, MeetingAvailabilityDaoException {
 		DaoUtils.checkTeacherExist(teacher, conn);
-		
 		String query = "SELECT isBooked FROM MeetingsAvailability WHERE date = ? AND hour = ? AND id_teacher = ?";
 		try (PreparedStatement stmt = conn.prepareStatement(query)){
 			stmt.setDate(1, Date.valueOf(date));
@@ -125,7 +124,6 @@ public class MeetingAvailabilityDaoDatabase implements MeetingAvailabilityDao {
 				else {
 					throw new MeetingAvailabilityDaoException("Meeting availability doesn't exist");
 				}
-
 			}
 		}
 		catch (SQLException e) {

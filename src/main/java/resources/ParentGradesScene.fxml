@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ParentGradesSceneController">
+   <children>
+      <TableView fx:id="tableView" layoutX="150.0" layoutY="95.0" prefHeight="400.0" prefWidth="700.0">
+         <columns>
+            <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="120.0" text="Date" />
+            <TableColumn fx:id="valueColumn" prefWidth="116.0" text="Value" />
+            <TableColumn fx:id="weightColumn" minWidth="9.6" prefWidth="131.0" text="Weight" />
+            <TableColumn fx:id="descriptionColumn" minWidth="4.8" prefWidth="373.0" text="Description" />
+         </columns>
+      </TableView>
+      <ChoiceBox fx:id="subjectsChoiceBox" layoutX="150.0" layoutY="40.0" prefHeight="30.0" prefWidth="200.0" />
+      <Label layoutX="155.0" layoutY="10.0" prefHeight="32.0" prefWidth="189.0" text="Subjects:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToParentScene" prefHeight="30.0" prefWidth="90.0" text="Back" />
+      <Button fx:id="showButton" layoutX="361.0" layoutY="35.0" mnemonicParsing="false" onAction="#showGrades" prefHeight="30.0" prefWidth="90.0" text="Show" />
+   </children>
+</AnchorPane>

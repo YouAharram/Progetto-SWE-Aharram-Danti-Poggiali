@@ -62,13 +62,18 @@ public class MeetingDaoDatabase implements MeetingDao {
 			stmt.setInt(1, parent.getId());
 			
 			try(ResultSet rs = stmt.executeQuery()){
-				Teacher teacher = teacherDaoDatabase.getTeacherById(rs.getInt("id_teacher"));
+				Teacher teacher;
+				MeetingAvailability meetingAvailability;
 				
-				MeetingAvailability meetingAvailability = meetingAvailabilityDaoDatabase.getMeetingAvailabilityByDateHourTeacher(
-						rs.getDate("date").toLocalDate(), LocalTime.parse(rs.getString("hour")), 
-						teacher);
-				
-				meetings.add(new Meeting(parent, meetingAvailability));
+				while(rs.next()) {
+					teacher = teacherDaoDatabase.getTeacherById(rs.getInt("id_teacher"));
+					
+					meetingAvailability = meetingAvailabilityDaoDatabase.getMeetingAvailabilityByDateHourTeacher(
+							rs.getDate("date").toLocalDate(), LocalTime.parse(rs.getString("hour")), 
+							teacher);
+					
+					meetings.add(new Meeting(parent, meetingAvailability));
+				}
 				
 			} catch (TeacherDaoException | MeetingAvailabilityDaoException e) {
 				throw new MeetingDaoException("Error getting meetings data");
@@ -94,7 +99,7 @@ public class MeetingDaoDatabase implements MeetingDao {
 			stmt.setInt(1, teacher.getId());
 			
 			try(ResultSet rs = stmt.executeQuery()){
-				if (rs.next()) {
+				while (rs.next()) {
 					Parent parent = parentDaoDatabase.getParentById(rs.getInt("id_parent"));
 
 					MeetingAvailability meetingAvailability = meetingAvailabilityDaoDatabase
