@@ -75,39 +75,57 @@ public class InterfaceLoginManager {
 	}
 
 	
-	public void login() throws IOException, StudentDaoException, DaoConnectionException, TeacherDaoException, ParentDaoException{
+	public void login() throws IOException{
 		String username = txtUsername.getText();
 		String password = txtPassword.getText();
 		
-		if(username.charAt(0) == 'T') {
-			TeacherDao dao = daoFactory.creatTeacherDao();
-			Teacher teacher = dao.getTeacherByUsernameAndPassword(username, password);
-			TeacherController teacherController = new TeacherController(teacher, daoFactory);
-			InterfaceTeacherManager.setController(teacherController);
-			root = FXMLLoader.load(getClass().getResource("../resources/TeacherInterface.fxml"));
-			stage = (Stage) txtUsername.getScene().getWindow();
+
+		if (username.length() > 0 && username.charAt(0) == 'T') {
+			try {
+				TeacherDao dao = daoFactory.creatTeacherDao();
+				Teacher teacher = dao.getTeacherByUsernameAndPassword(username, password);
+				TeacherController teacherController = new TeacherController(teacher, daoFactory);
+				InterfaceTeacherManager.setController(teacherController);
+				root = FXMLLoader.load(getClass().getResource("../resources/TeacherInterface.fxml"));
+				stage = (Stage) txtUsername.getScene().getWindow();
+			} catch (DaoConnectionException | StudentDaoException | TeacherDaoException e) {
+				HandlerError.showError(e.getMessage());
+			}
 		}
-		if(username.charAt(0) == 'S') {
-			StudentDao dao = daoFactory.createStudentDao();
-			Student student = dao.getStudentByUsernameAndPassword(username, password);
-			StudentController studentController = new StudentController(student, daoFactory);
-			StudentSceneManager.setController(studentController);
-			root = FXMLLoader.load(getClass().getResource("../resources/StudentInterface.fxml"));
-			stage = (Stage) txtUsername.getScene().getWindow();
-		}
-		if(username.charAt(0) == 'P') {
-			ParentDao parentDao = daoFactory.createParentDao();
-			domainModel.Parent parent = parentDao.getParentByUsernameWithPassword(username, password);
-			ParentController parentController = new ParentController(parent, daoFactory);
-			InterfaceParentManager.setController(parentController);
-			root = FXMLLoader.load(getClass().getResource("../resources/ParentInterface.fxml"));
-			stage = (Stage) txtUsername.getScene().getWindow();
+		else if(username.length() > 0 && username.charAt(0) == 'S') {
+			try {
+				StudentDao dao = daoFactory.createStudentDao();
+				Student student = dao.getStudentByUsernameAndPassword(username, password);
+				StudentController studentController = new StudentController(student, daoFactory);
+				StudentSceneManager.setController(studentController);
+				root = FXMLLoader.load(getClass().getResource("../resources/StudentInterface.fxml"));
+				stage = (Stage) txtUsername.getScene().getWindow();
+			} catch (DaoConnectionException | StudentDaoException e) {
+				HandlerError.showError(e.getMessage());
+			}
 			
 		}
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-		
+		else if(username.length() > 0 && username.charAt(0) == 'P') {
+			try {
+				ParentDao parentDao = daoFactory.createParentDao();
+				domainModel.Parent parent = parentDao.getParentByUsernameWithPassword(username, password);
+				ParentController parentController = new ParentController(parent, daoFactory);
+				InterfaceParentManager.setController(parentController);
+				root = FXMLLoader.load(getClass().getResource("../resources/ParentInterface.fxml"));
+				stage = (Stage) txtUsername.getScene().getWindow();
+			} catch (ParentDaoException | StudentDaoException | DaoConnectionException e) {
+				HandlerError.showError(e.getMessage());
+			}
+		}
+		else {
+			HandlerError.showError("Invalid credentials. Please try again");
+		}
+		if (root != null) {
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		}
+
 //		String password = txtPassword.getText();
 		
 //		LoginHandler teacherHandler = new TeacherUsernameValidationHandler(daoFactory);
