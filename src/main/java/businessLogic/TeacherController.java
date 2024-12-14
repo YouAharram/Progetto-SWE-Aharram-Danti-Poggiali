@@ -34,14 +34,13 @@ import DaoExceptions.MeetingAvailabilityDaoException;
 import DaoExceptions.MeetingDaoException;
 import strategyForGrade.GradeAverageStrategy;
 
-public final class TeacherController {
+public final class TeacherController implements UserController{
 	private static final int MINIMUM_GRADE = 1;
 	private static final int MAXIMUM_GRADE = 10;
 	private DaoFactory daoFactory;
 	private Teacher teacher;
 
-	public TeacherController(Teacher teacher, DaoFactory daoFactory)
-			throws StudentDaoException, TeacherDaoException, DaoConnectionException {
+	public TeacherController(Teacher teacher, DaoFactory daoFactory) {
 		this.teacher = teacher;
 		this.daoFactory = daoFactory;
 	}

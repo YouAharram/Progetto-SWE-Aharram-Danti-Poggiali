@@ -1,34 +1,24 @@
 package businessLogic;
 
 import DaoExceptions.DaoConnectionException;
-import DaoExceptions.ParentDaoException;
-import DaoExceptions.StudentDaoException;
 import DaoExceptions.TeacherDaoException;
 import daoFactory.DaoFactory;
 import domainModel.Teacher;
 
-public class TeacherUsernameValidationHandler implements LoginHandler{
-	private LoginHandler nextChain;
-	private DaoFactory daoFactory;
-	
-	public TeacherUsernameValidationHandler(DaoFactory daoFactory) {
-		this.daoFactory = daoFactory;
+public class TeacherUsernameValidationHandler extends LoginHandler {
+
+	public TeacherUsernameValidationHandler(LoginHandler next) {
+		super(next);
 	}
 
 	@Override
-	public void setNextChain(LoginHandler nextChain) {
-		this.nextChain = nextChain;
-	}
-	
-	@Override
-	public boolean validationCredentials(String username, String password) throws TeacherDaoException, DaoConnectionException, StudentDaoException, ParentDaoException {
-		if(username != null && username.charAt(0)=='T') {
-			System.out.println("Teacher sta cercando di fare il login");
+	public UserController validationCredentials(String username, String password, DaoFactory daoFactory) throws DaoConnectionException, IllegalCredentialsException {
+		try {
 			Teacher teacher = daoFactory.creatTeacherDao().getTeacherByUsernameAndPassword(username, password);
-			return true;
-		}else if(nextChain != null) {
-			nextChain.validationCredentials(username, password);
+			return new TeacherController(teacher, daoFactory);
+		} catch (TeacherDaoException e) {
+			return super.validationCredentials(username, password, daoFactory);
 		}
-		return false;
 	}
+
 }

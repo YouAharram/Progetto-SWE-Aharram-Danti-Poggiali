@@ -21,11 +21,11 @@ import domainModel.Student;
 import domainModel.TeachingAssignment;
 import strategyForGrade.GradeAverageStrategy;
 
-public final class StudentController {
+public final class StudentController implements UserController{
 	private Student student;
 	private DaoFactory daoFactory;
 
-	public StudentController(Student student, DaoFactory daoFactory) throws StudentDaoException, DaoConnectionException {
+	public StudentController(Student student, DaoFactory daoFactory) {
 		this.student = student;
 		this.daoFactory = daoFactory;
 	}

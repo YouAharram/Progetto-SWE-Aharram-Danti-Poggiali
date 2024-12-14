@@ -33,10 +33,10 @@ public class MeetingTeacherManager {
     private static TeacherController teacherController;
 
     @FXML
-    private Button btnBack; // Bottone per tornare indietro
-    private Stage stage; // Riferimento alla finestra (Stage)
-    private Scene scene; // Riferimento alla scena
-    private Parent root; // Riferimento alla root della scena caricata
+    private Button btnBack;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     @FXML
     private TableView<MeetingAvailability> availableMeetingsTable;
@@ -51,12 +51,12 @@ public class MeetingTeacherManager {
     @FXML
     private TableColumn<Meeting, String> bookedTimeColumn;
     @FXML
-    private DatePicker datePicker; // Campo per la selezione della data
+    private DatePicker datePicker;
 
     @FXML
-    private ChoiceBox<Integer> btnHour; // ChoiceBox per l'ora
+    private ChoiceBox<Integer> btnHour;
     @FXML
-    private ChoiceBox<Integer> btnMinute; // ChoiceBox per i minuti
+    private ChoiceBox<Integer> btnMinute;
 
     @FXML
     private Button addAvailabilityButton;
@@ -75,23 +75,19 @@ public class MeetingTeacherManager {
 
     @FXML
     public void initialize() {
-        // Imposta la colonna della data e dell'orario per la tabella delle disponibilità
         availabilityDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
         availabilityTimeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHour().toString()));
 
-        // Imposta la colonna della data e dell'orario per la tabella dei colloqui prenotati
         bookedDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMeetingAvailability().getDate().toString()));
         bookedTimeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMeetingAvailability().getHour().toString()));
 
-        // Carica le disponibilità e i colloqui prenotati
         loadAvailableMeetings();
         loadBookedMeetings();
 
-        // Popola le ChoiceBox con le ore (0-23) e i minuti (0-59)
-        for (int i = 0; i < 24; i++) {
+        for (int i = 8; i < 12; i++) {
             btnHour.getItems().add(i);
         }
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 60; i+=15) {
             btnMinute.getItems().add(i);
         }
     }
@@ -101,7 +97,7 @@ public class MeetingTeacherManager {
         try {
             teacherController.getMeetingAvailabilities().forEachRemaining(availableMeetings::add);
         } catch (Exception e) {
-            e.printStackTrace(); // Gestisci errori qui
+            e.printStackTrace();
         }
         availableMeetingsTable.setItems(availableMeetings);
     }
@@ -111,7 +107,7 @@ public class MeetingTeacherManager {
         try {
             teacherController.getBookedMeetings().forEachRemaining(bookedMeetings::add);
         } catch (Exception e) {
-            e.printStackTrace(); // Gestisci errori qui
+            e.printStackTrace();
         }
         bookedMeetingsTable.setItems(bookedMeetings);
     }
@@ -121,7 +117,6 @@ public class MeetingTeacherManager {
         Integer hour = btnHour.getValue();
         Integer minute = btnMinute.getValue();
 
-        // Verifica che la data, l'ora e i minuti siano selezionati
         if (date == null || hour == null || minute == null) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Errore di Inserimento");
@@ -131,7 +126,6 @@ public class MeetingTeacherManager {
             return;
         }
 
-        // Crea l'oggetto LocalTime utilizzando l'ora e i minuti selezionati
         LocalTime localTime = LocalTime.of(hour, minute);
         
         try {
@@ -141,20 +135,16 @@ public class MeetingTeacherManager {
         	return;
         }
 
-        // Crea una nuova disponibilità
         MeetingAvailability newAvailability = new MeetingAvailability(teacherController.getTeacher(), date, localTime, false);
 
-        // Aggiungi la nuova disponibilità alla lista
         availabilityList.add(newAvailability);
         loadAvailableMeetings();
     }
 
     public void deleteAvailability() {
-        // Ottieni l'elemento selezionato nella tabella
         MeetingAvailability selectedAvailability = availableMeetingsTable.getSelectionModel().getSelectedItem();
 
         if (selectedAvailability == null) {
-            // Mostra un alert se non è stato selezionato alcun elemento
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Eliminazione Disponibilità");
             alert.setHeaderText("Nessuna disponibilità selezionata");
@@ -163,34 +153,27 @@ public class MeetingTeacherManager {
             return;
         }
 
-        // Conferma l'eliminazione
         Alert confirmationAlert = new Alert(AlertType.CONFIRMATION);
         confirmationAlert.setTitle("Conferma Eliminazione");
         confirmationAlert.setHeaderText("Sei sicuro di voler eliminare questa disponibilità?");
         confirmationAlert.setContentText("Data: " + selectedAvailability.getDate() + "\nOrario: " + selectedAvailability.getHour());
         if (confirmationAlert.showAndWait().isEmpty() || !confirmationAlert.getResult().getButtonData().isDefaultButton()) {
-            // Se l'utente non conferma, esci dal metodo
             return;
         }
 
         try {
-            // Rimuovi la disponibilità dal database
             try {
 				teacherController.deleteMeetingAvailability(selectedAvailability);
 			} catch (MeetingAlreadyBookedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (TeacherDaoException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-            // Rimuovi la disponibilità dalla lista locale e aggiorna la tabella
             availabilityList.remove(selectedAvailability);
             availableMeetingsTable.setItems(availabilityList);
 
         } catch (DaoConnectionException | MeetingAvailabilityDaoException e) {
-            // Gestisci eventuali errori durante l'eliminazione dal database
             e.printStackTrace();
             Alert errorAlert = new Alert(AlertType.ERROR);
             errorAlert.setTitle("Errore");

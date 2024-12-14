@@ -32,13 +32,12 @@ import DaoExceptions.MeetingAvailabilityDaoException;
 import DaoExceptions.MeetingDaoException;
 import strategyForGrade.GradeAverageStrategy;
 
-public final class ParentController {
+public final class ParentController implements UserController{
 	private StudentController studentController;
 	private Parent parent;
 	private DaoFactory daoFactory;
 
-	public ParentController(Parent parent, DaoFactory daoFactory)
-			throws StudentDaoException, DaoConnectionException, ParentDaoException {
+	public ParentController(Parent parent, DaoFactory daoFactory) {
 		this.parent = parent;
 		this.daoFactory = daoFactory;
 		Student student = parent.getStudent();

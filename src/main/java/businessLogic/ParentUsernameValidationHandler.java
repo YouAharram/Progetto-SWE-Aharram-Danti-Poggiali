@@ -3,32 +3,23 @@ package businessLogic;
 import DaoExceptions.DaoConnectionException;
 import DaoExceptions.ParentDaoException;
 import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeacherDaoException;
 import daoFactory.DaoFactory;
 import domainModel.Parent;
 
-public class ParentUsernameValidationHandler implements LoginHandler {
+public class ParentUsernameValidationHandler extends LoginHandler {
 
-	private LoginHandler nextChain;
-	private DaoFactory daoFactory;
+	public ParentUsernameValidationHandler(LoginHandler next) {
+		super(next);
+	}
 
-	public ParentUsernameValidationHandler(DaoFactory daoFactory) {
-		this.daoFactory = daoFactory;
-	}
-	
 	@Override
-	public void setNextChain(LoginHandler nextChain) {
-		this.nextChain = nextChain;
-	}
-	
-	@Override
-	public boolean validationCredentials(String username, String password) throws ParentDaoException, StudentDaoException, TeacherDaoException, DaoConnectionException {
-		if(username != null && username.charAt(0)=='P') {
-			System.out.println("Parent sta cercando di fare il login");
-			Parent pareny = daoFactory.createParentDao().getParentByUsernameWithPassword(username, password);
-		}else if(nextChain != null) {
-			nextChain.validationCredentials(username, password);
+	public UserController validationCredentials(String username, String password, DaoFactory daoFactory) throws DaoConnectionException, IllegalCredentialsException {
+		try {
+			Parent parent = daoFactory.createParentDao().getParentByUsernameWithPassword(username, password);
+			return new ParentController(parent, daoFactory);
+		} catch (ParentDaoException | StudentDaoException e) {
+			return super.validationCredentials(username, password, daoFactory);
 		}
-		return false;		
 	}
+
 }
