@@ -2,17 +2,17 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="789.0" prefWidth="1283.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InterfaceTeacherManager">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="839.0" prefWidth="1517.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InterfaceTeacherManager">
    <children>
-      <HBox prefHeight="789.0" prefWidth="1283.0">
+      <HBox prefHeight="839.0" prefWidth="1517.0">
          <children>
             <AnchorPane prefHeight="703.0" prefWidth="431.0" stylesheets="@InterfacciaTeacherFrontEnd.css">
                <children>
@@ -26,35 +26,35 @@
                         <Font name="Arial Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="45.0" layoutY="59.0" text="My teachings:">
+                  <Label layoutX="54.0" layoutY="211.0" text="My teachings:">
                      <font>
                         <Font name="Arial Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="250.0" layoutY="59.0" text="My classes:">
+                  <Label layoutX="259.0" layoutY="211.0" text="My classes:">
                      <font>
                         <Font name="Arial Bold" size="16.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="cbTeachings" layoutX="16.0" layoutY="97.0" prefHeight="44.0" prefWidth="162.0" />
-                  <ChoiceBox fx:id="cbClasses" layoutX="211.0" layoutY="97.0" prefHeight="44.0" prefWidth="171.0" />
-                  <Button fx:id="btnShowGrades" layoutX="16.0" layoutY="163.0" mnemonicParsing="false" onAction="#showGrades" prefHeight="44.0" prefWidth="162.0" text="Show grades" />
-                  <Button layoutX="211.0" layoutY="163.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="171.0" text="Show students" />
-                  <Button layoutX="14.0" layoutY="255.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="162.0" text="Show absences" />
-                  <Button layoutX="16.0" layoutY="407.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="162.0" text="Set attendance" />
-                  <Button fx:id="btnLesson" layoutX="14.0" layoutY="494.0" mnemonicParsing="false" onAction="#openLesson" prefHeight="44.0" prefWidth="162.0" text="Lesson" />
-                  <Button layoutX="14.0" layoutY="578.0" mnemonicParsing="false" onAction="#openMeeting" prefHeight="44.0" prefWidth="162.0" text="Meeting" />
-                  <Button fx:id="btnHomework" layoutX="211.0" layoutY="494.0" mnemonicParsing="false" onAction="#openHomework" prefHeight="44.0" prefWidth="171.0" text="Homework" />
-                  <DatePicker layoutX="194.0" layoutY="261.0" prefHeight="33.0" prefWidth="197.0" />
-                  <Text layoutX="23.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student selected: " wrappingWidth="156.0">
-                     <font>
-                        <Font name="Arial Bold" size="16.0" />
-                     </font>
-                  </Text>
-                  <ChoiceBox layoutX="211.0" layoutY="407.0" prefHeight="44.0" prefWidth="171.0" />
+                  <ChoiceBox fx:id="cbTeachings" layoutX="25.0" layoutY="249.0" prefHeight="44.0" prefWidth="162.0" />
+                  <ChoiceBox fx:id="cbClasses" layoutX="220.0" layoutY="249.0" prefHeight="44.0" prefWidth="171.0" />
+                  <Button fx:id="btnGrades" layoutX="25.0" layoutY="315.0" mnemonicParsing="false" onAction="#openGrades" prefHeight="44.0" prefWidth="162.0" text="Grades" />
+                  <Button fx:id="btnShowStudents" layoutX="220.0" layoutY="315.0" mnemonicParsing="false" onAction="#showStudents" prefHeight="44.0" prefWidth="171.0" text="Show students" />
+                  <Button layoutX="229.0" layoutY="504.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="162.0" text="Absences" />
+                  <Button fx:id="btnLesson" layoutX="27.0" layoutY="420.0" mnemonicParsing="false" onAction="#openLesson" prefHeight="44.0" prefWidth="162.0" text="Lesson" />
+                  <Button layoutX="27.0" layoutY="504.0" mnemonicParsing="false" onAction="#openMeeting" prefHeight="44.0" prefWidth="162.0" text="Meeting" />
+                  <Button fx:id="btnHomework" layoutX="224.0" layoutY="420.0" mnemonicParsing="false" onAction="#openHomework" prefHeight="44.0" prefWidth="171.0" text="Homework" />
                </children>
             </AnchorPane>
-            <TableView fx:id="tvGradesStudents" prefHeight="728.0" prefWidth="854.0" />
+            <ScrollPane prefHeight="839.0" prefWidth="1091.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="843.0" prefWidth="1096.0">
+                     <children>
+                        <TableView fx:id="tvGradesStudents" layoutX="-2.0" prefHeight="839.0" prefWidth="1089.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
          </children>
       </HBox>
    </children>
