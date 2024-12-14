@@ -272,7 +272,7 @@ public class InterfaceTeacherManager {
 
 	@FXML
 	public void openMeeting() throws IOException {
-		openWindow("../resources/MeetingInterface.fxml", "Meeting");
+		openWindow("../resources/MeetingSceneTeacher.fxml", "Meeting");
 	}
 	
 	@FXML

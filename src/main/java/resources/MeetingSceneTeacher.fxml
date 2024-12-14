@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MeetingTeacherManager">
+   <children>
+      <!-- Bottone per tornare alla scena principale -->
+      <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToPreviousScene" prefHeight="30.0" prefWidth="90.0" text="Back" />
+
+      <!-- Tabella per visualizzare le disponibilità dei colloqui -->
+      <TableView fx:id="availableMeetingsTable" layoutX="50.0" layoutY="80.0" prefHeight="250.0" prefWidth="900.0">
+         <columns>
+            <TableColumn fx:id="dateColumn" minWidth="100.0" prefWidth="200.0" text="Date" />
+            <TableColumn fx:id="timeColumn" minWidth="100.0" prefWidth="200.0" text="Time" />
+            <TableColumn fx:id="actionColumn" minWidth="100.0" prefWidth="200.0" text="Action" />
+         </columns>
+      </TableView>
+
+      <!-- Tabella per visualizzare i colloqui fissati -->
+      <TableView fx:id="bookedMeetingsTable" layoutX="50.0" layoutY="350.0" prefHeight="150.0" prefWidth="900.0">
+         <columns>
+            <TableColumn fx:id="bookedDateColumn" minWidth="100.0" prefWidth="200.0" text="Booked Date" />
+            <TableColumn fx:id="bookedTimeColumn" minWidth="100.0" prefWidth="200.0" text="Booked Time" />
+         </columns>
+      </TableView>
+
+      <!-- Sezione per aggiungere una disponibilità -->
+      <HBox alignment="CENTER" layoutX="50.0" layoutY="530.0" spacing="20.0">
+         <DatePicker fx:id="meetingDatePicker" prefWidth="200.0" />
+         <TextField fx:id="meetingTimeField" prefWidth="150.0" promptText="Enter Time" />
+         <Button fx:id="addAvailabilityButton" onAction="#addAvailability" prefHeight="30.0" prefWidth="150.0" text="Add Availability" />
+      </HBox>
+
+      <!-- Sezione per eliminare una disponibilità -->
+      <HBox alignment="CENTER" layoutX="400.0" layoutY="530.0" spacing="20.0" />
+      <Button fx:id="deleteAvailabilityButton" layoutX="616.0" layoutY="530.0" onAction="#deleteAvailability" prefHeight="30.0" prefWidth="150.0" text="Delete Availability" />
+   </children>
+</AnchorPane>
