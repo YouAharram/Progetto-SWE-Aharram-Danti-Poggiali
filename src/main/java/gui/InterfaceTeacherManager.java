@@ -45,8 +45,16 @@ public class InterfaceTeacherManager {
 
 	@FXML
 	private Button btnLesson;
+	
+	@FXML
+	private Button brtAbsence;
+	
 	@FXML
 	private Label lblTeacherName;
+	
+	@FXML
+	private Label lblTeacherSurname;
+	
 	@FXML
 	private ChoiceBox<String> cbTeachings;
 	@FXML
@@ -60,9 +68,20 @@ public class InterfaceTeacherManager {
 	private int idTeaching;
 	private int numberOfStudents = 0;
 
+	private SchoolClass schoolClass;
+
 	@FXML
 	public void initialize() throws StudentDaoException, DaoConnectionException, SchoolClassDaoException,
 			GradeDaoException, TeachingAssignmentDaoException {
+		
+		 if (teacherController != null) {
+	        	setControllerForAllScene();
+	            String name = teacherController.getTeacher().getName();
+	            String surname = teacherController.getTeacher().getSurname();
+	            lblTeacherName.setText(name);
+	            lblTeacherSurname.setText(surname);
+		 }
+		
 		setControllerForAllScene();
 		cbTeachings.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue != null) {
@@ -130,7 +149,7 @@ public class InterfaceTeacherManager {
 			Iterator<Grade> gradesPerStudent = teacherController.getAllStudentGradesByTeaching(student,
 					new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
 							cbTeachings.getValue(), teacherController.getTeacher(),
-							new SchoolClass(cbClasses.getValue())));
+							schoolClass));
 			while (gradesPerStudent.hasNext()) { // Ad esempio, 10 voti per studente
 				row.set(c, String.valueOf(gradesPerStudent.next().getValue()));
 				c++;
@@ -262,6 +281,21 @@ public class InterfaceTeacherManager {
 		openWindow("../resources/GradesTeacherInterface.fxml","Grades");
 	}
 
+	@FXML
+	public void openAbsence() throws IOException {
+	    if (cbClasses.getValue() != null && !cbClasses.getValue().isEmpty()) {
+	        schoolClass = new SchoolClass(cbClasses.getValue());
+
+	        AbsenceTeacherSceneManager.setSchoolClass(schoolClass);
+	        AbsenceTeacherSceneManager.setTeacherController(teacherController); // Se non lo hai già fatto in un altro punto
+
+	        openWindow("../resources/AbsenceSceneTeacher.fxml", "Absences");
+	    } else {
+	        System.out.println("Per favore, seleziona una classe prima di aprire la scheda delle assenze.");
+	    }
+	}
+
+
 	private void openWindow(String path, String nameWindow) throws IOException {
 		root = FXMLLoader.load(getClass().getResource(path));
 		stage = (Stage) btnLesson.getScene().getWindow();
@@ -274,6 +308,8 @@ public class InterfaceTeacherManager {
 	private void setControllerForAllScene() {
 		LessonTeacherManager.setController(teacherController);
 	}
+	
+	
 	public static void setController(TeacherController teacherController) {
 		InterfaceTeacherManager.teacherController = teacherController;
 	}
