@@ -263,9 +263,8 @@ public class InterfaceTeacherManager {
 	@FXML
 	public void openLesson() throws IOException {
 		openWindow("../resources/LessonInterface.fxml", "Lesson");
-		LessonTeacherManager.setClass(new SchoolClass(cbClasses.getValue()));
+		LessonTeacherManager.setTeachingsAssignement(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex()+1, cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
 	}
-
 	@FXML
 	public void openHomework() throws IOException {
 		openWindow("../resources/HomeworkInterface.fxml", "Homework");
