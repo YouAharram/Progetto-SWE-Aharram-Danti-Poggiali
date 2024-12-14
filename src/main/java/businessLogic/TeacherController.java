@@ -254,7 +254,6 @@ public final class TeacherController {
 			throws E {
 		if (!teacher.equals(otherTeacher)) {
 			exceptionSupplier.throwException();
-			System.out.println("un la lancia");
 		}
 	}
 	
