@@ -294,7 +294,6 @@ public class InterfaceTeacherManager {
 	    }
 	}
 
-
 	private void openWindow(String path, String nameWindow) throws IOException {
 		root = FXMLLoader.load(getClass().getResource(path));
 		stage = (Stage) btnLesson.getScene().getWindow();
@@ -306,6 +305,7 @@ public class InterfaceTeacherManager {
 
 	private void setControllerForAllScene() {
 		LessonTeacherManager.setController(teacherController);
+		MeetingTeacherManager.setTeacherController(teacherController);
 	}
 	
 	
