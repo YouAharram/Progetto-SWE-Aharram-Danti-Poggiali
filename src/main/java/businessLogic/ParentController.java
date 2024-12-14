@@ -49,14 +49,10 @@ public final class ParentController {
 		return parent;
 	}
 	
-	//TEACHINGS
-	
 	public Iterator<TeachingAssignment> getTeachings() throws TeachingAssignmentDaoException, DaoConnectionException, StudentDaoException {
 		return studentController.getTeachings();
 	}
 
-	//GRADES
-	
 	public Iterator<Grade> getGradesByTeaching(TeachingAssignment teaching)
 			throws GradeDaoException, DaoConnectionException, StudentDaoException, TeachingAssignmentDaoException {
 		return studentController.getGradesByTeaching(teaching);
@@ -76,27 +72,18 @@ public final class ParentController {
 		return studentController.calculateTotalGradeAverage(gradeAverageStrategy);
 	}
 	
-	
-	//REPORTS
-
 	public Iterator<DisciplinaryReport> getDisciplinaryReports()
 			throws DisciplinaryReportException, DaoConnectionException, StudentDaoException {
 		return studentController.getDisciplinaryReports();
 	}
 
-	//HOMEWORK
-	
 	public Iterator<Homework> getHomeworksBySubmissionDate(LocalDate date) throws DaoConnectionException, HomeworkDaoException, SchoolClassDaoException {
 		return studentController.getHomeworksBySubmissionDate(date);
 	}
 
-	//LESSON
-	
 	public Iterator<Lesson> getLessonInDate(LocalDate date) throws DaoConnectionException, LessonDaoException, SchoolClassDaoException {
 		return studentController.getLessonInDate(date);
 	}
-
-	//MEETINGS
 
 	public Iterator<MeetingAvailability> getAllMeetingsAvaialabilityByTeacher(Teacher teacher) throws TeacherDaoException, MeetingAvailabilityDaoException, DaoConnectionException {
 		return daoFactory.createMeetingAvailabilityDao().getAllMeetingsAvaialabilityByTeacher(teacher);
@@ -114,9 +101,6 @@ public final class ParentController {
 		return daoFactory.createMeetingDao().getAllMeetingsByParent(parent);
 	}
 
-	
-	//ABSENCE
-	
 	public Iterator<Absence> getAllStudentAbsences() throws AbsenceDaoException, DaoConnectionException, StudentDaoException {
 		return studentController.getAllStudentAbsences();
 	}
@@ -129,8 +113,6 @@ public final class ParentController {
 		return studentController.checkStudentAttendanceInDay(date);
 	}
 
-	
-	
 	public class AlreadyBookedMeetingException extends Exception {
 
 		private static final long serialVersionUID = 1L;

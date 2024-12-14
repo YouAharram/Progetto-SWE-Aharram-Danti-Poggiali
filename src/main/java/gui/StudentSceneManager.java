@@ -65,32 +65,28 @@ public class StudentSceneManager {
 	}
 
 	public void switchToHomeworkAndLessonScene() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../resources/HomeworkAndLessonSceneStudent.fxml"));
-		stage = (Stage) homeworkAndLessonButton.getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+		String fileFxml = "../resources/HomeworkAndLessonSceneStudent.fxml";
+		switchScene(fileFxml);
 	}
-	
+
 	public void switchToDisciplinaryReportScene() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../resources/DisciplinaryReportSceneStudent.fxml"));
-		stage = (Stage) disciplinaryReportButton.getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+		String fileFxml = "../resources/DisciplinaryReportSceneStudent.fxml";
+		switchScene(fileFxml);
 	}
 	
 	public void switchToAbsenceScene() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../resources/AbsenceSceneStudent.fxml"));
-		stage = (Stage) absenceButton.getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+		String fileFxml = "../resources/AbsenceSceneStudent.fxml";
+		switchScene(fileFxml);
 	}
 	
 	public void switchToAvarageGradeScene() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../resources/AvarageGradeSceneStudent.fxml"));
-		stage = (Stage) avarageGradeButton.getScene().getWindow();
+		String fileFxml ="../resources/AvarageGradeSceneStudent.fxml";
+		switchScene(fileFxml);
+	}
+	
+	private void switchScene(String fileFxml) throws IOException {
+		root = FXMLLoader.load(getClass().getResource(fileFxml));
+		stage = (Stage) homeworkAndLessonButton.getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
