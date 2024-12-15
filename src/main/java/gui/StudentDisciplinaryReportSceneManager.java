@@ -21,7 +21,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class DisciplinaryReportStudentSceneManager {
+public class StudentDisciplinaryReportSceneManager {
 
 	@FXML
 	private Button back;
@@ -80,6 +80,6 @@ public class DisciplinaryReportStudentSceneManager {
 	
 
 	public static void setController(StudentController studentController) {
-		DisciplinaryReportStudentSceneManager.studentController = studentController;
+		StudentDisciplinaryReportSceneManager.studentController = studentController;
 	}
 }

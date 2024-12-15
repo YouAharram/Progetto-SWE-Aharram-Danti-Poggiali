@@ -21,7 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
-public class AbsenceStudentSceneController {
+public class StudentAbsenceSceneController {
 
     @FXML
     private Button back;
@@ -67,6 +67,6 @@ public class AbsenceStudentSceneController {
     }
 
     public static void setController(StudentController studentController) {
-        AbsenceStudentSceneController.studentController = studentController;
+        StudentAbsenceSceneController.studentController = studentController;
     }
 }

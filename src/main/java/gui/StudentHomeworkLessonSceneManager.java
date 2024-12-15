@@ -29,7 +29,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
-public class HomeworkLessonSceneManager {
+public class StudentHomeworkLessonSceneManager {
 
     @FXML
     private Button showButton;
@@ -137,6 +137,6 @@ public class HomeworkLessonSceneManager {
     }
 
     public static void setController(StudentController studentController) {
-        HomeworkLessonSceneManager.studentController = studentController;
+        StudentHomeworkLessonSceneManager.studentController = studentController;
     }
 }

@@ -45,6 +45,7 @@
                   <Button layoutX="27.0" layoutY="504.0" mnemonicParsing="false" onAction="#openMeeting" prefHeight="44.0" prefWidth="162.0" text="Meeting" />
                   <Button fx:id="btnHomework" layoutX="224.0" layoutY="420.0" mnemonicParsing="false" onAction="#openHomework" prefHeight="44.0" prefWidth="171.0" text="Homework" />
                   <Label fx:id="lblTeacherSurname" layoutX="220.0" layoutY="18.0" prefHeight="22.0" prefWidth="118.0" text="Surname" />
+                  <Button layoutX="116.0" layoutY="576.0" mnemonicParsing="false" onAction="#openDisciplinaryReport" prefHeight="44.0" prefWidth="197.0" text="Disciplinary report" />
                </children>
             </AnchorPane>
             <ScrollPane prefHeight="839.0" prefWidth="1091.0">

@@ -31,7 +31,7 @@ import DaoExceptions.GradeDaoException;
 import DaoExceptions.StudentDaoException;
 import DaoExceptions.TeachingAssignmentDaoException;
 
-public class AvarageGradeStudentScene {
+public class StudentAvarageGradeScene {
 	
 	@FXML
 	private Button back;
@@ -60,7 +60,7 @@ public class AvarageGradeStudentScene {
 	private static StudentController studentController;
 
 	public static void setController(StudentController studentController) {
-		AvarageGradeStudentScene.studentController = studentController;
+		StudentAvarageGradeScene.studentController = studentController;
 	}
 
 	public void switchToStudentScene() throws IOException {

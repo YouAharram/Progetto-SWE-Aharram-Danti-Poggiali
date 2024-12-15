@@ -15,7 +15,7 @@ public class InterfaceStudentManager {
 	 private Parent root;
 
 	public void switchToGradesScene(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("GradesSceneStudent.fxml"));
+		root = FXMLLoader.load(getClass().getResource("StudentGradesScene.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);

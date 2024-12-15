@@ -28,7 +28,7 @@ import DaoExceptions.DaoConnectionException;
 import DaoExceptions.MeetingAvailabilityDaoException;
 import DaoExceptions.TeacherDaoException;
 
-public class MeetingTeacherManager {
+public class TeacherMeetingManager {
 
     private static TeacherController teacherController;
 
@@ -186,6 +186,6 @@ public class MeetingTeacherManager {
 
 
     public static void setTeacherController(TeacherController teacherController) {
-        MeetingTeacherManager.teacherController = teacherController;
+        TeacherMeetingManager.teacherController = teacherController;
     }
 }

@@ -49,11 +49,11 @@ public class StudentSceneManager {
     }
 
 	private void setControllerForAllScene() {
-		AbsenceStudentSceneController.setController(studentController);
-		AvarageGradeStudentScene.setController(studentController);
-		DisciplinaryReportStudentSceneManager.setController(studentController);
-		GradesStuentSceneManager.setController(studentController);
-		HomeworkLessonSceneManager.setController(studentController);
+		StudentAbsenceSceneController.setController(studentController);
+		StudentAvarageGradeScene.setController(studentController);
+		StudentDisciplinaryReportSceneManager.setController(studentController);
+		StudentGradesSceneManager.setController(studentController);
+		StudentHomeworkLessonSceneManager.setController(studentController);
 	}
 
 	public void switchToGradesScene() throws IOException {

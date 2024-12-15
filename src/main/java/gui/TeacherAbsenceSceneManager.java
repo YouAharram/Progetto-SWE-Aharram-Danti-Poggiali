@@ -1,6 +1,6 @@
 package gui;
 
-import javafx.collections.FXCollections;
+import javafx.collections.FXCollections; 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +26,7 @@ import DaoExceptions.SchoolClassDaoException;
 import DaoExceptions.StudentDaoException;
 import businessLogic.TeacherController;
 
-public class AbsenceTeacherSceneManager {
+public class TeacherAbsenceSceneManager {
 
     @FXML private DatePicker datePicker;
     @FXML private TableView<StudentAbsenceInfo> studentTableView;
@@ -44,11 +44,11 @@ public class AbsenceTeacherSceneManager {
     private Parent root;
 
     public static void setSchoolClass(SchoolClass schoolClass) {
-        AbsenceTeacherSceneManager.schoolClass = schoolClass;
+        TeacherAbsenceSceneManager.schoolClass = schoolClass;
     }
 
     public static void setTeacherController(TeacherController teacherController) {
-        AbsenceTeacherSceneManager.teacherController = teacherController;
+        TeacherAbsenceSceneManager.teacherController = teacherController;
     }
 
     @FXML
@@ -73,14 +73,12 @@ public class AbsenceTeacherSceneManager {
 
         while (studentIterator.hasNext()) {
             Student student = studentIterator.next();
-            boolean isAbsent = false;
             String justification = "";
             String presenceStatus = "Present";
 
             while (absenceIterator.hasNext()) {
                 Absence absence = absenceIterator.next();
                 if (absence.getStudent().equals(student)) {
-                    isAbsent = true;
                     justification = absence.isJustified() ? "Yes" : "No";
                     presenceStatus = "Absent";
                     break;
@@ -146,6 +144,6 @@ public class AbsenceTeacherSceneManager {
     }
 
     public static void setTeacherAbsence(SchoolClass schoolClass) {
-        AbsenceTeacherSceneManager.schoolClass = schoolClass;
+        TeacherAbsenceSceneManager.schoolClass = schoolClass;
     }
 }

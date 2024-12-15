@@ -1,21 +1,17 @@
 package gui;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import DaoExceptions.DaoConnectionException;
 import DaoExceptions.HomeworkDaoException;
-import DaoExceptions.LessonDaoException;
 import DaoExceptions.SchoolClassDaoException;
 import DaoExceptions.TeachingAssignmentDaoException;
 import businessLogic.TeacherController;
 import businessLogic.TeacherController.IllegalHomeworkAccessException;
 import domainModel.Homework;
-import domainModel.Lesson;
 import domainModel.TeachingAssignment;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -31,7 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
-public class HomeworkTeacherManager {
+public class TeacherHomeworkManager {
 	@FXML
 	private Button btnBack;
 	private Stage stage;
@@ -76,7 +72,7 @@ public class HomeworkTeacherManager {
 		LocalDate selectedDate = datePicker.getValue();
 		Iterator<Homework> homeworkIterator = null;
 		try {
-			homeworkIterator  = teacherController.getClassHomeworksSubmissionDate(selectedDate,
+			homeworkIterator = teacherController.getClassHomeworksSubmissionDate(selectedDate,
 					teachingAssignment.getSchoolClass());
 		} catch (DaoConnectionException | SchoolClassDaoException e) {
 			e.printStackTrace();
@@ -95,35 +91,55 @@ public class HomeworkTeacherManager {
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
 	}
 
-	public void addHomework() throws HomeworkDaoException, TeachingAssignmentDaoException, DaoConnectionException {
-		teacherController.assignNewHomework(teachingAssignment, datePicker.getValue(), taDescription.getText(),
-				datePicker.getValue());
+	public void addHomework() {
+		try {
+			try {
+				teacherController.assignNewHomework(teachingAssignment, datePicker.getValue(), taDescription.getText(),
+						datePicker.getValue());
+			} catch (HomeworkDaoException e) {
+				HandlerError.showError("check arguments");
+			}
+		} catch (TeachingAssignmentDaoException | DaoConnectionException e) {
+			HandlerError.showError("check connection");
+		}
 	}
 
-	public void deleteHomeWork() throws IllegalHomeworkAccessException, HomeworkDaoException, DaoConnectionException {
-		teacherController.deleteHomework(homeworks.get(homeworkTableView.getSelectionModel().getSelectedIndex()));
+	public void deleteHomeWork() {
+		try {
+			teacherController.deleteHomework(homeworks.get(homeworkTableView.getSelectionModel().getSelectedIndex()));
+		} catch (IllegalHomeworkAccessException e) {
+			HandlerError.showError("Not your homework");
+			e.printStackTrace();
+		} catch (HomeworkDaoException | DaoConnectionException e) {
+			HandlerError.showError("check connection");
+		}
 	}
-	
-	public void editHomework() throws HomeworkDaoException, DaoConnectionException {
+
+	public void editHomework() {
 		Homework homework = homeworks.get(homeworkTableView.getSelectionModel().getSelectedIndex());
 		try {
-			teacherController.editHomeworkDescription(homework,taDescription.getText());	
-			teacherController.editHomeworkSubmissionDate(homeworks.get(homeworkTableView.getSelectionModel().getSelectedIndex()), datePicker.getValue());
+			teacherController.editHomeworkDescription(homework, taDescription.getText());
+			teacherController.editHomeworkSubmissionDate(
+					homeworks.get(homeworkTableView.getSelectionModel().getSelectedIndex()), datePicker.getValue());
 
-		}catch(IllegalHomeworkAccessException e) {HandlerError.showError("Not your lessons");}
+		} catch (IllegalHomeworkAccessException e) {
+			HandlerError.showError("Not your homework");
+		} catch (HomeworkDaoException | DaoConnectionException e) {
+			HandlerError.showError("check connection");
+		}
 	}
 
-	
 	public void itemSelected() {
 		Homework homework = homeworkTableView.getSelectionModel().getSelectedItem();
 		taDescription.setText(homework.getDescription());
 		datePicker.setValue(homework.getSubmissionDate());
 	}
+
 	protected static void setTeachingsAssignement(TeachingAssignment teachingAssignment) {
-		HomeworkTeacherManager.teachingAssignment = teachingAssignment;
+		TeacherHomeworkManager.teachingAssignment = teachingAssignment;
 	}
 
 	public static void setController(TeacherController teacherController) {
-		HomeworkTeacherManager.teacherController = teacherController;
+		TeacherHomeworkManager.teacherController = teacherController;
 	}
 }

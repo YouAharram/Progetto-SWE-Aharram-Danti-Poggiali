@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="969.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherDisciplinaryReportManager">
+   <children>
+      <TableView fx:id="tvDisciplinaryrReport" layoutX="119.0" layoutY="268.0" prefHeight="289.0" prefWidth="732.0" />
+      <ComboBox fx:id="cbStudents" layoutX="251.0" layoutY="37.0" prefWidth="150.0" />
+      <Button layoutX="32.0" layoutY="37.0" mnemonicParsing="false" onAction="#getDisciplinaryReport" text="show Discipplinary report" />
+      <TextArea fx:id="taDesciption" layoutX="274.0" layoutY="110.0" prefHeight="98.0" prefWidth="351.0" />
+      <DatePicker fx:id="datePicker" layoutX="651.0" layoutY="147.0" />
+      <Button layoutX="32.0" layoutY="116.0" mnemonicParsing="false" onAction="#addDisciplinaryReport" text="Assign disciplinary report" />
+      <Button layoutX="33.0" layoutY="160.0" mnemonicParsing="false" onAction="#deleteDisciplinaryReport" text="Delete disciplinary report" />
+   </children>
+</AnchorPane>

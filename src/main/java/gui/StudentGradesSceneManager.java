@@ -25,7 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class GradesStuentSceneManager {
+public class StudentGradesSceneManager {
 
     @FXML
     private Button showButton;
@@ -138,6 +138,6 @@ public class GradesStuentSceneManager {
     }
 
     public static void setController(StudentController studentController) {
-        GradesStuentSceneManager.studentController = studentController;
+        StudentGradesSceneManager.studentController = studentController;
     }
 }

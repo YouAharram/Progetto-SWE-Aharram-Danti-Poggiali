@@ -1,6 +1,6 @@
 package gui;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,8 +14,6 @@ import DaoExceptions.TeachingAssignmentDaoException;
 import businessLogic.TeacherController;
 import businessLogic.TeacherController.InvalidGradeValueException;
 import domainModel.Grade;
-import domainModel.Homework;
-import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.TeachingAssignment;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -32,7 +30,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -177,7 +174,6 @@ public class TeacherGradeManager {
 			while (gradesPerStudent.hasNext()) { // Ad esempio, 10 voti per studente
 				row.set(c, String.valueOf(gradesPerStudent.next().getValue()));
 				c++;
-//				row.set(c, String.valueOf(gradesPerStudent.next().getValue()));
 			}
 		}
 	}
@@ -235,11 +231,11 @@ public class TeacherGradeManager {
 		cbGrades.setValue(gradeSelected.getValue());
 		}
 
+	@SuppressWarnings("unchecked")
 	private void handleChoiceBoxChange(Student newValue) throws GradeDaoException, DaoConnectionException, StudentDaoException, TeachingAssignmentDaoException {
 		gradeTable.getItems().clear();
 		gradeTable.getColumns().clear();
 
-		int size = 5;
 		TableColumn<ObservableList<String>, String> studentColumn = new TableColumn<>("Student");
 		TableColumn<ObservableList<String>, String> valueColumn = new TableColumn<>("Value");
 		TableColumn<ObservableList<String>, String> weightColumn = new TableColumn<>("weght");
