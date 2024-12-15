@@ -9,6 +9,7 @@ import abstractOrm.DaoFactory;
 import domainModel.Absence;
 import domainModel.DisciplinaryReport;
 import domainModel.Grade;
+import domainModel.GradeAverageStrategy;
 import domainModel.Homework;
 import domainModel.Lesson;
 import domainModel.Meeting;
@@ -30,7 +31,6 @@ import exceptions.SchoolClassDaoException;
 import exceptions.StudentDaoException;
 import exceptions.TeacherDaoException;
 import exceptions.TeachingAssignmentDaoException;
-import strategyForGrade.GradeAverageStrategy;
 
 public final class ParentController implements UserController{
 	private StudentController studentController;

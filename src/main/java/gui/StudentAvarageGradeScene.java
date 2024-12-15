@@ -1,7 +1,11 @@
 package gui;
 
 import businessLogic.*;
+import domainModel.ArithmeticGradeAverageStrategy;
+import domainModel.GeometricGradeAverageStrategy;
+import domainModel.GradeAverageStrategy;
 import domainModel.TeachingAssignment;
+import domainModel.WeightedGradeAverageStrategy;
 import exceptions.DaoConnectionException;
 import exceptions.GradeDaoException;
 import exceptions.StudentDaoException;
@@ -20,10 +24,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import strategyForGrade.ArithmeticGradeAverageStrategy;
-import strategyForGrade.GeometricGradeAverageStrategy;
-import strategyForGrade.GradeAverageStrategy;
-import strategyForGrade.WeightedGradeAverageStrategy;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

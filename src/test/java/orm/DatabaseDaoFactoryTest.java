@@ -1,4 +1,4 @@
-package daoFactory;
+package orm;
 
 import static org.assertj.core.api.Assertions.*; 
 import org.junit.Before;
@@ -17,8 +17,6 @@ import abstractOrm.TeachingAssignmentDao;
 import exceptions.DaoConnectionException;
 
 import java.sql.SQLException;
-
-import orm.*;
 
 public class DatabaseDaoFactoryTest {
 

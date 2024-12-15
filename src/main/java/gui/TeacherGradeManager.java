@@ -8,9 +8,13 @@ import java.util.List;
 
 import businessLogic.TeacherController;
 import businessLogic.TeacherController.InvalidGradeValueException;
+import domainModel.ArithmeticGradeAverageStrategy;
+import domainModel.GeometricGradeAverageStrategy;
 import domainModel.Grade;
+import domainModel.GradeAverageStrategy;
 import domainModel.Student;
 import domainModel.TeachingAssignment;
+import domainModel.WeightedGradeAverageStrategy;
 import exceptions.DaoConnectionException;
 import exceptions.GradeDaoException;
 import exceptions.SchoolClassDaoException;
@@ -33,10 +37,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import strategyForGrade.ArithmeticGradeAverageStrategy;
-import strategyForGrade.GeometricGradeAverageStrategy;
-import strategyForGrade.GradeAverageStrategy;
-import strategyForGrade.WeightedGradeAverageStrategy;
 
 public class TeacherGradeManager {
 	private static TeacherController teacherController;

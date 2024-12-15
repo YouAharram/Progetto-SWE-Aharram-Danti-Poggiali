@@ -14,11 +14,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import abstractOrm.DaoFactory;
+import domainModel.ArithmeticGradeAverageStrategy;
+import domainModel.GeometricGradeAverageStrategy;
 import domainModel.Grade;
 import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
+import domainModel.WeightedGradeAverageStrategy;
 import exceptions.DaoConnectionException;
 import exceptions.GradeDaoException;
 import exceptions.SchoolClassDaoException;
@@ -26,9 +29,6 @@ import exceptions.StudentDaoException;
 import exceptions.TeacherDaoException;
 import exceptions.TeachingAssignmentDaoException;
 import orm.GradeDao;
-import strategyForGrade.ArithmeticGradeAverageStrategy;
-import strategyForGrade.GeometricGradeAverageStrategy;
-import strategyForGrade.WeightedGradeAverageStrategy;
 
 public class GradeAvarageStrategyTest {
 	private DaoFactory factoryMock;

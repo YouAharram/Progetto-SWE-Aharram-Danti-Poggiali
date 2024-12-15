@@ -1,8 +1,6 @@
-package strategyForGrade;
+package domainModel;
 
 import java.util.Iterator;
-
-import domainModel.Grade;
 
 public interface GradeAverageStrategy {
 	
