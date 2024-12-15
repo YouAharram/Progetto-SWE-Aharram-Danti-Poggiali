@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="1078.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LessonTeacherManager">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="778.0" prefWidth="1076.0" stylesheets="@InterfacciaTeacherFrontEnd.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LessonTeacherManager">
    <children>
       <Pane prefHeight="71.0" prefWidth="1078.0" style="-fx-background-color: black;" />
       <Label layoutX="24.0" layoutY="20.0" text="Lesson" textFill="WHITE">
@@ -24,7 +24,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <DatePicker fx:id="datePicker" layoutX="181.0" layoutY="106.0" prefHeight="33.0" prefWidth="183.0" />
+      <DatePicker fx:id="datePicker" layoutX="241.0" layoutY="139.0" prefHeight="33.0" prefWidth="183.0" />
       <Button fx:id="btnAddLesson" layoutX="32.0" layoutY="228.0" mnemonicParsing="false" onAction="#addLesson" prefHeight="40.0" prefWidth="150.0" text="Add lesson">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -45,7 +45,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TableView fx:id="lessonsTableView" layoutX="61.0" layoutY="461.0" prefHeight="245.0" prefWidth="914.0">
+      <TableView fx:id="lessonsTableView" layoutX="81.0" layoutY="510.0" prefHeight="245.0" prefWidth="914.0">
          <columns>
             <TableColumn fx:id="subjectLessonColumn" prefWidth="125.0" text="Subject" />
             <TableColumn fx:id="teacherLessonColumn" prefWidth="149.0" text="Teacher" />
@@ -54,10 +54,13 @@
             <TableColumn fx:id="descriptionLessonColumn" prefWidth="447.0" text="Description" />
          </columns>
       </TableView>
-      <ComboBox fx:id="cbSHours" layoutX="384.0" layoutY="110.0" prefWidth="150.0" />
-      <ComboBox fx:id="cbSMinutes" layoutX="556.0" layoutY="110.0" prefWidth="150.0" />
-      <TextArea fx:id="taDescription" layoutX="273.0" layoutY="210.0" prefHeight="218.0" prefWidth="511.0" />
-      <ComboBox fx:id="cbFHours" layoutX="383.0" layoutY="155.0" prefWidth="150.0" />
-      <ComboBox fx:id="cbFMinutes" layoutX="555.0" layoutY="155.0" prefWidth="150.0" />
+      <ComboBox fx:id="cbSHours" layoutX="483.0" layoutY="106.0" prefWidth="150.0" styleClass="choice-box" stylesheets="@InterfacciaTeacherFrontEnd.css" />
+      <ComboBox fx:id="cbSMinutes" layoutX="657.0" layoutY="105.0" prefWidth="150.0" styleClass="choice-box" stylesheets="@InterfacciaTeacherFrontEnd.css" />
+      <TextArea fx:id="taDescription" layoutX="302.0" layoutY="272.0" prefHeight="218.0" prefWidth="511.0" />
+      <ComboBox fx:id="cbFHours" layoutX="483.0" layoutY="186.0" prefWidth="150.0" styleClass="choice-box" stylesheets="@InterfacciaTeacherFrontEnd.css" />
+      <ComboBox fx:id="cbFMinutes" layoutX="653.0" layoutY="187.0" prefWidth="150.0" styleClass="choice-box" stylesheets="@InterfacciaTeacherFrontEnd.css" />
+      <Label layoutX="596.0" layoutY="80.0" text="Start lesson" />
+      <Label layoutX="602.0" layoutY="163.0" prefHeight="18.0" prefWidth="89.0" text="End Lesson" />
+      <Label layoutX="297.0" layoutY="108.0" text="Select Date" />
    </children>
 </AnchorPane>

@@ -40,8 +40,6 @@ public class HomeworkTeacherManager {
 
 	@FXML
 	private DatePicker datePicker;
-	@FXML
-	private DatePicker datePicker1;
 
 	List<Homework> homeworks = new ArrayList<>();
 	private static TeacherController teacherController;
@@ -99,7 +97,7 @@ public class HomeworkTeacherManager {
 
 	public void addHomework() throws HomeworkDaoException, TeachingAssignmentDaoException, DaoConnectionException {
 		teacherController.assignNewHomework(teachingAssignment, datePicker.getValue(), taDescription.getText(),
-				datePicker1.getValue());
+				datePicker.getValue());
 	}
 
 	public void deleteHomeWork() throws IllegalHomeworkAccessException, HomeworkDaoException, DaoConnectionException {
@@ -110,7 +108,7 @@ public class HomeworkTeacherManager {
 		Homework homework = homeworks.get(homeworkTableView.getSelectionModel().getSelectedIndex());
 		try {
 			teacherController.editHomeworkDescription(homework,taDescription.getText());	
-			teacherController.editHomeworkSubmissionDate(homeworks.get(homeworkTableView.getSelectionModel().getSelectedIndex()), datePicker1.getValue());
+			teacherController.editHomeworkSubmissionDate(homeworks.get(homeworkTableView.getSelectionModel().getSelectedIndex()), datePicker.getValue());
 
 		}catch(IllegalHomeworkAccessException e) {HandlerError.showError("Not your lessons");}
 	}
@@ -119,7 +117,7 @@ public class HomeworkTeacherManager {
 	public void itemSelected() {
 		Homework homework = homeworkTableView.getSelectionModel().getSelectedItem();
 		taDescription.setText(homework.getDescription());
-		datePicker1.setValue(homework.getSubmissionDate());
+		datePicker.setValue(homework.getSubmissionDate());
 	}
 	protected static void setTeachingsAssignement(TeachingAssignment teachingAssignment) {
 		HomeworkTeacherManager.teachingAssignment = teachingAssignment;

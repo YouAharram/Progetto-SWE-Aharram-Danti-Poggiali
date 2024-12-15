@@ -139,24 +139,25 @@ public class AbsenceDaoDatabaseTest {
 
 	
 	@Test
-	public void testGetAbsencesByStudent() throws SQLException, AbsenceDaoException, DaoConnectionException, StudentDaoException {
-	    String insertAbsence = "INSERT INTO Absences (date, justification, id_student) VALUES (?, 0, ?)";
-	    try (PreparedStatement stmt = conn.prepareStatement(insertAbsence)) {
-	        stmt.setDate(1, Date.valueOf(LocalDate.of(2023, 11, 5)));
-	        stmt.setInt(2, student.getId());
-	        stmt.executeUpdate();
-	    }
+	public void testGetAbsencesByStudent()
+			throws SQLException, AbsenceDaoException, DaoConnectionException, StudentDaoException {
+		String insertAbsence = "INSERT INTO Absences (date, justification, id_student) VALUES (?, 0, ?)";
+		try (PreparedStatement stmt = conn.prepareStatement(insertAbsence)) {
+			stmt.setDate(1, Date.valueOf(LocalDate.of(2023, 11, 5)));
+			stmt.setInt(2, student.getId());
+			stmt.executeUpdate();
+		}
 
-	    Absence firstAbsence = new Absence(student, LocalDate.of(2023, 11, 3), false);
-	    Absence secondAbsence = new Absence(student, LocalDate.of(2023, 11, 5), false);
-	    List<Absence> expectedAbsences = List.of(firstAbsence, secondAbsence);
+		Absence firstAbsence = new Absence(student, LocalDate.of(2023, 11, 3), false);
+		Absence secondAbsence = new Absence(student, LocalDate.of(2023, 11, 5), false);
+		List<Absence> expectedAbsences = List.of(firstAbsence, secondAbsence);
 
-	    Iterator<Absence> actualAbsencesIterator = absenceDao.getAbsencesByStudent(student);
+		Iterator<Absence> actualAbsencesIterator = absenceDao.getAbsencesByStudent(student);
 
-	    List<Absence> actualAbsences = new ArrayList<>();
-	    actualAbsencesIterator.forEachRemaining(actualAbsences::add);
+		List<Absence> actualAbsences = new ArrayList<>();
+		actualAbsencesIterator.forEachRemaining(actualAbsences::add);
 
-	    assertThat(actualAbsences).containsExactlyInAnyOrderElementsOf(expectedAbsences);
+		assertThat(actualAbsences).containsExactlyInAnyOrderElementsOf(expectedAbsences);
 	}
 	
 	@Test
