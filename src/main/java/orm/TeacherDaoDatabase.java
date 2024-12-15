@@ -5,8 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import DaoExceptions.TeacherDaoException;
+import abstractOrm.TeacherDao;
 import domainModel.Teacher;
+import exceptions.TeacherDaoException;
 
 public class TeacherDaoDatabase implements TeacherDao {
 

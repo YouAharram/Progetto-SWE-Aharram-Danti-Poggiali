@@ -5,13 +5,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.GradeDaoException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
 import businessLogic.ParentController;
 import domainModel.Grade;
 import domainModel.TeachingAssignment;
+import exceptions.DaoConnectionException;
+import exceptions.GradeDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeachingAssignmentDaoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

@@ -1,31 +1,17 @@
-package daoFactory;
+package orm;
 
-import DaoExceptions.DaoConnectionException;
-import orm.AbsenceDao;
-import orm.AbsenceDaoDatabase;
-import orm.DatabaseManager;
-import orm.DisciplinaryReportDao;
-import orm.DisciplinaryReportDaoDatabase;
-import orm.GradeDao;
-import orm.GradeDaoDatabase;
-import orm.HomeworkDao;
-import orm.HomeworkDaoDatabase;
-import orm.LessonDao;
-import orm.LessonDaoDatabase;
-import orm.MeetingAvailabilityDao;
-import orm.MeetingAvailabilityDaoDatabase;
-import orm.MeetingDao;
-import orm.MeetingDaoDatabase;
-import orm.ParentDao;
-import orm.ParentDaoDatabase;
-import orm.SchoolClassDao;
-import orm.SchoolClassDaoDatabase;
-import orm.StudentDao;
-import orm.StudentDaoDatabase;
-import orm.TeacherDao;
-import orm.TeacherDaoDatabase;
-import orm.TeachingAssignmentDao;
-import orm.TeachingAssignmentDaoDatabase;
+import abstractOrm.AbsenceDao;
+import abstractOrm.DaoFactory;
+import abstractOrm.DisciplinaryReportDao;
+import abstractOrm.HomeworkDao;
+import abstractOrm.LessonDao;
+import abstractOrm.MeetingAvailabilityDao;
+import abstractOrm.MeetingDao;
+import abstractOrm.ParentDao;
+import abstractOrm.StudentDao;
+import abstractOrm.TeacherDao;
+import abstractOrm.TeachingAssignmentDao;
+import exceptions.DaoConnectionException;
 
 public class DatabaseDaoFactory implements DaoFactory {
 
@@ -47,11 +33,6 @@ public class DatabaseDaoFactory implements DaoFactory {
 	@Override
 	public DisciplinaryReportDao createDisciplinaryReportDao() throws DaoConnectionException {
 		return new DisciplinaryReportDaoDatabase(DatabaseManager.getInstance().getConnection());
-	}
-
-	@Override
-	public SchoolClassDao createSchoolClassDao() throws DaoConnectionException {
-		return new SchoolClassDaoDatabase(DatabaseManager.getInstance().getConnection());
 	}
 
 	@Override

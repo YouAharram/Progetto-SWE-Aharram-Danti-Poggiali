@@ -13,13 +13,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import DaoExceptions.AbsenceDaoException;
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeacherDaoException;
 import domainModel.SchoolClass;
 import domainModel.Student;
+import exceptions.AbsenceDaoException;
+import exceptions.DaoConnectionException;
+import exceptions.SchoolClassDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeacherDaoException;
 
 public class StudentDaoDatabaseTest {
 

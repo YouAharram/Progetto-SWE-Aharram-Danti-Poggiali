@@ -4,11 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.LessonDaoException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Connection;
@@ -30,6 +25,10 @@ import domainModel.Lesson;
 import domainModel.SchoolClass;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
+import exceptions.DaoConnectionException;
+import exceptions.LessonDaoException;
+import exceptions.SchoolClassDaoException;
+import exceptions.TeachingAssignmentDaoException;
 
 public class LessonDaoDatabaseTest {
 	

@@ -15,14 +15,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeacherDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
 import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
+import exceptions.DaoConnectionException;
+import exceptions.StudentDaoException;
+import exceptions.TeacherDaoException;
+import exceptions.TeachingAssignmentDaoException;
 
 public class TeachingAssignmentDaoDatabaseTest {
 

@@ -2,16 +2,8 @@ package businessLogic;
 
 import java.time.LocalDate;
 import java.util.Iterator;
-import DaoExceptions.AbsenceDaoException;
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.DisciplinaryReportException;
-import DaoExceptions.GradeDaoException;
-import DaoExceptions.HomeworkDaoException;
-import DaoExceptions.LessonDaoException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
-import daoFactory.DaoFactory;
+
+import abstractOrm.DaoFactory;
 import domainModel.Absence;
 import domainModel.DisciplinaryReport;
 import domainModel.Grade;
@@ -19,6 +11,15 @@ import domainModel.Homework;
 import domainModel.Lesson;
 import domainModel.Student;
 import domainModel.TeachingAssignment;
+import exceptions.AbsenceDaoException;
+import exceptions.DaoConnectionException;
+import exceptions.DisciplinaryReportException;
+import exceptions.GradeDaoException;
+import exceptions.HomeworkDaoException;
+import exceptions.LessonDaoException;
+import exceptions.SchoolClassDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeachingAssignmentDaoException;
 import strategyForGrade.GradeAverageStrategy;
 
 public final class StudentController implements UserController{

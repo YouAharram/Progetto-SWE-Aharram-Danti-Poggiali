@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import DaoExceptions.AbsenceDaoException;
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.StudentDaoException;
+
 import businessLogic.StudentController;
 import domainModel.Absence;
+import exceptions.AbsenceDaoException;
+import exceptions.DaoConnectionException;
+import exceptions.StudentDaoException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

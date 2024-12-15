@@ -8,18 +8,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.Before;
 import org.junit.Test;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeacherDaoException;
+import abstractOrm.DaoFactory;
+import abstractOrm.MeetingAvailabilityDao;
+import abstractOrm.MeetingDao;
 import businessLogic.TeacherController.MeetingAlreadyBookedException;
-import daoFactory.DaoFactory;
 import domainModel.Meeting;
 import domainModel.MeetingAvailability;
 import domainModel.Teacher;
-import orm.MeetingAvailabilityDao;
-import DaoExceptions.MeetingAvailabilityDaoException;
-import DaoExceptions.MeetingDaoException;
-import orm.MeetingDao;
+import exceptions.DaoConnectionException;
+import exceptions.MeetingAvailabilityDaoException;
+import exceptions.MeetingDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeacherDaoException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

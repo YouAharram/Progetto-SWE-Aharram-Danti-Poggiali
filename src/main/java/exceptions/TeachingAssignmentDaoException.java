@@ -1,4 +1,4 @@
-package DaoExceptions;
+package exceptions;
 
 public class TeachingAssignmentDaoException extends Exception {
 

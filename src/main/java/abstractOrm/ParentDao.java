@@ -1,8 +1,8 @@
- package orm;
+ package abstractOrm;
 
-import DaoExceptions.ParentDaoException; 
-import DaoExceptions.StudentDaoException;
 import domainModel.Parent;
+import exceptions.ParentDaoException;
+import exceptions.StudentDaoException;
 
 public interface ParentDao {
 	

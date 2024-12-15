@@ -7,11 +7,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.GradeDaoException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,6 +18,10 @@ import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
+import exceptions.DaoConnectionException;
+import exceptions.GradeDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeachingAssignmentDaoException;
 
 public class GradeDaoDatabaseTest {
 	

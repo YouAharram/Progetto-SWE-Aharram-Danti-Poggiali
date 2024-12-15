@@ -1,8 +1,8 @@
-package orm;
+package abstractOrm;
 
 
-import DaoExceptions.TeacherDaoException;
 import domainModel.Teacher;
+import exceptions.TeacherDaoException;
 
 public interface TeacherDao {
 	

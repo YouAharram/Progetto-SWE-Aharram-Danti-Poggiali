@@ -9,12 +9,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import DaoExceptions.DisciplinaryReportException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeacherDaoException;
+import abstractOrm.DisciplinaryReportDao;
 import domainModel.DisciplinaryReport;
 import domainModel.Student;
 import domainModel.Teacher;
+import exceptions.DisciplinaryReportException;
+import exceptions.StudentDaoException;
+import exceptions.TeacherDaoException;
 
 public class DisciplinaryReportDaoDatabase implements DisciplinaryReportDao {
 	

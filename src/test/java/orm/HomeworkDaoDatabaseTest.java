@@ -18,13 +18,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import DaoExceptions.HomeworkDaoException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
+import abstractOrm.HomeworkDao;
 import domainModel.Homework;
 import domainModel.SchoolClass;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
+import exceptions.HomeworkDaoException;
+import exceptions.SchoolClassDaoException;
+import exceptions.TeachingAssignmentDaoException;
 
 public class HomeworkDaoDatabaseTest {
 	private Connection conn;

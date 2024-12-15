@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import DaoExceptions.AbsenceDaoException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.StudentDaoException;
+import abstractOrm.AbsenceDao;
 import domainModel.Absence;
 import domainModel.SchoolClass;
 import domainModel.Student;
+import exceptions.AbsenceDaoException;
+import exceptions.SchoolClassDaoException;
+import exceptions.StudentDaoException;
 
 public class AbsenceDaoDatabase implements AbsenceDao {
 

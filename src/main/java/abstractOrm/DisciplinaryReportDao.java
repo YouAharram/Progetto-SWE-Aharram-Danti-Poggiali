@@ -1,14 +1,14 @@
-package orm;
+package abstractOrm;
 
 import java.time.LocalDate;
 import java.util.Iterator;
 
-import DaoExceptions.DisciplinaryReportException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeacherDaoException;
 import domainModel.DisciplinaryReport;
 import domainModel.Student;
 import domainModel.Teacher;
+import exceptions.DisciplinaryReportException;
+import exceptions.StudentDaoException;
+import exceptions.TeacherDaoException;
 
 public interface DisciplinaryReportDao {
 

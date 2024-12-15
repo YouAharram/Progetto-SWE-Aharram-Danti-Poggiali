@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import DaoExceptions.GradeDaoException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
 import domainModel.Grade;
 import domainModel.Student;
 import domainModel.TeachingAssignment;
+import exceptions.GradeDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeachingAssignmentDaoException;
 
 public class GradeDaoDatabase implements GradeDao {
 	

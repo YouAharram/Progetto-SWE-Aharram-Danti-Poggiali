@@ -2,6 +2,10 @@ package gui;
 
 import businessLogic.*;
 import domainModel.TeachingAssignment;
+import exceptions.DaoConnectionException;
+import exceptions.GradeDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeachingAssignmentDaoException;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -25,11 +29,6 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.util.Iterator;
-
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.GradeDaoException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
 
 public class StudentAvarageGradeScene {
 	

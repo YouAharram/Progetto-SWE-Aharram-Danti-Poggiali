@@ -7,11 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.StudentDaoException;
+import abstractOrm.StudentDao;
 import domainModel.SchoolClass;
 import domainModel.Student;
+import exceptions.DaoConnectionException;
+import exceptions.SchoolClassDaoException;
+import exceptions.StudentDaoException;
 
 public class StudentDaoDatabase implements StudentDao {
 

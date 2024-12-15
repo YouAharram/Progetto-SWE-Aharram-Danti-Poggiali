@@ -1,7 +1,7 @@
 package businessLogic;
 
-import DaoExceptions.DaoConnectionException;
-import daoFactory.DaoFactory;
+import abstractOrm.DaoFactory;
+import exceptions.DaoConnectionException;
 
 public abstract class LoginHandler {
 

@@ -4,12 +4,12 @@ import java.time.LocalDate;
 
 import java.util.Iterator;
 
-import DaoExceptions.GradeDaoException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
 import domainModel.Grade;
 import domainModel.Student;
 import domainModel.TeachingAssignment;
+import exceptions.GradeDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeachingAssignmentDaoException;
 
 public interface GradeDao {
 

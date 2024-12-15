@@ -7,19 +7,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.Before;
 import org.junit.Test;
 
-import DaoExceptions.AbsenceDaoException;
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.DisciplinaryReportException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeacherDaoException;
+import abstractOrm.DaoFactory;
+import abstractOrm.DisciplinaryReportDao;
 import businessLogic.TeacherController.IllegalReportAccessException;
-import daoFactory.DaoFactory;
 import domainModel.DisciplinaryReport;
 import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.Teacher;
-import orm.DisciplinaryReportDao;
-import orm.SchoolClassDao;
+import exceptions.AbsenceDaoException;
+import exceptions.DaoConnectionException;
+import exceptions.DisciplinaryReportException;
+import exceptions.StudentDaoException;
+import exceptions.TeacherDaoException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,7 +28,6 @@ public class TeacherController_ReportsTest {
 
 	private DaoFactory factoryMock;
 	private Teacher teacher;
-	private SchoolClassDao schoolClassDaoMock;
 	private TeacherController teacherController;
 	private DisciplinaryReportDao disciplinaryReportDaoMock;
 
@@ -47,7 +45,6 @@ public class TeacherController_ReportsTest {
 
 		teacher = new Teacher(1, "Mario", "Rossi");
 
-		expect(factoryMock.createSchoolClassDao()).andReturn(schoolClassDaoMock).anyTimes();
 		expect(factoryMock.createDisciplinaryReportDao()).andReturn(disciplinaryReportDaoMock).anyTimes();
 		
 		teacherController = new TeacherController(teacher, factoryMock);

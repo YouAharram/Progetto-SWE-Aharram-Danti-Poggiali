@@ -1,14 +1,14 @@
-package orm;
+package abstractOrm;
 
 import java.time.LocalDate;
 import java.util.Iterator;
 
-import DaoExceptions.AbsenceDaoException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.StudentDaoException;
 import domainModel.Absence;
 import domainModel.SchoolClass;
 import domainModel.Student;
+import exceptions.AbsenceDaoException;
+import exceptions.SchoolClassDaoException;
+import exceptions.StudentDaoException;
 
 public interface AbsenceDao {
 	

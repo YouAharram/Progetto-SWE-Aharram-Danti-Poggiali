@@ -11,12 +11,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import DaoExceptions.HomeworkDaoException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
+import abstractOrm.HomeworkDao;
 import domainModel.Homework;
 import domainModel.SchoolClass;
 import domainModel.TeachingAssignment;
+import exceptions.HomeworkDaoException;
+import exceptions.SchoolClassDaoException;
+import exceptions.TeachingAssignmentDaoException;
 
 public class HomeworkDaoDatabase implements HomeworkDao {
 

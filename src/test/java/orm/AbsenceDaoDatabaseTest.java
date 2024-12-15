@@ -17,13 +17,13 @@ import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
 
-import DaoExceptions.AbsenceDaoException;
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.StudentDaoException;
 import domainModel.Absence;
 import domainModel.SchoolClass;
 import domainModel.Student;
+import exceptions.AbsenceDaoException;
+import exceptions.DaoConnectionException;
+import exceptions.SchoolClassDaoException;
+import exceptions.StudentDaoException;
 
 public class AbsenceDaoDatabaseTest {
 	private Connection conn;

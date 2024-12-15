@@ -10,16 +10,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.MeetingAvailabilityDaoException;
-import DaoExceptions.MeetingDaoException;
-import DaoExceptions.ParentDaoException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeacherDaoException;
+import abstractOrm.MeetingDao;
 import domainModel.Meeting;
 import domainModel.MeetingAvailability;
 import domainModel.Parent;
 import domainModel.Teacher;
+import exceptions.DaoConnectionException;
+import exceptions.MeetingAvailabilityDaoException;
+import exceptions.MeetingDaoException;
+import exceptions.ParentDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeacherDaoException;
 
 public class MeetingDaoDatabase implements MeetingDao {
 	

@@ -15,15 +15,11 @@ import java.util.Iterator;
 import org.junit.Before;
 import org.junit.Test;
 
-import DaoExceptions.AbsenceDaoException;
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.GradeDaoException;
-import DaoExceptions.ParentDaoException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeacherDaoException;
+import abstractOrm.AbsenceDao;
+import abstractOrm.DaoFactory;
+import abstractOrm.MeetingAvailabilityDao;
+import abstractOrm.MeetingDao;
 import businessLogic.ParentController.AlreadyBookedMeetingException;
-import daoFactory.DaoFactory;
 import domainModel.Absence;
 import domainModel.Meeting;
 import domainModel.MeetingAvailability;
@@ -31,11 +27,15 @@ import domainModel.Parent;
 import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.Teacher;
-import orm.AbsenceDao;
-import orm.MeetingAvailabilityDao;
-import DaoExceptions.MeetingAvailabilityDaoException;
-import DaoExceptions.MeetingDaoException;
-import orm.MeetingDao;
+import exceptions.AbsenceDaoException;
+import exceptions.DaoConnectionException;
+import exceptions.GradeDaoException;
+import exceptions.MeetingAvailabilityDaoException;
+import exceptions.MeetingDaoException;
+import exceptions.ParentDaoException;
+import exceptions.SchoolClassDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeacherDaoException;
 
 public class ParenControllTest {
 	

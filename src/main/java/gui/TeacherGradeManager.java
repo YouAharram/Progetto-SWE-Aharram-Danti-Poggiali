@@ -6,16 +6,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.GradeDaoException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
 import businessLogic.TeacherController;
 import businessLogic.TeacherController.InvalidGradeValueException;
 import domainModel.Grade;
 import domainModel.Student;
 import domainModel.TeachingAssignment;
+import exceptions.DaoConnectionException;
+import exceptions.GradeDaoException;
+import exceptions.SchoolClassDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeachingAssignmentDaoException;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -165,7 +165,6 @@ public class TeacherGradeManager {
 		while (students.hasNext()) {
 			int c = 1;// Ad esempio, 5 studenti
 			Student student = students.next();
-			System.out.println(student.getName());
 			ObservableList<String> row = rows.get(rowindex);
 			rowindex++;
 			row.set(0, String.valueOf(student.getName() + " " + student.getSurname()));
@@ -192,7 +191,6 @@ public class TeacherGradeManager {
 	public void deleteGrade() throws GradeDaoException, DaoConnectionException {
 		// Logica per eliminare un voto (da implementare)
 		teacherController.deleteGrade(gradeSelected);
-		//System.out.println(gradeSelected.getId());
 	}
 
 	public void goBack() throws IOException {
@@ -303,7 +301,6 @@ public class TeacherGradeManager {
 		}
 
 
-		System.out.println(numberOfStudents);
 		for (int r = 0; r < numberOfStudents; r++) {
 			ObservableList<String> row = FXCollections.observableArrayList();
 			for (int c = 0; c < size; c++) {
@@ -331,7 +328,6 @@ public class TeacherGradeManager {
 				maxNumberOfGrades = grades.size();
 			}
 		}
-		System.out.println("max: " + maxNumberOfGrades);
 		return maxNumberOfGrades;
 	}
 }

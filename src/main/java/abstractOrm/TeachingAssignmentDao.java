@@ -1,14 +1,14 @@
-package orm;
+package abstractOrm;
 
 import java.util.Iterator;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeacherDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
 import domainModel.Student;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
+import exceptions.DaoConnectionException;
+import exceptions.StudentDaoException;
+import exceptions.TeacherDaoException;
+import exceptions.TeachingAssignmentDaoException;
 
 public interface TeachingAssignmentDao {
 

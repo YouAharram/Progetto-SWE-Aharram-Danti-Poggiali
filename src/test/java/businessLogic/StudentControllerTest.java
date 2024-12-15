@@ -11,16 +11,13 @@ import java.util.Iterator;
 import org.junit.Before;
 import org.junit.Test;
 
-import DaoExceptions.AbsenceDaoException;
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.DisciplinaryReportException;
-import DaoExceptions.GradeDaoException;
-import DaoExceptions.HomeworkDaoException;
-import DaoExceptions.LessonDaoException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
-import daoFactory.DaoFactory;
+import abstractOrm.AbsenceDao;
+import abstractOrm.DaoFactory;
+import abstractOrm.DisciplinaryReportDao;
+import abstractOrm.HomeworkDao;
+import abstractOrm.LessonDao;
+import abstractOrm.StudentDao;
+import abstractOrm.TeachingAssignmentDao;
 import domainModel.Absence;
 import domainModel.DisciplinaryReport;
 import domainModel.Grade;
@@ -29,13 +26,16 @@ import domainModel.Lesson;
 import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.TeachingAssignment;
-import orm.AbsenceDao;
-import orm.DisciplinaryReportDao;
+import exceptions.AbsenceDaoException;
+import exceptions.DaoConnectionException;
+import exceptions.DisciplinaryReportException;
+import exceptions.GradeDaoException;
+import exceptions.HomeworkDaoException;
+import exceptions.LessonDaoException;
+import exceptions.SchoolClassDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeachingAssignmentDaoException;
 import orm.GradeDao;
-import orm.HomeworkDao;
-import orm.LessonDao;
-import orm.StudentDao;
-import orm.TeachingAssignmentDao;
 
 public class StudentControllerTest {
 

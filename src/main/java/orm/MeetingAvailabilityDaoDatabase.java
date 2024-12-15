@@ -10,10 +10,11 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import DaoExceptions.MeetingAvailabilityDaoException;
-import DaoExceptions.TeacherDaoException;
+import abstractOrm.MeetingAvailabilityDao;
 import domainModel.MeetingAvailability;
 import domainModel.Teacher;
+import exceptions.MeetingAvailabilityDaoException;
+import exceptions.TeacherDaoException;
 
 public class MeetingAvailabilityDaoDatabase implements MeetingAvailabilityDao {
 	

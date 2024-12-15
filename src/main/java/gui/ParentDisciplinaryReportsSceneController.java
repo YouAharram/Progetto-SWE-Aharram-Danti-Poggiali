@@ -3,11 +3,11 @@ package gui;
 import java.io.IOException;
 import java.util.Iterator;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.DisciplinaryReportException;
-import DaoExceptions.StudentDaoException;
 import businessLogic.ParentController;
 import domainModel.DisciplinaryReport;
+import exceptions.DaoConnectionException;
+import exceptions.DisciplinaryReportException;
+import exceptions.StudentDaoException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

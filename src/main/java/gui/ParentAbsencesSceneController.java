@@ -18,11 +18,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import DaoExceptions.AbsenceDaoException;
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.StudentDaoException;
 import businessLogic.ParentController;
 import domainModel.Absence;
+import exceptions.AbsenceDaoException;
+import exceptions.DaoConnectionException;
+import exceptions.StudentDaoException;
 
 public class ParentAbsencesSceneController {
 

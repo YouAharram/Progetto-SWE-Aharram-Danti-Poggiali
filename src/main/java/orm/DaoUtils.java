@@ -2,18 +2,18 @@ package orm;
 
 import java.sql.Connection;
 
-import DaoExceptions.ParentDaoException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeacherDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
-import DaoExceptions.MeetingAvailabilityDaoException;
 import domainModel.MeetingAvailability;
 import domainModel.Parent;
 import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
+import exceptions.MeetingAvailabilityDaoException;
+import exceptions.ParentDaoException;
+import exceptions.SchoolClassDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeacherDaoException;
+import exceptions.TeachingAssignmentDaoException;
 
 class DaoUtils {
 	

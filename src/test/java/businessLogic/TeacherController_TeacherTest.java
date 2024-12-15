@@ -6,19 +6,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeacherDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
-import daoFactory.DaoFactory;
+import abstractOrm.DaoFactory;
+import abstractOrm.StudentDao;
+import abstractOrm.TeachingAssignmentDao;
 import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
-import orm.SchoolClassDao;
-import orm.StudentDao;
-import orm.TeachingAssignmentDao;
+import exceptions.DaoConnectionException;
+import exceptions.SchoolClassDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeacherDaoException;
+import exceptions.TeachingAssignmentDaoException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,7 +27,6 @@ public class TeacherController_TeacherTest {
 	private DaoFactory factoryMock;
 	private StudentDao studentDaoMock;
 	private Teacher teacher;
-	private SchoolClassDao schoolClassDaoMock;
 	private TeacherController teacherController;
 	private TeachingAssignmentDao teachingAssignmentDaoMock;
 
@@ -47,12 +45,10 @@ public class TeacherController_TeacherTest {
 	public void setup() throws StudentDaoException, TeacherDaoException, DaoConnectionException {
 		factoryMock = createMock(DaoFactory.class);
 		studentDaoMock = createMock(StudentDao.class);
-		schoolClassDaoMock = createMock(SchoolClassDao.class);
 		teachingAssignmentDaoMock = createMock(TeachingAssignmentDao.class);
 
 		teacher = new Teacher(1, "Mario", "Rossi");
 
-		expect(factoryMock.createSchoolClassDao()).andReturn(schoolClassDaoMock).anyTimes();
 		expect(factoryMock.createStudentDao()).andReturn(studentDaoMock).anyTimes();
 		expect(factoryMock.createTeachingAssignmentDao()).andReturn(teachingAssignmentDaoMock).anyTimes();
 		

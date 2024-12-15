@@ -1,8 +1,8 @@
 package businessLogic;
 
-import DaoExceptions.DaoConnectionException;
+import abstractOrm.DaoFactory;
 import businessLogic.LoginHandler.IllegalCredentialsException;
-import daoFactory.DaoFactory;
+import exceptions.DaoConnectionException;
 
 public final class LoginController {
 

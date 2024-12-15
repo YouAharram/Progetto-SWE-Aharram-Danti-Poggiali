@@ -1,16 +1,16 @@
-package orm;
+package abstractOrm;
 
 import java.util.Iterator;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.MeetingAvailabilityDaoException;
-import DaoExceptions.MeetingDaoException;
-import DaoExceptions.ParentDaoException;
-import DaoExceptions.TeacherDaoException;
 import domainModel.Meeting;
 import domainModel.MeetingAvailability;
 import domainModel.Parent;
 import domainModel.Teacher;
+import exceptions.DaoConnectionException;
+import exceptions.MeetingAvailabilityDaoException;
+import exceptions.MeetingDaoException;
+import exceptions.ParentDaoException;
+import exceptions.TeacherDaoException;
 
 public interface MeetingDao {
 

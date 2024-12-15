@@ -7,13 +7,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import DaoExceptions.TeacherDaoException;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import domainModel.Teacher;
+import exceptions.TeacherDaoException;
 
 public class TeacherDaoDatabaseTest {
 

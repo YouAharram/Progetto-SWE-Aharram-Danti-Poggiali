@@ -1,10 +1,10 @@
 package businessLogic;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.ParentDaoException;
-import DaoExceptions.StudentDaoException;
-import daoFactory.DaoFactory;
+import abstractOrm.DaoFactory;
 import domainModel.Parent;
+import exceptions.DaoConnectionException;
+import exceptions.ParentDaoException;
+import exceptions.StudentDaoException;
 
 public class ParentUsernameValidationHandler extends LoginHandler {
 

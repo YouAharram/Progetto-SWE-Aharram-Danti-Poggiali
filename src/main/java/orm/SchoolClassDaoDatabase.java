@@ -5,10 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import DaoExceptions.SchoolClassDaoException;
 import domainModel.SchoolClass;
+import exceptions.SchoolClassDaoException;
 
-public class SchoolClassDaoDatabase implements SchoolClassDao {
+public class SchoolClassDaoDatabase {
 	private Connection conn;
 
 	public SchoolClassDaoDatabase(Connection conn) {

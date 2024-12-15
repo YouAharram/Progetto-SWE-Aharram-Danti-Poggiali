@@ -7,19 +7,19 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.Before;
 import org.junit.Test;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.GradeDaoException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeacherDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
+import abstractOrm.DaoFactory;
 import businessLogic.TeacherController.InvalidGradeValueException;
 import businessLogic.TeacherController.NegativeWeightException;
-import daoFactory.DaoFactory;
 import domainModel.Grade;
 import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.Teacher;
 import domainModel.TeachingAssignment;
+import exceptions.DaoConnectionException;
+import exceptions.GradeDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeacherDaoException;
+import exceptions.TeachingAssignmentDaoException;
 import orm.GradeDao;
 
 import java.time.LocalDate;

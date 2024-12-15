@@ -1,16 +1,16 @@
-package orm;
+package abstractOrm;
 
 
 import java.time.LocalDate;
 
 import java.util.Iterator;
 
-import DaoExceptions.HomeworkDaoException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
 import domainModel.Homework;
 import domainModel.SchoolClass;
 import domainModel.TeachingAssignment;
+import exceptions.HomeworkDaoException;
+import exceptions.SchoolClassDaoException;
+import exceptions.TeachingAssignmentDaoException;
 
 public interface HomeworkDao {
 	

@@ -1,11 +1,20 @@
 package daoFactory;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*; 
 import org.junit.Before;
-import org.junit.After;
 import org.junit.Test;
 
-import DaoExceptions.DaoConnectionException;
+import abstractOrm.AbsenceDao;
+import abstractOrm.DisciplinaryReportDao;
+import abstractOrm.HomeworkDao;
+import abstractOrm.LessonDao;
+import abstractOrm.MeetingAvailabilityDao;
+import abstractOrm.MeetingDao;
+import abstractOrm.ParentDao;
+import abstractOrm.StudentDao;
+import abstractOrm.TeacherDao;
+import abstractOrm.TeachingAssignmentDao;
+import exceptions.DaoConnectionException;
 
 import java.sql.SQLException;
 
@@ -42,12 +51,6 @@ public class DatabaseDaoFactoryTest {
     public void testCreateDisciplinaryReportDao() throws DaoConnectionException {
         DisciplinaryReportDao disciplinaryReportDao = daoFactory.createDisciplinaryReportDao();
         assertThat(disciplinaryReportDao).isInstanceOf(DisciplinaryReportDaoDatabase.class);
-    }
-
-    @Test
-    public void testCreateSchoolClassDao() throws DaoConnectionException {
-        SchoolClassDao schoolClassDao = daoFactory.createSchoolClassDao();
-        assertThat(schoolClassDao).isInstanceOf(SchoolClassDaoDatabase.class);
     }
 
     @Test

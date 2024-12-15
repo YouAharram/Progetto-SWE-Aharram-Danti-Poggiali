@@ -4,6 +4,9 @@ import businessLogic.TeacherController;
 import businessLogic.TeacherController.MeetingAlreadyBookedException;
 import domainModel.Meeting;
 import domainModel.MeetingAvailability;
+import exceptions.DaoConnectionException;
+import exceptions.MeetingAvailabilityDaoException;
+import exceptions.TeacherDaoException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,10 +26,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.MeetingAvailabilityDaoException;
-import DaoExceptions.TeacherDaoException;
 
 public class TeacherMeetingManager {
 

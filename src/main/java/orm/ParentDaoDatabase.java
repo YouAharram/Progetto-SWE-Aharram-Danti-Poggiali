@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.ParentDaoException;
-import DaoExceptions.StudentDaoException;
+
+import abstractOrm.ParentDao;
 import domainModel.Parent;
 import domainModel.Student;
+import exceptions.DaoConnectionException;
+import exceptions.ParentDaoException;
+import exceptions.StudentDaoException;
 
 public class ParentDaoDatabase implements ParentDao {
 

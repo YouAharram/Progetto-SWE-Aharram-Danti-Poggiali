@@ -1,12 +1,12 @@
-package orm;
+package abstractOrm;
 
 import java.util.Iterator;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.StudentDaoException;
 import domainModel.SchoolClass;
 import domainModel.Student;
+import exceptions.DaoConnectionException;
+import exceptions.SchoolClassDaoException;
+import exceptions.StudentDaoException;
 
 public interface StudentDao {
 		

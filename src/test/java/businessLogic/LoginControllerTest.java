@@ -1,24 +1,23 @@
 package businessLogic;
 
-import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.createMock; 
 import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.ParentDaoException;
-import DaoExceptions.StudentDaoException;
-import DaoExceptions.TeacherDaoException;
+import abstractOrm.DaoFactory;
+import abstractOrm.ParentDao;
+import abstractOrm.StudentDao;
+import abstractOrm.TeacherDao;
 import businessLogic.LoginHandler.IllegalCredentialsException;
-import daoFactory.DaoFactory;
 import domainModel.Parent;
 import domainModel.Student;
 import domainModel.Teacher;
-import orm.ParentDao;
-import orm.StudentDao;
-import orm.TeacherDao;
+import exceptions.DaoConnectionException;
+import exceptions.ParentDaoException;
+import exceptions.StudentDaoException;
+import exceptions.TeacherDaoException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

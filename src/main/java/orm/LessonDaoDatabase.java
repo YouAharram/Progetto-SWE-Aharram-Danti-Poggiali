@@ -1,25 +1,25 @@
 package orm;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.LessonDaoException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.TeachingAssignmentDaoException;
+import abstractOrm.LessonDao;
 import domainModel.Lesson;
 import domainModel.SchoolClass;
 import domainModel.TeachingAssignment;
+import exceptions.DaoConnectionException;
+import exceptions.LessonDaoException;
+import exceptions.SchoolClassDaoException;
+import exceptions.TeachingAssignmentDaoException;
 
 public class LessonDaoDatabase implements LessonDao {
 	private Connection conn;

@@ -14,16 +14,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import domainModel.SchoolClass;
 import domainModel.Student;
+import exceptions.AbsenceDaoException;
+import exceptions.DaoConnectionException;
+import exceptions.SchoolClassDaoException;
+import exceptions.StudentDaoException;
 import domainModel.Absence;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Iterator;
 
-import DaoExceptions.AbsenceDaoException;
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.SchoolClassDaoException;
-import DaoExceptions.StudentDaoException;
 import businessLogic.TeacherController;
 
 public class TeacherAbsenceSceneManager {

@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import DaoExceptions.DaoConnectionException;
-import DaoExceptions.LessonDaoException;
-import DaoExceptions.SchoolClassDaoException;
 import businessLogic.TeacherController;
 import businessLogic.TeacherController.IllegalLessonAccessException;
 import domainModel.Lesson;
 import domainModel.TeachingAssignment;
+import exceptions.DaoConnectionException;
+import exceptions.LessonDaoException;
+import exceptions.SchoolClassDaoException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -142,7 +142,6 @@ public class TeacherLessonManager {
 	}
 
 	public void deleteLesson() throws LessonDaoException, IllegalLessonAccessException, DaoConnectionException {
-		System.out.println(lessonsTableView.getSelectionModel().getSelectedIndex());
 		teacherController.deleteLesson(lessons.get(lessonsTableView.getSelectionModel().getSelectedIndex()));
 	}
 
