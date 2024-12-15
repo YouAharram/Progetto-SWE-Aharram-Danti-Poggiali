@@ -1,6 +1,7 @@
 package gui;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -13,18 +14,22 @@ import DaoExceptions.TeacherDaoException;
 import businessLogic.TeacherController;
 import businessLogic.TeacherController.IllegalReportAccessException;
 import domainModel.DisciplinaryReport;
-import domainModel.Grade;
 import domainModel.Student;
 import domainModel.TeachingAssignment;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 public class TeacherDisciplinaryReportManager {
@@ -47,9 +52,13 @@ public class TeacherDisciplinaryReportManager {
 	private TableColumn<ObservableList<String>, String> teacherColumn;
 	private TableColumn<ObservableList<String>, String> descriptionColumn;
 	private TableColumn<ObservableList<String>, String> dateColumn;
+	@FXML
+	private Button btnBack;
 	
+	private Stage stage;
+	private Scene scene;
+	private Parent root;
 	
-	@SuppressWarnings("unchecked")
 	@FXML
 	public void initialize() throws StudentDaoException, DaoConnectionException, SchoolClassDaoException {
 		Iterator<Student> students = teacherController.getStudentsByClass(teachingAssignment.getSchoolClass());
@@ -119,6 +128,14 @@ public class TeacherDisciplinaryReportManager {
 		
 		teacherController.deleteDisciplinaryReport(disciplinaryRepostsList.get(tvDisciplinaryrReport.getSelectionModel().getSelectedIndex()));
 	}
+	
+	
+	public void goBack() throws IOException {
+		root = FXMLLoader.load(getClass().getResource("../resources/TeacherInterface.fxml"));
+		stage = (Stage) btnBack.getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();	}
 	
 	protected static void setController(TeacherController teacherController) {
 		TeacherDisciplinaryReportManager.teacherController = teacherController;
