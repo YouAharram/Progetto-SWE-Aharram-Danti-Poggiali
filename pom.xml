@@ -42,11 +42,6 @@
 			<version>3.47.1.0</version>
 		</dependency>
 		<dependency>
-			<groupId>net.bytebuddy</groupId>
-			<artifactId>byte-buddy</artifactId>
-			<version>1.12.21</version>
-		</dependency>
-		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
 			<version>23.0.1</version>
