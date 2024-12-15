@@ -90,5 +90,4 @@ public class InterfaceLoginManager {
 		InterfaceLoginManager.loginController = loginController;
 	}
 	
-	
 }

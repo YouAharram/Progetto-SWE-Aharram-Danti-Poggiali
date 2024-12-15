@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import businessLogic.LoginController;
 import businessLogic.LoginHandler;
+import businessLogic.ParentUsernameValidationHandler;
 import businessLogic.StudentUsernameValidationHandler;
 import businessLogic.TeacherUsernameValidationHandler;
 import daoFactory.DaoFactory;
@@ -26,7 +27,7 @@ public class Main extends Application {
 		DaoFactory daoFacotry = new DatabaseDaoFactory();
 
 		LoginHandler loginHandler = new StudentUsernameValidationHandler(new TeacherUsernameValidationHandler(
-				new TeacherUsernameValidationHandler(null)));
+				new ParentUsernameValidationHandler(null)));
 
 		LoginController loginController = new LoginController(loginHandler, daoFacotry);
 		InterfaceLoginManager.setLoginController(loginController);

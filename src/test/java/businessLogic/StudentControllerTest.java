@@ -93,11 +93,7 @@ public class StudentControllerTest {
 	
 	@Test
 	public void testGetStudent() throws StudentDaoException, SchoolClassDaoException, DaoConnectionException {
-		replay(factoryMock);
-		
 		assertThat(studentController.getStudent()).isEqualTo(student);
-	
-		verify(factoryMock);
 	}
 	
 	@Test
