@@ -5,7 +5,12 @@ import java.util.Iterator;
 import domainModel.Grade;
 
 public class WeightedGradeAverageStrategy implements GradeAverageStrategy {
-
+	
+	private String name;
+	public WeightedGradeAverageStrategy(String name) {
+		this.name = name;
+	}
+	
 	@Override
 	public double getAverage(Iterator<Grade> grades) {
 		double sum = 0;
@@ -17,6 +22,12 @@ public class WeightedGradeAverageStrategy implements GradeAverageStrategy {
 			total = total + grade.getWeight();
 		}
 		return total != 0 ? sum / total : 0;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return name;
 	}
 
 }

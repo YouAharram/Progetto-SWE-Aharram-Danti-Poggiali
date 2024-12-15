@@ -5,7 +5,13 @@ import java.util.Iterator;
 import domainModel.Grade;
 
 public class ArithmeticGradeAverageStrategy implements GradeAverageStrategy {
+	
+	private String name;
 
+	public ArithmeticGradeAverageStrategy(String name) {
+		this.name = name;
+	}
+	
 	@Override
 	public double getAverage(Iterator<Grade> grades) {
 		double sum = 0;
@@ -15,6 +21,11 @@ public class ArithmeticGradeAverageStrategy implements GradeAverageStrategy {
 			total++;
 		}
 		return total != 0 ? sum / total : 0;
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 
 }

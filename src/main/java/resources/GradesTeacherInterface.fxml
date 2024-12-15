@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="843.0" prefWidth="1557.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherGradeManager">
+    <children>
+        <HBox prefHeight="839.0" prefWidth="1517.0">
+            <children>
+                <AnchorPane prefHeight="889.0" prefWidth="428.0" stylesheets="@InterfacciaTeacherFrontEnd.css">
+                    <children>
+                        <Button fx:id="btnGrades" layoutX="27.0" layoutY="158.0" mnemonicParsing="false" onAction="#showGrades" prefHeight="44.0" prefWidth="162.0" text="Show Grade" />
+                        <Button fx:id="btnLesson" layoutX="27.0" layoutY="259.0" mnemonicParsing="false" onAction="#addGrade" prefHeight="44.0" prefWidth="162.0" text="Add Grade" />
+                        <Button fx:id="btnEdit" layoutX="31.0" layoutY="671.0" mnemonicParsing="false" onAction="#editGrade" prefHeight="44.0" prefWidth="162.0" text="Edit Grade" />
+                        <Button fx:id="btnDelete" layoutX="27.0" layoutY="765.0" mnemonicParsing="false" onAction="#deleteGrade" prefHeight="44.0" prefWidth="171.0" text="Delete Grade" />
+                        <Button fx:id="btnBack" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" onAction="#goBack" prefHeight="44.0" prefWidth="162.0" text="Back" />
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" />
+                        <ComboBox fx:id="cbStudents" layoutX="225.0" layoutY="259.0" prefWidth="150.0" />
+                        <ComboBox fx:id="cbGrades" layoutX="233.0" layoutY="311.0" prefWidth="150.0" />
+                        <ComboBox fx:id="cbWeight" layoutX="233.0" layoutY="352.0" prefWidth="150.0" />
+                        <TextArea fx:id="taDescription" layoutX="66.0" layoutY="401.0" prefHeight="200.0" prefWidth="294.0" />
+                        <DatePicker fx:id="datePicker" layoutX="213.0" layoutY="186.0" prefHeight="33.0" prefWidth="189.0" />
+                    </children>
+                </AnchorPane>
+                
+                <ScrollPane prefHeight="839.0" prefWidth="1091.0">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="843.0" prefWidth="1096.0">
+                            <children>
+                                <!-- TableView for displaying grades -->
+                                <TableView fx:id="gradeTable" layoutX="14.0" layoutY="6.0" onMouseClicked="#itemSelected" prefHeight="819.0" prefWidth="1063.0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </ScrollPane>
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

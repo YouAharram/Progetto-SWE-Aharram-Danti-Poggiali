@@ -50,10 +50,11 @@
             <ScrollPane prefHeight="839.0" prefWidth="1091.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="843.0" prefWidth="1096.0">
-                     <children>
-                        <TableView fx:id="tvGradesStudents" layoutX="-2.0" prefHeight="839.0" prefWidth="1089.0" />
-                     </children>
-                  </AnchorPane>
+                  <children>
+                    <!-- TableView for displaying grades -->
+                    <TableView fx:id="tvGradesStudents" layoutX="-1.0" layoutY="1.0" prefHeight="808.0" prefWidth="1066.0" />
+                  </children>
+                </AnchorPane>
               </content>
             </ScrollPane>
          </children>

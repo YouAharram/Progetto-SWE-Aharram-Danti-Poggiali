@@ -61,7 +61,7 @@ public class InterfaceTeacherManager {
 	private ChoiceBox<String> cbClasses;
 	@FXML
 	private TableView<ObservableList<String>> tvGradesStudents;
-	ObservableList<ObservableList<String>> rows = FXCollections.observableArrayList();
+	private ObservableList<ObservableList<String>> rows = FXCollections.observableArrayList();
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
@@ -93,7 +93,6 @@ public class InterfaceTeacherManager {
 	}
 
 	private void handleChoiceBoxChange(String newValue) {
-		System.out.println("suuu " + newValue);
 		populateClass();
 	}
 
@@ -278,6 +277,7 @@ public class InterfaceTeacherManager {
 	
 	@FXML
 	public void openGrades() throws IOException {
+		TeacherGradeManager.setTeachingAssignment(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex()+1, cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
 		openWindow("../resources/GradesTeacherInterface.fxml","Grades");
 	}
 
@@ -308,6 +308,7 @@ public class InterfaceTeacherManager {
 		LessonTeacherManager.setController(teacherController);
 		MeetingTeacherManager.setTeacherController(teacherController);
 		HomeworkTeacherManager.setController(teacherController);
+		TeacherGradeManager.setController(teacherController);
 	}
 	
 	

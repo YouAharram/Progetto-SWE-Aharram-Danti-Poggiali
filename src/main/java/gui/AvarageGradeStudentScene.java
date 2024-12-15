@@ -125,11 +125,11 @@ public class AvarageGradeStudentScene {
 	private GradeAverageStrategy getStrategyFromChoice(String strategyChoice) {
 		switch (strategyChoice) {
 		case "Arithmetic":
-			return new ArithmeticGradeAverageStrategy();
+			return new ArithmeticGradeAverageStrategy("Aritmetic average");
 		case "Geometric":
-			return new GeometricGradeAverageStrategy();
+			return new GeometricGradeAverageStrategy("Geometric average");
 		case "Weighted":
-			return new WeightedGradeAverageStrategy();
+			return new WeightedGradeAverageStrategy("Weighted average");
 		default:
 			return null;
 		}

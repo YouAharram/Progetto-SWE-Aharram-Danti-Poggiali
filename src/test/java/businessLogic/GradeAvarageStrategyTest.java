@@ -73,7 +73,7 @@ public class GradeAvarageStrategyTest {
 		
 		replay(factoryMock, gradeDaoMock);
 
-		assertThat(studentController.calculateTeachingGradeAverage(teachingAssignment, new ArithmeticGradeAverageStrategy())).isEqualTo(expectedAverage);
+		assertThat(studentController.calculateTeachingGradeAverage(teachingAssignment, new ArithmeticGradeAverageStrategy("Artimetic average"))).isEqualTo(expectedAverage);
 		
 		verify(factoryMock, gradeDaoMock);
 	}
@@ -96,7 +96,7 @@ public class GradeAvarageStrategyTest {
 		
 		replay(factoryMock, gradeDaoMock);
 
-		assertThat(studentController.calculateTeachingGradeAverage(teachingAssignment, new GeometricGradeAverageStrategy())).isEqualTo(expectedAverage);
+		assertThat(studentController.calculateTeachingGradeAverage(teachingAssignment, new GeometricGradeAverageStrategy("Geometric average"))).isEqualTo(expectedAverage);
 		
 		verify(factoryMock, gradeDaoMock);
 	}
@@ -120,7 +120,7 @@ public class GradeAvarageStrategyTest {
 		
 		replay(factoryMock, gradeDaoMock);
 
-		assertThat(studentController.calculateTeachingGradeAverage(teachingAssignment, new WeightedGradeAverageStrategy())).isEqualTo(expectedAverage);
+		assertThat(studentController.calculateTeachingGradeAverage(teachingAssignment, new WeightedGradeAverageStrategy("Weighted average"))).isEqualTo(expectedAverage);
 		
 		verify(factoryMock, gradeDaoMock);
 	}
@@ -144,7 +144,7 @@ public class GradeAvarageStrategyTest {
 		replay(factoryMock, gradeDaoMock);
 
 		StudentController studentController = new StudentController(student, factoryMock);
-		assertThat(studentController.calculateTotalGradeAverage(new ArithmeticGradeAverageStrategy())).isEqualTo(expectedAverage);
+		assertThat(studentController.calculateTotalGradeAverage(new ArithmeticGradeAverageStrategy("Aritmetic average"))).isEqualTo(expectedAverage);
 		
 		verify(factoryMock, gradeDaoMock);
 	}
@@ -169,7 +169,7 @@ public class GradeAvarageStrategyTest {
 		replay(factoryMock, gradeDaoMock);
 
 		StudentController studentController = new StudentController(student, factoryMock);
-		assertThat(studentController.calculateTotalGradeAverage(new GeometricGradeAverageStrategy())).isEqualTo(expectedAverage);
+		assertThat(studentController.calculateTotalGradeAverage(new GeometricGradeAverageStrategy("Geometic average"))).isEqualTo(expectedAverage);
 		
 		verify(factoryMock, gradeDaoMock);
 	}
@@ -195,7 +195,7 @@ public class GradeAvarageStrategyTest {
 		replay(factoryMock, gradeDaoMock);
 
 		StudentController studentController = new StudentController(student, factoryMock);
-		assertThat(studentController.calculateTotalGradeAverage(new WeightedGradeAverageStrategy())).isEqualTo(expectedAverage);
+		assertThat(studentController.calculateTotalGradeAverage(new WeightedGradeAverageStrategy("Weighted average"))).isEqualTo(expectedAverage);
 		
 		verify(factoryMock, gradeDaoMock);
 	}
@@ -215,7 +215,7 @@ public class GradeAvarageStrategyTest {
         
         replay(factoryMock, gradeDaoMock);
 
-		double average = teacherController.calculateStudentTeachingGradeAverage(student, teachingAssignment, new ArithmeticGradeAverageStrategy());
+		double average = teacherController.calculateStudentTeachingGradeAverage(student, teachingAssignment, new ArithmeticGradeAverageStrategy("Aritmentic average"));
 
         assertThat(average).isEqualTo(8.0);
 
