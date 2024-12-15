@@ -62,6 +62,9 @@ public class TeacherGradeManager {
 	private TextArea taDescription;
 
 	@FXML
+	private TextArea taAverage;
+	
+	@FXML
 	private ComboBox<Student> cbStudents;
 
 	@FXML
@@ -136,26 +139,26 @@ public class TeacherGradeManager {
 		strategies.add(new ArithmeticGradeAverageStrategy("Aritmetic average"));
 		strategies.add(new GeometricGradeAverageStrategy("Geometric average"));
 		strategies.add(new WeightedGradeAverageStrategy("Weighted average"));
-			
+		
 		cbStrategy.setItems(FXCollections.observableArrayList(strategies));
-	}
+	
 
-//		cbStrategy.setConverter(new StringConverter<GradeAverageStrategy>() {
-//			
-//			@Override
-//			public String toString(GradeAverageStrategy object) {
-//				// TODO Auto-generated method stub
-//				return object != null ? object.getClass().toString() : "";
-//
-//			}
-//			
-//			@Override
-//			public GradeAverageStrategy fromString(String string) {
-//				// TODO Auto-generated method stub
-//				return null;
-//			}
-//		});
-//	}
+		cbStrategy.setConverter(new StringConverter<GradeAverageStrategy>() {
+			
+			@Override
+			public String toString(GradeAverageStrategy object) {
+				// TODO Auto-generated method stub
+				return object != null ? object.getName(): "";
+
+			}
+			
+			@Override
+			public GradeAverageStrategy fromString(String string) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		});
+	}
 
 	public void showGrades() throws StudentDaoException, DaoConnectionException, SchoolClassDaoException,
 			GradeDaoException, TeachingAssignmentDaoException {
@@ -213,7 +216,8 @@ public class TeacherGradeManager {
 	
 	public void getAverage() throws GradeDaoException, DaoConnectionException, StudentDaoException, TeachingAssignmentDaoException
 	{
-//		teacherController.calculateStudentTeachingGradeAverage(cbStudents.getValue(), teachingAssignment, new );
+		Double avg = teacherController.calculateStudentTeachingGradeAverage(cbStudents.getValue(), teachingAssignment, cbStrategy.getValue());
+		taAverage.setText(String.valueOf(avg));
 	}
 	
 	protected static void setController(TeacherController teacherController) {
@@ -221,7 +225,7 @@ public class TeacherGradeManager {
 	}
 
 	protected static void setTeachingAssignment(TeachingAssignment teachingAssignment) {
-		TeacherGradeManager.teachingAssignment = teachingAssignment;
+		 TeacherGradeManager.teachingAssignment = teachingAssignment;
 	}
 	
 	public void itemSelected() {
