@@ -217,6 +217,7 @@ public class InterfaceTeacherManager {
 		TeacherLessonManager.setController(teacherController);
 		TeacherMeetingManager.setTeacherController(teacherController);
 		TeacherHomeworkManager.setController(teacherController);
+		TeacherAbsenceSceneManager.setTeacherController(teacherController);
 		TeacherGradeManager.setController(teacherController);
 		TeacherDisciplinaryReportManager.setController(teacherController);
 	}
