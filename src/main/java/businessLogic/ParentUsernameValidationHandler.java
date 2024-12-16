@@ -13,12 +13,12 @@ public class ParentUsernameValidationHandler extends LoginHandler {
 	}
 
 	@Override
-	public UserController validationCredentials(String username, String password, DaoFactory daoFactory) throws DaoConnectionException, IllegalCredentialsException {
+	public void validationCredentials(String username, String password, DaoFactory daoFactory, InterfaceCreator interfaceCreator) throws DaoConnectionException, IllegalCredentialsException {
 		try {
 			Parent parent = daoFactory.createParentDao().getParentByUsernameWithPassword(username, password);
-			return new ParentController(parent, daoFactory);
+			interfaceCreator.createParentInterface(new ParentController(parent, daoFactory));
 		} catch (ParentDaoException | StudentDaoException e) {
-			return super.validationCredentials(username, password, daoFactory);
+			super.validationCredentials(username, password, daoFactory, interfaceCreator);
 		}
 	}
 

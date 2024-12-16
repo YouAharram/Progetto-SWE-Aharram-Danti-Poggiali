@@ -11,9 +11,10 @@ public abstract class LoginHandler {
 		this.next = next;
 	}
 
-	public UserController validationCredentials(String username, String password, DaoFactory daoFacotry) throws DaoConnectionException, IllegalCredentialsException{
+	public void validationCredentials(String username, String password, DaoFactory daoFacotry, InterfaceCreator interfaceCreator) throws DaoConnectionException, IllegalCredentialsException{
 		if (next != null) {
-			return next.validationCredentials(username, password, daoFacotry);
+			next.validationCredentials(username, password, daoFacotry, interfaceCreator);
+			return;
 		}
 		throw new IllegalCredentialsException("Invalid username or password");
 	}

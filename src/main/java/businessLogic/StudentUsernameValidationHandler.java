@@ -12,12 +12,12 @@ public class StudentUsernameValidationHandler extends LoginHandler {
 	}
 
 	@Override
-	public UserController validationCredentials(String username, String password, DaoFactory daoFactory) throws DaoConnectionException, IllegalCredentialsException {
+	public void validationCredentials(String username, String password, DaoFactory daoFactory, InterfaceCreator interfaceCreator) throws DaoConnectionException, IllegalCredentialsException {
 		try {
 			Student student = daoFactory.createStudentDao().getStudentByUsernameAndPassword(username, password);
-			return new StudentController(student, daoFactory);
+			interfaceCreator.createStudentInterface(new StudentController(student, daoFactory));
 		} catch (StudentDaoException e) {
-			return super.validationCredentials(username, password, daoFactory);
+			super.validationCredentials(username, password, daoFactory, interfaceCreator);
 		}
 	}
 

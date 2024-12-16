@@ -86,6 +86,8 @@ public class TeacherDisciplinaryReportManager {
 	
 	@SuppressWarnings("unchecked")
 	public void getDisciplinaryReport() {
+		tvDisciplinaryrReport.getItems().clear();
+		tvDisciplinaryrReport.getColumns().clear();
 		studentColumn = new TableColumn<>("Student");
 		teacherColumn = new TableColumn<>("Teacher");
 		descriptionColumn = new TableColumn<>("Description");
@@ -124,7 +126,12 @@ public class TeacherDisciplinaryReportManager {
 	
 	public void addDisciplinaryReport() {
 		try {
-			teacherController.assignDisciplinaryReportToStudentInDate(cbStudents.getValue(), taDesciption.getText(), datePicker.getValue());
+			if (cbStudents.getValue() != null &&  datePicker.getValue() != null && taDesciption.getText() != null) {
+				teacherController.assignDisciplinaryReportToStudentInDate(cbStudents.getValue(), taDesciption.getText(), datePicker.getValue());
+			}
+			else {
+				HandlerError.showError("Please insert all values");
+			}
 		} catch (DisciplinaryReportException | DaoConnectionException | StudentDaoException | TeacherDaoException e) {
 			HandlerError.showError(e.getMessage());
 		}

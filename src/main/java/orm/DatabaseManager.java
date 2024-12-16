@@ -20,7 +20,7 @@ public class DatabaseManager {
           try {
 			connection = DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
-			throw new DaoConnectionException();
+			throw new DaoConnectionException("Cannot connect with ClassFlow. Please check internet connection");
 		}
     }
 

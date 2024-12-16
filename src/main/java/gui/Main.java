@@ -29,7 +29,7 @@ public class Main extends Application {
 		LoginHandler loginHandler = new StudentUsernameValidationHandler(new TeacherUsernameValidationHandler(
 				new ParentUsernameValidationHandler(null)));
 
-		LoginController loginController = new LoginController(loginHandler, daoFacotry);
+		LoginController loginController = new LoginController(loginHandler, daoFacotry, new GuiInterfaceCreator());
 		InterfaceLoginManager.setLoginController(loginController);
 
 		try {

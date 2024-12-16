@@ -8,14 +8,16 @@ public final class LoginController {
 
 	private LoginHandler loginHandler;
 	private DaoFactory daoFacotry;
+	private InterfaceCreator interfaceCreator;
 
-	public LoginController(LoginHandler loginHandler, DaoFactory daoFacotry) {
+	public LoginController(LoginHandler loginHandler, DaoFactory daoFacotry, InterfaceCreator interfaceCreator) {
 		this.loginHandler = loginHandler;
 		this.daoFacotry = daoFacotry;
+		this.interfaceCreator = interfaceCreator;
 	}
 	
-	public UserController login(String username, String password) throws DaoConnectionException, IllegalCredentialsException {
-		return loginHandler.validationCredentials(username, password, daoFacotry);
+	public void login(String username, String password) throws DaoConnectionException, IllegalCredentialsException {
+		loginHandler.validationCredentials(username, password, daoFacotry, interfaceCreator);
 	}
 }
 
