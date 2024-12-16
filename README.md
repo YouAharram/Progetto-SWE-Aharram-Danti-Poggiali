@@ -17,7 +17,7 @@ cd <nome-cartella-progetto>
 
 Pulizia e build del progetto (senza eseguire i test):
 
-mvn clean install -DskipTests
+mvn clean install
 
 Avvia l'applicazione JavaFX:
 
