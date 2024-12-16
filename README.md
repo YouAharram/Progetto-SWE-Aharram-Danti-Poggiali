@@ -9,6 +9,7 @@ Tecnologie Utilizzate
     Database: MySQL
 
 Come Eseguire il Progetto
+
 Clonare la repository
 
     git clone <url-del-repository>
