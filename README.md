@@ -23,7 +23,7 @@ Avvia l'applicazione JavaFX:
 
     mvn javafx:run
 
-    Nota: Assicurati che Maven sia configurato correttamente sul tuo sistema prima di eseguire i comandi.
+Nota: Assicurati che Maven sia configurato correttamente sul tuo sistema prima di eseguire i comandi.
 
 Credenziali di Accesso
 
