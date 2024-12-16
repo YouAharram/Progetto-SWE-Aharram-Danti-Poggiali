@@ -8,7 +8,7 @@ Tecnologie Utilizzate
     Frontend: JavaFX (per applicazioni desktop)
     Database: MySQL
 
-Come Eseguire il Progetto
+Come Eseguire il Progetto:
 
 Clonare la repository
 
@@ -17,7 +17,7 @@ Clonare la repository
 
 Pulizia e build del progetto (senza eseguire i test):
 
-mvn clean install
+    mvn clean install
 
 Avvia l'applicazione JavaFX:
 
