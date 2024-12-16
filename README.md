@@ -9,11 +9,10 @@ Tecnologie Utilizzate
     Database: MySQL
 
 Come Eseguire il Progetto
+Clonare la repository
 
-    Clona il repository:
-
-git clone <url-del-repository>
-cd <nome-cartella-progetto>
+    git clone <url-del-repository>
+    cd <nome-cartella-progetto>
 
 Pulizia e build del progetto (senza eseguire i test):
 
