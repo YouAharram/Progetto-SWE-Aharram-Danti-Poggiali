@@ -159,7 +159,7 @@ public class InterfaceTeacherManager {
 
 	@FXML
 	public void openLesson() throws IOException {
-		openWindow("../resources/TeacherLessonInterface.fxml", "Lesson");
+		openWindow("../resources/TeacherLessonScene.fxml", "Lesson");
 		TeacherLessonManager
 				.setTeachingsAssignement(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
 						cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
@@ -167,7 +167,7 @@ public class InterfaceTeacherManager {
 
 	@FXML
 	public void openHomework() throws IOException {
-		openWindow("../resources/TeacherHomeworkInterface.fxml", "Homework");
+		openWindow("../resources/TeacherHomeworkScene.fxml", "Homework");
 		TeacherHomeworkManager
 				.setTeachingsAssignement(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
 						cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
@@ -183,7 +183,7 @@ public class InterfaceTeacherManager {
 		TeacherGradeManager
 				.setTeachingAssignment(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
 						cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
-		openWindow("../resources/TeacherGradesInterface.fxml", "Grades");
+		openWindow("../resources/TeacherGradesScene.fxml", "Grades");
 	}
 
 	@FXML
@@ -192,7 +192,7 @@ public class InterfaceTeacherManager {
 			schoolClass = new SchoolClass(cbClasses.getValue());
 			TeacherAbsenceSceneManager.setSchoolClass(schoolClass);
 			openWindow("../resources/TeacherAbsenceScene.fxml", "Absences");
-		} HandlerError.showError("Select Class");
+		} else HandlerError.showError("Select Class");
 
 	}
 
@@ -201,7 +201,7 @@ public class InterfaceTeacherManager {
 		TeacherDisciplinaryReportManager
 				.setTeachingAssignment(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
 						cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
-		openWindow("../resources/TeacherDisciplinaryReportInterface.fxml", "Disciplinary report");
+		openWindow("../resources/TeacherDisciplinaryReportScene.fxml", "Disciplinary report");
 	}
 
 	private void openWindow(String path, String nameWindow) throws IOException {
