@@ -83,19 +83,17 @@ public class ParentMeetingSceneController {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("hour"));        
         statusColumn.setCellValueFactory(cellData -> {
-            boolean isBooked = cellData.getValue().isBooked(); // Ottiene il valore boolean
-            String status = isBooked ? "booked" : "available"; // Converte in stringa
-            return new SimpleStringProperty(status);          // Ritorna una proprietà osservabile
+            boolean isBooked = cellData.getValue().isBooked(); 
+            String status = isBooked ? "booked" : "available";
+            return new SimpleStringProperty(status);
         });
 
-
-        // Configura la colonna "Prenota" per contenere i bottoni
         bookColumn.setCellFactory(col -> new TableCell<MeetingAvailability, Void>() {
             private final Button bookButton = new Button("Book");
             {
                 bookButton.setOnAction(event -> {
                     MeetingAvailability availability = getTableView().getItems().get(getIndex());
-                    bookMeeting(availability); // Prenotazione colloquio
+                    bookMeeting(availability);
                 });
             }
 
@@ -120,7 +118,7 @@ public class ParentMeetingSceneController {
         
 
         teacherColumn.setCellValueFactory(cellData -> {
-            Meeting meeting = cellData.getValue();  // Ottieni l'oggetto Meeting
+            Meeting meeting = cellData.getValue();
             if (meeting != null && meeting.getMeetingAvailability() != null) {
                 Teacher teacher = meeting.getMeetingAvailability().getTeacher();
                 return new SimpleStringProperty(teacher.getSurname() + " " + teacher.getName());
@@ -129,7 +127,7 @@ public class ParentMeetingSceneController {
         });
 
         meetingDateColumn.setCellValueFactory(cellData -> {
-            Meeting meeting = cellData.getValue();  // Ottieni l'oggetto Meeting
+            Meeting meeting = cellData.getValue();
             if (meeting != null && meeting.getMeetingAvailability() != null) {
                 return new SimpleStringProperty(meeting.getMeetingAvailability().getDate().toString());
             }
@@ -137,7 +135,7 @@ public class ParentMeetingSceneController {
         });
 
         meetingTimeColumn.setCellValueFactory(cellData -> {
-            Meeting meeting = cellData.getValue();  // Ottieni l'oggetto Meeting
+            Meeting meeting = cellData.getValue();
             if (meeting != null && meeting.getMeetingAvailability() != null) {
                 return new SimpleStringProperty(meeting.getMeetingAvailability().getHour().toString());
             }
@@ -146,11 +144,9 @@ public class ParentMeetingSceneController {
 
         
         meetingsTable.setItems(meetings);
-        // Popola il ComboBox
         loadTeachers();
         teacherComboBox.setItems(teachers);
 
-        // Listener per il ComboBox
         teacherComboBox.setOnAction(event -> {
             String selectedTeacher = teacherComboBox.getValue();
             if (selectedTeacher != null) {
@@ -158,7 +154,6 @@ public class ParentMeetingSceneController {
             }
         });
 
-        // Carica gli appuntamenti già fissati
         loadMeetings();
     }
 
@@ -235,7 +230,6 @@ public class ParentMeetingSceneController {
 		}
 
     }
-    
 
 	public static void setController(ParentController parentController) {
 		ParentMeetingSceneController.parentController = parentController;

@@ -56,6 +56,12 @@ public class TeacherMeetingManager {
     private ChoiceBox<Integer> btnHour;
     @FXML
     private ChoiceBox<Integer> btnMinute;
+    @FXML
+    private TableColumn<Meeting, String> studentNameColumn;
+
+    @FXML
+    private TableColumn<Meeting, String> parentNameColumn;
+
 
     @FXML
     private Button addAvailabilityButton;
@@ -80,16 +86,20 @@ public class TeacherMeetingManager {
         bookedDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMeetingAvailability().getDate().toString()));
         bookedTimeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMeetingAvailability().getHour().toString()));
 
+        studentNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getParent().getStudent().getSurname() + " " + cellData.getValue().getParent().getStudent().getName()));
+        parentNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getParent().getSurname() + " " + cellData.getValue().getParent().getName()));
+
         loadAvailableMeetings();
         loadBookedMeetings();
 
         for (int i = 8; i < 12; i++) {
             btnHour.getItems().add(i);
         }
-        for (int i = 0; i < 60; i+=15) {
+        for (int i = 0; i < 60; i += 15) {
             btnMinute.getItems().add(i);
         }
     }
+
 
     public void loadAvailableMeetings() {
         ObservableList<MeetingAvailability> availableMeetings = FXCollections.observableArrayList();

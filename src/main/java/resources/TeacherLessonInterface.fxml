@@ -1,66 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="778.0" prefWidth="1076.0" stylesheets="@InterfacciaTeacherFrontEnd.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherLessonManager">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@InterfacciaTeacherFrontEnd.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherAbsenceSceneManager">
    <children>
-      <Pane prefHeight="71.0" prefWidth="1078.0" style="-fx-background-color: black;" />
-      <Label layoutX="24.0" layoutY="20.0" text="Lesson" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="22.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnLesson" layoutX="32.0" layoutY="164.0" mnemonicParsing="false" onAction="#showLesson" prefHeight="40.0" prefWidth="150.0" text="Show lesson">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <DatePicker fx:id="datePicker" layoutX="241.0" layoutY="139.0" prefHeight="33.0" prefWidth="183.0" />
-      <Button fx:id="btnAddLesson" layoutX="32.0" layoutY="228.0" mnemonicParsing="false" onAction="#addLesson" prefHeight="40.0" prefWidth="150.0" text="Add lesson">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="removeButton11" layoutX="32.0" layoutY="288.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Edit lesson">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnDeleteLesson" layoutX="32.0" layoutY="345.0" mnemonicParsing="false" onAction="#deleteLesson" prefHeight="40.0" prefWidth="150.0" text="Delete lesson">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnBack" layoutX="10.0" layoutY="89.0" mnemonicParsing="false" onAction="#backAtTeacherScene" prefHeight="40.0" prefWidth="103.0" text="Back">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <TableView fx:id="lessonsTableView" layoutX="81.0" layoutY="510.0" prefHeight="245.0" prefWidth="914.0">
+      <!-- DatePicker per selezionare la data -->
+      <DatePicker fx:id="datePicker" layoutX="226.0" layoutY="30.0" prefWidth="200.0" />
+
+      <!-- Bottone per mostrare le assenze -->
+      <Button fx:id="showButton" layoutX="455.0" layoutY="21.0" mnemonicParsing="false" onAction="#showAbsences" prefHeight="30.0" prefWidth="90.0" text="Show" />
+
+      <!-- Tabella per visualizzare le informazioni sugli studenti -->
+      <TableView fx:id="studentTableView" layoutX="100.0" layoutY="80.0" prefHeight="403.0" prefWidth="800.0">
          <columns>
-            <TableColumn fx:id="subjectLessonColumn" prefWidth="125.0" text="Subject" />
-            <TableColumn fx:id="teacherLessonColumn" prefWidth="149.0" text="Teacher" />
-            <TableColumn fx:id="startHourColumn" prefWidth="93.0" text="Start Hour" />
-            <TableColumn fx:id="endHourColumn" prefWidth="99.0" text="End Hour" />
-            <TableColumn fx:id="descriptionLessonColumn" prefWidth="447.0" text="Description" />
+            <TableColumn fx:id="firstNameColumn" minWidth="100.0" prefWidth="200.0" text="Name" />
+            <TableColumn fx:id="lastNameColumn" minWidth="100.0" prefWidth="200.0" text="Surname" />
+            <TableColumn fx:id="presenceColumn" minWidth="100.0" prefWidth="200.0" text="Attendance" />
+            <TableColumn fx:id="justificationColumn" minWidth="100.0" prefWidth="200.0" text="Justified" />
          </columns>
       </TableView>
-      <ComboBox fx:id="cbSHours" layoutX="483.0" layoutY="106.0" prefWidth="150.0" styleClass="choice-box" stylesheets="@InterfacciaTeacherFrontEnd.css" />
-      <ComboBox fx:id="cbSMinutes" layoutX="657.0" layoutY="105.0" prefWidth="150.0" styleClass="choice-box" stylesheets="@InterfacciaTeacherFrontEnd.css" />
-      <TextArea fx:id="taDescription" layoutX="302.0" layoutY="272.0" prefHeight="218.0" prefWidth="511.0" />
-      <ComboBox fx:id="cbFHours" layoutX="483.0" layoutY="186.0" prefWidth="150.0" styleClass="choice-box" stylesheets="@InterfacciaTeacherFrontEnd.css" />
-      <ComboBox fx:id="cbFMinutes" layoutX="653.0" layoutY="187.0" prefWidth="150.0" styleClass="choice-box" stylesheets="@InterfacciaTeacherFrontEnd.css" />
-      <Label layoutX="596.0" layoutY="80.0" text="Start lesson" />
-      <Label layoutX="602.0" layoutY="163.0" prefHeight="18.0" prefWidth="89.0" text="End Lesson" />
-      <Label layoutX="297.0" layoutY="108.0" text="Select Date" />
+
+      <!-- Bottone per tornare alla scena principale -->
+      <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToTeacherScene" prefHeight="30.0" prefWidth="90.0" text="Back" />
+
+      <!-- Contenitore HBox per disporre i pulsanti orizzontalmente -->
+      <HBox alignment="CENTER" layoutX="400.0" layoutY="500.0" spacing="20">
+         <!-- I pulsanti possono essere inseriti all'interno dell'HBox se necessario -->
+      </HBox>
    </children>
 </AnchorPane>

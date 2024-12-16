@@ -26,7 +26,6 @@ import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.TeachingAssignment;
 import exceptions.DaoConnectionException;
-import exceptions.GradeDaoException;
 import exceptions.SchoolClassDaoException;
 import exceptions.StudentDaoException;
 import exceptions.TeacherDaoException;
@@ -61,8 +60,7 @@ public class InterfaceTeacherManager {
 	private SchoolClass schoolClass;
 
 	@FXML
-	public void initialize() throws StudentDaoException, DaoConnectionException, SchoolClassDaoException,
-			GradeDaoException, TeachingAssignmentDaoException {
+	public void initialize() {
 
 		if (teacherController != null) {
 			setControllerForAllScene();
@@ -70,7 +68,9 @@ public class InterfaceTeacherManager {
 			String surname = teacherController.getTeacher().getSurname();
 			lblTeacherName.setText(name);
 			lblTeacherSurname.setText(surname);
-		}
+		} else {
+            HandlerError.showError("Parent controller not yet initialized");
+        }
 
 		setControllerForAllScene();
 		cbTeachings.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -82,44 +82,41 @@ public class InterfaceTeacherManager {
 
 	}
 
-	public void showStudents() throws StudentDaoException, DaoConnectionException, SchoolClassDaoException {
-		// Svuota i dati del modello
+	public void showStudents() {
 		tvGradesStudents.getItems().clear();
-		// Rimuove tutte le colonne
 		tvGradesStudents.getColumns().clear();
 
-		// Crea le colonne
 		TableColumn<ObservableList<String>, String> column1 = new TableColumn<>("Number");
 		TableColumn<ObservableList<String>, String> column2 = new TableColumn<>("Name");
 		TableColumn<ObservableList<String>, String> column3 = new TableColumn<>("Surname");
 
-		// Imposta il cell value factory per ogni colonna
-		column1.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get(0))); // Colonna "Number"
-		column2.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get(1))); // Colonna "Name"
-		column3.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get(2))); // Colonna "Surname"
+		column1.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get(0)));
+		column2.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get(1)));
+		column3.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get(2)));
 
-		// Aggiunge le colonne alla TableView
 		tvGradesStudents.getColumns().add(column1);
 		tvGradesStudents.getColumns().add(column2);
 		tvGradesStudents.getColumns().add(column3);
 
-		// Ottieni gli studenti dalla classe selezionata
-		Iterator<Student> students = teacherController.getStudentsByClass(new SchoolClass(cbClasses.getValue()));
+		Iterator<Student> students = null;
+		try {
+			students = teacherController.getStudentsByClass(new SchoolClass(cbClasses.getValue()));
+		} catch (StudentDaoException | DaoConnectionException | SchoolClassDaoException e) {
+			HandlerError.showError(e.getMessage());
+		}
 		ObservableList<ObservableList<String>> newRows = FXCollections.observableArrayList();
 		int i = 1;
 
-		// Popola i dati
 		while (students.hasNext()) {
 			Student student = students.next();
 			ObservableList<String> row = FXCollections.observableArrayList();
-			row.add(String.valueOf(i)); // Numero
-			row.add(student.getName()); // Nome
-			row.add(student.getSurname()); // Cognome
+			row.add(String.valueOf(i));
+			row.add(student.getName());
+			row.add(student.getSurname());
 			newRows.add(row);
 			i++;
 		}
 
-		// Imposta i dati nella TableView
 		tvGradesStudents.setItems(newRows);
 	}
 
@@ -133,7 +130,7 @@ public class InterfaceTeacherManager {
 			try {
 				teachings = teacherController.getAllMyTeachings();
 			} catch (TeachingAssignmentDaoException | TeacherDaoException | DaoConnectionException e) {
-				e.printStackTrace();
+				HandlerError.showError(e.getMessage());
 			}
 			while (teachings.hasNext()) {
 				cbTeachings.getItems().add(teachings.next().getSubject());
@@ -152,7 +149,7 @@ public class InterfaceTeacherManager {
 						.stream(Spliterators.spliteratorUnknownSize(teachings, Spliterator.ORDERED), false)
 						.filter(t -> t.getSubject().equals(subject)).collect(Collectors.toList());
 			} catch (TeachingAssignmentDaoException | TeacherDaoException | DaoConnectionException e) {
-				e.printStackTrace();
+				HandlerError.showError(e.getMessage());
 			}
 			for (TeachingAssignment ta : classes) {
 				cbClasses.getItems().add(ta.getSchoolClass().getClassName());
@@ -193,13 +190,10 @@ public class InterfaceTeacherManager {
 	public void openAbsence() throws IOException {
 		if (cbClasses.getValue() != null && !cbClasses.getValue().isEmpty()) {
 			schoolClass = new SchoolClass(cbClasses.getValue());
-
 			TeacherAbsenceSceneManager.setSchoolClass(schoolClass);
-			TeacherAbsenceSceneManager.setTeacherController(teacherController); // Se non lo hai già fatto in un altro
-																				// punto
-
 			openWindow("../resources/TeacherAbsenceScene.fxml", "Absences");
-		}
+		} HandlerError.showError("Select Class");
+
 	}
 
 	@FXML

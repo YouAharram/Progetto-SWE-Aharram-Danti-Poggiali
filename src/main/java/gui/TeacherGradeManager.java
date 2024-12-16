@@ -78,35 +78,41 @@ public class TeacherGradeManager {
 	private int numberOfStudents = 0;
 
 	@FXML
-	public void initialize() throws StudentDaoException, DaoConnectionException, SchoolClassDaoException, 
-			GradeDaoException, TeachingAssignmentDaoException {
+	public void initialize() {
 		cbStudents.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue != null) {
-				try {
-					handleChoiceBoxChange(newValue);
-				} catch (GradeDaoException | DaoConnectionException | StudentDaoException
-						| TeachingAssignmentDaoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				handleChoiceBoxChange(newValue);
 			}
 		});
 
-		// Popolamento degli studenti nella ComboBox
-		Iterator<Student> students = teacherController.getStudentsByClass(teachingAssignment.getSchoolClass());
+		Iterator<Student> students = null;
+		try {
+			students = teacherController.getStudentsByClass(teachingAssignment.getSchoolClass());
+		} catch (StudentDaoException | DaoConnectionException | SchoolClassDaoException e) {
+			HandlerError.showError(e.getMessage());
+		}
 		students.forEachRemaining(Liststudents::add);
 
-		cbWeight.getItems().addAll(2, 4, 6); // Pesi fissi per la ComboBox
+		cbWeight.getItems().addAll(2, 4, 6);
 
-		students = teacherController.getStudentsByClass(teachingAssignment.getSchoolClass());
+		try {
+			students = teacherController.getStudentsByClass(teachingAssignment.getSchoolClass());
+		} catch (StudentDaoException | DaoConnectionException | SchoolClassDaoException e) {
+			HandlerError.showError(e.getMessage());
+		}
 		while (students.hasNext()) {
 			Student student = students.next();
-			Iterator<Grade> gradesPerStudent = teacherController.getAllStudentGradesByTeaching(student,
-					teachingAssignment);
+			Iterator<Grade> gradesPerStudent = null;
+			try {
+				gradesPerStudent = teacherController.getAllStudentGradesByTeaching(student,
+						teachingAssignment);
+			} catch (GradeDaoException | DaoConnectionException | StudentDaoException
+					| TeachingAssignmentDaoException e) {
+				HandlerError.showError(e.getMessage());
+			}
 			gradesPerStudent.forEachRemaining(gradesList::add);
 		}
 
-		// Popolamento dei voti nella ComboBox
 		double grade = 1;
 		
 		for (int i = 1; i <= 20; i++) {
@@ -114,7 +120,6 @@ public class TeacherGradeManager {
 			grade += 0.5;
 		}
 
-		// Popolamento degli studenti nella ComboBox
 		cbStudents.setItems(FXCollections.observableArrayList(Liststudents));
 		cbStudents.setConverter(new StringConverter<Student>() {
 			@Override
@@ -124,13 +129,9 @@ public class TeacherGradeManager {
 
 			@Override
 			public Student fromString(String string) {
-				// Non necessario, ma se necessario implementare la logica per trovare lo
-				// studente
 				return null;
 			}
 		});
-
-		
 		
 		List<GradeAverageStrategy> strategies = new ArrayList<>();
 		strategies.add(new ArithmeticGradeAverageStrategy("Aritmetic average"));
@@ -138,59 +139,70 @@ public class TeacherGradeManager {
 		strategies.add(new WeightedGradeAverageStrategy("Weighted average"));
 		
 		cbStrategy.setItems(FXCollections.observableArrayList(strategies));
-	
-
 		cbStrategy.setConverter(new StringConverter<GradeAverageStrategy>() {
 			
 			@Override
 			public String toString(GradeAverageStrategy object) {
-				// TODO Auto-generated method stub
 				return object != null ? object.getName(): "";
 
 			}
 			
 			@Override
 			public GradeAverageStrategy fromString(String string) {
-				// TODO Auto-generated method stub
 				return null;
 			}
 		});
 	}
 
-	public void showGrades() throws StudentDaoException, DaoConnectionException, SchoolClassDaoException,
-			GradeDaoException, TeachingAssignmentDaoException {
+	public void showGrades() {
 		ConfigureColumnForGrade();
-		Iterator<Student> students = teacherController.getStudentsByClass(teachingAssignment.getSchoolClass());
+		Iterator<Student> students = null;
+		try {
+			students = teacherController.getStudentsByClass(teachingAssignment.getSchoolClass());
+		} catch (StudentDaoException | DaoConnectionException | SchoolClassDaoException e) {
+			HandlerError.showError(e.getMessage());
+		}
 		int rowindex = 0;
 		while (students.hasNext()) {
-			int c = 1;// Ad esempio, 5 studenti
+			int c = 1;
 			Student student = students.next();
 			ObservableList<String> row = rows.get(rowindex);
 			rowindex++;
 			row.set(0, String.valueOf(student.getName() + " " + student.getSurname()));
-			Iterator<Grade> gradesPerStudent = teacherController.getAllStudentGradesByTeaching(student,
-					teachingAssignment);
-			while (gradesPerStudent.hasNext()) { // Ad esempio, 10 voti per studente
+			Iterator<Grade> gradesPerStudent = null;
+			try {
+				gradesPerStudent = teacherController.getAllStudentGradesByTeaching(student,
+						teachingAssignment);
+			} catch (GradeDaoException | DaoConnectionException | StudentDaoException
+					| TeachingAssignmentDaoException e) {
+				HandlerError.showError(e.getMessage());
+			}
+			while (gradesPerStudent.hasNext()) {
 				row.set(c, String.valueOf(gradesPerStudent.next().getValue()));
 				c++;
 			}
 		}
 	}
 
-	public void addGrade() 
-			throws GradeDaoException, InvalidGradeValueException, DaoConnectionException, StudentDaoException {
+	public void addGrade() {
 		Double gradeValue = cbGrades.getValue();
 		String description = taDescription.getText();
 		Student student = cbStudents.getValue();
 		LocalDate date = datePicker.getValue();
 
-		// Assegna il voto
-		teacherController.assignGradeToStudentInDate(gradeValue, description, teachingAssignment, student, date);
+		try {
+			teacherController.assignGradeToStudentInDate(gradeValue, description, teachingAssignment, student, date);
+		} catch (GradeDaoException | InvalidGradeValueException | DaoConnectionException | StudentDaoException e) {
+			HandlerError.showError(e.getMessage());
+		}
 	}
 
-	public void deleteGrade() throws GradeDaoException, DaoConnectionException {
-		// Logica per eliminare un voto (da implementare)
-		teacherController.deleteGrade(gradeSelected);
+	public void deleteGrade() {
+		try {
+			teacherController.deleteGrade(gradeSelected);
+		} catch (GradeDaoException | DaoConnectionException e) {
+			HandlerError.showError(e.getMessage());
+		}
 	}
 
 	public void goBack() throws IOException {
@@ -200,17 +212,23 @@ public class TeacherGradeManager {
 		stage.setScene(scene);
 		stage.show();	}
 
-	public void editGrade() throws GradeDaoException, DaoConnectionException {
-		// Logica per modificare un voto esistente (da implementare)
-		teacherController.editGradeDescription(gradeSelected, taDescription.getText());
-		teacherController.editGradeValue(gradeSelected, cbGrades.getValue());
-		teacherController.editGradeWeight(gradeSelected, cbWeight.getValue());
+	public void editGrade() {
+		try {
+			teacherController.editGradeValue(gradeSelected, cbGrades.getValue());
+			teacherController.editGradeWeight(gradeSelected, cbWeight.getValue());
+		} catch (GradeDaoException | DaoConnectionException e) {
+			HandlerError.showError(e.getMessage());
+		}
 	}
 
 	
-	public void getAverage() throws GradeDaoException, DaoConnectionException, StudentDaoException, TeachingAssignmentDaoException
-	{
-		Double avg = teacherController.calculateStudentTeachingGradeAverage(cbStudents.getValue(), teachingAssignment, cbStrategy.getValue());
+	public void getAverage() {
+		Double avg = null;
+		try {
+			avg = teacherController.calculateStudentTeachingGradeAverage(cbStudents.getValue(), teachingAssignment, cbStrategy.getValue());
+		} catch (GradeDaoException | DaoConnectionException | StudentDaoException | TeachingAssignmentDaoException e) {
+			HandlerError.showError(e.getMessage());
+		}
 		taAverage.setText(String.valueOf(avg));
 	}
 	
@@ -230,7 +248,7 @@ public class TeacherGradeManager {
 		}
 
 	@SuppressWarnings("unchecked")
-	private void handleChoiceBoxChange(Student newValue) throws GradeDaoException, DaoConnectionException, StudentDaoException, TeachingAssignmentDaoException {
+	private void handleChoiceBoxChange(Student newValue) {
 		gradeTable.getItems().clear();
 		gradeTable.getColumns().clear();
 
@@ -242,16 +260,20 @@ public class TeacherGradeManager {
 
 		gradeTable.getColumns().addAll(studentColumn, valueColumn, weightColumn, dateColumn, descriptionColumn);
 		
-		Iterator<Grade> grades = teacherController.getAllStudentGradesByTeaching(newValue, teachingAssignment);
+		Iterator<Grade> grades = null;
+		try {
+			grades = teacherController.getAllStudentGradesByTeaching(newValue, teachingAssignment);
+		} catch (GradeDaoException | DaoConnectionException | StudentDaoException | TeachingAssignmentDaoException e) {
+			HandlerError.showError(e.getMessage());
+		}
 		
-		// Popolamento della tabella gradeTable
 		ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
 
 		while (grades.hasNext()) {
 		    Grade grade = grades.next();
 
 		    ObservableList<String> row = FXCollections.observableArrayList();
-		    row.add(grade.getStudent().getName()); // Supponendo che getName() restituisca il nome dello studente
+		    row.add(grade.getStudent().getName());
 		    row.add(String.valueOf(grade.getValue()));
 		    row.add(String.valueOf(grade.getWeight()));
 		    row.add(grade.getDate().toString());
@@ -262,7 +284,6 @@ public class TeacherGradeManager {
 
 		gradeTable.setItems(data);
 
-		// Imposta le celle per ogni colonna
 		studentColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(0)));
 		valueColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(1)));
 		weightColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(2)));
@@ -272,15 +293,12 @@ public class TeacherGradeManager {
 		
 
 	}
-	private void ConfigureColumnForGrade() throws StudentDaoException, DaoConnectionException, SchoolClassDaoException,
-			GradeDaoException, TeachingAssignmentDaoException {
-// Svuota i dati del modello
+	private void ConfigureColumnForGrade() {
 		gradeTable.getItems().clear();
-// Rimuove tutte le colonne
 		gradeTable.getColumns().clear();
 
-		int size = getMaxNumberOfGrades() + 1; // Numero di colonne necessarie
-
+		int size = getMaxNumberOfGrades() + 1;
+		
 		for (int i = 0; i < size; i++) {
 			TableColumn<ObservableList<String>, String> column;
 			if (i == 0) {
@@ -289,7 +307,7 @@ public class TeacherGradeManager {
 				column = new TableColumn<>("Grade " + (i));
 			}
 
-			final int colIndex = i; // Indice di colonna
+			final int colIndex = i;
 
 			// Imposta la cella come elemento della lista corrispondente all'indice
 			column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(colIndex)));
@@ -313,14 +331,24 @@ public class TeacherGradeManager {
 		gradeTable.setItems(rows);
 	}
 
-	private int getMaxNumberOfGrades() throws StudentDaoException, DaoConnectionException, SchoolClassDaoException,
-			GradeDaoException, TeachingAssignmentDaoException {
-		Iterator<Student> students = teacherController.getStudentsByClass(teachingAssignment.getSchoolClass());
+	private int getMaxNumberOfGrades() {
+		Iterator<Student> students = null;
+		try {
+			students = teacherController.getStudentsByClass(teachingAssignment.getSchoolClass());
+		} catch (StudentDaoException | DaoConnectionException | SchoolClassDaoException e) {
+			HandlerError.showError(e.getMessage());
+		}
 		int maxNumberOfGrades = 0;
 		while (students.hasNext()) {
 			numberOfStudents++;
-			Iterator<Grade> gradesPerStudent = teacherController.getAllStudentGradesByTeaching(students.next(),
-					teachingAssignment);
+			Iterator<Grade> gradesPerStudent = null;
+			try {
+				gradesPerStudent = teacherController.getAllStudentGradesByTeaching(students.next(),
+						teachingAssignment);
+			} catch (GradeDaoException | DaoConnectionException | StudentDaoException
+					| TeachingAssignmentDaoException e) {
+				HandlerError.showError(e.getMessage());
+			}
 			;
 			List<Grade> grades = new ArrayList<Grade>();
 			gradesPerStudent.forEachRemaining(grades::add);

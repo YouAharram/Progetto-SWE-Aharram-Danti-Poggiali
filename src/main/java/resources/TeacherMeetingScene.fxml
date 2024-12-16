@@ -6,38 +6,63 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherMeetingManager">
-    <children>
-        <!-- Bottone per tornare alla scena principale -->
-        <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToPreviousScene" prefHeight="30.0" prefWidth="90.0" text="Back" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@InterfacciaTeacherFrontEnd.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherMeetingManager">
+   <children>
+      <!-- Bottone per tornare alla scena principale -->
+      <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToPreviousScene" prefHeight="30.0" prefWidth="90.0" text="Back" />
 
-        <!-- Tabella per visualizzare le disponibilità dei colloqui -->
-        <TableView fx:id="availableMeetingsTable" layoutX="50.0" layoutY="80.0" prefHeight="250.0" prefWidth="900.0">
-            <columns>
-                <TableColumn fx:id="availabilityDateColumn" minWidth="100.0" prefWidth="200.0" text="Date" />
-                <TableColumn fx:id="availabilityTimeColumn" minWidth="100.0" prefWidth="200.0" text="Time" />
-            </columns>
-        </TableView>
+      <!-- GridPane per le tabelle e i dati -->
+      <GridPane alignment="CENTER" hgap="20.0" layoutX="150.0" layoutY="60.0" vgap="20.0">
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+      </GridPane>
 
-        <!-- Tabella per visualizzare i colloqui fissati -->
-        <TableView fx:id="bookedMeetingsTable" layoutX="50.0" layoutY="350.0" prefHeight="150.0" prefWidth="900.0">
-            <columns>
-                <TableColumn fx:id="bookedDateColumn" minWidth="100.0" prefWidth="200.0" text="Booked Date" />
-                <TableColumn fx:id="bookedTimeColumn" minWidth="100.0" prefWidth="200.0" text="Booked Time" />
-            </columns>
-        </TableView>
+      <!-- Sezione per aggiungere una disponibilità -->
+      <VBox alignment="CENTER" layoutX="150.0" layoutY="380.0" spacing="15.0" />
 
-        <!-- Sezione per aggiungere una disponibilità -->
-        <HBox alignment="CENTER" layoutX="50.0" layoutY="530.0" spacing="20.0" />
+      <!-- Sezione per i pulsanti di gestione disponibilità -->
+      <VBox alignment="CENTER" layoutX="400.0" layoutY="380.0" spacing="15.0" />
+      <DatePicker fx:id="datePicker" layoutX="179.0" layoutY="23.0" prefWidth="200.0" />
+      <ChoiceBox fx:id="btnHour" layoutX="406.0" layoutY="18.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="btnMinute" layoutX="577.0" layoutY="18.0" prefWidth="150.0" />
+      <Button fx:id="addAvailabilityButton" layoutX="750.0" layoutY="14.0" onAction="#addAvailability" prefHeight="40.0" prefWidth="200.0" text="Add Availability" />
+      <Button fx:id="deleteAvailabilityButton" layoutX="418.0" layoutY="528.0" onAction="#deleteAvailability" prefHeight="40.0" prefWidth="200.0" text="Delete Availability" />
 
-        <!-- Sezione per eliminare una disponibilità -->
-        <HBox alignment="CENTER" layoutX="400.0" layoutY="530.0" spacing="20.0" />
-         <Button fx:id="deleteAvailabilityButton" layoutX="676.0" layoutY="525.0" onAction="#deleteAvailability" prefHeight="30.0" prefWidth="150.0" text="Delete Availability" />
-         <Button fx:id="addAvailabilityButton" layoutX="684.0" layoutY="14.0" onAction="#addAvailability" prefHeight="30.0" prefWidth="150.0" text="Add Availability" />
-         <DatePicker fx:id="datePicker" layoutX="140.0" layoutY="22.0" prefWidth="200.0" />
-      <ChoiceBox fx:id="btnHour" layoutX="363.0" layoutY="17.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="btnMinute" layoutX="520.0" layoutY="17.0" prefWidth="150.0" />
-    </children>
+      <!-- Tabella per visualizzare i colloqui fissati -->
+      <TableView fx:id="bookedMeetingsTable" layoutX="163.0" layoutY="310.0" prefHeight="200.0" prefWidth="700.0">
+         <columns>
+            <TableColumn fx:id="bookedDateColumn" minWidth="100.0" prefWidth="150.0" text="Booked Date" />
+            <TableColumn fx:id="bookedTimeColumn" minWidth="100.0" prefWidth="150.0" text="Booked Time" />
+            <TableColumn fx:id="studentNameColumn" minWidth="150.0" prefWidth="200.0" text="Student Name" />
+            <TableColumn fx:id="parentNameColumn" minWidth="150.0" prefWidth="200.0" text="Parent Name" />
+         </columns>
+      </TableView>
+      <!-- Tabella per visualizzare le disponibilità dei colloqui -->
+      <TableView fx:id="availableMeetingsTable" layoutX="163.0" layoutY="100.0" prefHeight="200.0" prefWidth="700.0">
+         <columns>
+            <TableColumn fx:id="availabilityDateColumn" minWidth="100.0" prefWidth="150.0" text="Date" />
+            <TableColumn fx:id="availabilityTimeColumn" minWidth="100.0" prefWidth="150.0" text="Time" />
+         </columns>
+      </TableView>
+   </children>
 </AnchorPane>

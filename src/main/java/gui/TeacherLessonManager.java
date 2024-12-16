@@ -90,7 +90,7 @@ public class TeacherLessonManager {
 			cbSHours.getItems().add(String.format("%02d", i));
 			cbFHours.getItems().add(String.format("%02d", i));
 		}
-		// Popola il ComboBox per i minuti
+
 		for (int i = 0; i < 60; i++) {
 			cbSMinutes.getItems().add(String.format("%02d", i));
 			cbFMinutes.getItems().add(String.format("%02d", i));
@@ -98,7 +98,7 @@ public class TeacherLessonManager {
 	}
 
 	@FXML
-	public void showLesson() throws DaoConnectionException, LessonDaoException, SchoolClassDaoException {
+	public void showLesson() {
 		if (datePicker.getValue() == null) {
 			return;
 		}
@@ -108,8 +108,7 @@ public class TeacherLessonManager {
 		try {
 			lessonsIterator = teacherController.getClassLessonsInDay(selectedDate, teachingAssignment.getSchoolClass());
 		} catch (DaoConnectionException | LessonDaoException | SchoolClassDaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			HandlerError.showError(e.getMessage());
 		}
 
 		lessonsIterator.forEachRemaining(lessons::add);
@@ -127,18 +126,20 @@ public class TeacherLessonManager {
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEndHour().toString()));
 		descriptionLessonColumn
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
-
-
 	}
 
 	public static void setController(TeacherController teacherController) {
 		TeacherLessonManager.teacherController = teacherController;
 	}
 
-	public void addLesson() throws LessonDaoException, DaoConnectionException {
-		teacherController.addNewLesson(teachingAssignment, datePicker.getValue(), taDescription.getText(),
-				LocalTime.of(Integer.valueOf(cbSHours.getValue()), Integer.valueOf(cbSMinutes.getValue())),
-				LocalTime.of(Integer.valueOf(cbFHours.getValue()), Integer.valueOf(cbFMinutes.getValue())));
+	public void addLesson() {
+		try {
+			teacherController.addNewLesson(teachingAssignment, datePicker.getValue(), taDescription.getText(),
+					LocalTime.of(Integer.valueOf(cbSHours.getValue()), Integer.valueOf(cbSMinutes.getValue())),
+					LocalTime.of(Integer.valueOf(cbFHours.getValue()), Integer.valueOf(cbFMinutes.getValue())));
+		} catch (NumberFormatException | LessonDaoException | DaoConnectionException e) {
+			HandlerError.showError(e.getMessage());
+		}
 	}
 
 	public void deleteLesson() throws LessonDaoException, IllegalLessonAccessException, DaoConnectionException {

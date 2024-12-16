@@ -68,7 +68,6 @@ public class ParentGradesSceneController {
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("Value"));
         weightColumn.setCellValueFactory(new PropertyValueFactory<>("Weight"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("Description"));
-
     }
     
 
@@ -141,8 +140,6 @@ public class ParentGradesSceneController {
     
 	public static void setController(ParentController parentController) {
 		ParentGradesSceneController.parentController = parentController;
-		
 	}
-
 
 }

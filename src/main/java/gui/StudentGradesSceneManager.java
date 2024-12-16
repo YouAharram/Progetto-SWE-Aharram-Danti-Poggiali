@@ -67,7 +67,6 @@ public class StudentGradesSceneManager {
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("Value"));
         weightColumn.setCellValueFactory(new PropertyValueFactory<>("Weight"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("Description"));
-
     }
 
     @FXML

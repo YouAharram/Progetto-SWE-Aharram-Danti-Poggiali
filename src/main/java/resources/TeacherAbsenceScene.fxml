@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherAbsenceSceneManager">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@InterfacciaTeacherFrontEnd.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherAbsenceSceneManager">
    <children>
-      <!-- DataPicker per selezionare la data -->
-      <DatePicker fx:id="datePicker" layoutX="100.0" layoutY="30.0" prefWidth="200.0" />
+      <!-- DatePicker per selezionare la data -->
+      <DatePicker fx:id="datePicker" layoutX="175.0" layoutY="30.0" prefWidth="200.0" />
 
       <!-- Bottone per mostrare le assenze -->
-      <Button fx:id="showButton" layoutX="320.0" layoutY="30.0" mnemonicParsing="false" onAction="#showAbsences" prefHeight="30.0" prefWidth="90.0" text="Show" />
+      <Button fx:id="showButton" layoutX="400.0" layoutY="21.0" mnemonicParsing="false" onAction="#showAbsences" prefHeight="30.0" prefWidth="90.0" text="Show" />
 
       <!-- Tabella per visualizzare le informazioni sugli studenti -->
       <TableView fx:id="studentTableView" layoutX="100.0" layoutY="80.0" prefHeight="403.0" prefWidth="800.0">
@@ -29,6 +29,8 @@
       <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToTeacherScene" prefHeight="30.0" prefWidth="90.0" text="Back" />
 
       <!-- Contenitore HBox per disporre i pulsanti orizzontalmente -->
-      <HBox alignment="CENTER" layoutX="500.0" layoutY="500.0" spacing="20" />
+      <HBox alignment="CENTER" layoutX="400.0" layoutY="500.0" spacing="20">
+         <!-- I pulsanti possono essere inseriti all'interno dell'HBox se necessario -->
+      </HBox>
    </children>
 </AnchorPane>

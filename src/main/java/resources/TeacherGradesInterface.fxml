@@ -11,55 +11,59 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="843.0" prefWidth="1557.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherGradeManager">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherGradeManager">
     <children>
-        <HBox prefHeight="839.0" prefWidth="1517.0">
+        <HBox prefHeight="600.0" prefWidth="1000.0">
             <children>
-                <AnchorPane prefHeight="839.0" prefWidth="542.0" stylesheets="@InterfacciaTeacherFrontEnd.css">
+                <AnchorPane prefHeight="600.0" prefWidth="350.0" stylesheets="@InterfacciaTeacherFrontEnd.css">
                     <children>
-                        <Button fx:id="btnGrades" layoutX="14.0" layoutY="121.0" mnemonicParsing="false" onAction="#showGrades" prefHeight="44.0" prefWidth="162.0" text="Show Grade" />
-                        <Button fx:id="btnLesson" layoutX="15.0" layoutY="241.0" mnemonicParsing="false" onAction="#addGrade" prefHeight="44.0" prefWidth="171.0" text="Add Grade" />
-                        <Button fx:id="btnEdit" layoutX="15.0" layoutY="304.0" mnemonicParsing="false" onAction="#editGrade" prefHeight="44.0" prefWidth="171.0" text="Edit Grade" />
-                        <Button fx:id="btnDelete" layoutX="15.0" layoutY="366.0" mnemonicParsing="false" onAction="#deleteGrade" prefHeight="44.0" prefWidth="171.0" text="Delete Grade" />
-                        <Button fx:id="btnBack" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" onAction="#goBack" prefHeight="44.0" prefWidth="162.0" text="Back" />
+                        <Button fx:id="btnGrades" layoutX="20.0" layoutY="102.0" mnemonicParsing="false" onAction="#showGrades" prefHeight="44.0" prefWidth="150.0" text="Show Grade" />
+                        <Button fx:id="btnLesson" layoutX="20.0" layoutY="161.0" mnemonicParsing="false" onAction="#addGrade" prefHeight="44.0" prefWidth="150.0" text="Add Grade" />
+                        <Button fx:id="btnEdit" layoutX="20.0" layoutY="218.0" mnemonicParsing="false" onAction="#editGrade" prefHeight="44.0" prefWidth="150.0" text="Edit Grade" />
+                        <Button fx:id="btnDelete" layoutX="20.0" layoutY="273.0" mnemonicParsing="false" onAction="#deleteGrade" prefHeight="44.0" prefWidth="150.0" text="Delete Grade" />
+                        <Button fx:id="btnBack" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBack" prefHeight="44.0" prefWidth="150.0" text="Back" />
 
-                        <ComboBox fx:id="cbStudents" layoutX="234.0" layoutY="219.0" prefWidth="150.0" styleClass="choice-box" stylesheets="@InterfacciaTeacherFrontEnd.css" />
-                        <ComboBox fx:id="cbGrades" layoutX="234.0" layoutY="313.0" prefWidth="150.0" styleClass="choice-box" stylesheets="@InterfacciaTeacherFrontEnd.css" />
-                        <ComboBox fx:id="cbWeight" layoutX="235.0" layoutY="388.0" prefWidth="150.0" styleClass="choice-box" stylesheets="@InterfacciaTeacherFrontEnd.css" />
-                        <TextArea fx:id="taDescription" layoutX="29.0" layoutY="456.0" prefHeight="112.0" prefWidth="370.0" />
-                        <DatePicker fx:id="datePicker" layoutX="216.0" layoutY="127.0" prefHeight="33.0" prefWidth="189.0" />
-                  <Button fx:id="btnDelete1" layoutX="29.0" layoutY="594.0" mnemonicParsing="false" onAction="#getAverage" prefHeight="44.0" prefWidth="171.0" text="Calcualte average" />
-                  <ComboBox fx:id="cbStrategy" layoutX="234.0" layoutY="594.0" prefWidth="150.0" styleClass="choice-box" stylesheets="@InterfacciaTeacherFrontEnd.css" />
-                  <TextArea fx:id="taAverage" layoutX="29.0" layoutY="679.0" prefHeight="112.0" prefWidth="370.0" />
-                  <Label layoutX="249.0" layoutY="180.0" text="Select student">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="256.0" layoutY="273.0" text="Select value">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="253.0" layoutY="363.0" text="Select weight">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="250.0" layoutY="89.0" text="Select date">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
+                        <ComboBox fx:id="cbStudents" layoutX="180.0" layoutY="60.0" prefWidth="150.0" styleClass="choice-box" />
+                        <ComboBox fx:id="cbGrades" layoutX="180.0" layoutY="130.0" prefWidth="150.0" styleClass="choice-box" />
+                        <ComboBox fx:id="cbWeight" layoutX="180.0" layoutY="200.0" prefWidth="150.0" styleClass="choice-box" />
+                        <ComboBox fx:id="cbStrategy" layoutX="180.0" layoutY="328.0" prefWidth="150.0" styleClass="choice-box" />
+
+                        <TextArea fx:id="taDescription" layoutX="20.0" layoutY="382.0" prefHeight="100.0" prefWidth="310.0" />
+                        <TextArea fx:id="taAverage" layoutX="20.0" layoutY="490.0" prefHeight="100.0" prefWidth="310.0" />
+
+                        <DatePicker fx:id="datePicker" layoutX="180.0" layoutY="269.0" prefHeight="30.0" prefWidth="150.0" />
+
+                        <Button fx:id="btnDelete1" layoutX="20.0" layoutY="326.0" mnemonicParsing="false" onAction="#getAverage" prefHeight="44.0" prefWidth="150.0" text="Calculate Average" />
+
+                        <Label layoutX="185.0" layoutY="40.0" text="Select Student">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="185.0" layoutY="110.0" text="Select Grade">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="185.0" layoutY="180.0" text="Select Weight">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="185.0" layoutY="249.0" text="Select Date">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
                     </children>
                 </AnchorPane>
                 
-                <ScrollPane prefHeight="839.0" prefWidth="1091.0">
+                <!-- ScrollPane per la visualizzazione della tabella -->
+                <ScrollPane prefHeight="600.0" prefWidth="650.0">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="843.0" prefWidth="1096.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="650.0">
                             <children>
-                                <!-- TableView for displaying grades -->
-                                <TableView fx:id="gradeTable" layoutX="14.0" layoutY="6.0" onMouseClicked="#itemSelected" prefHeight="819.0" prefWidth="1063.0" />
+                                <TableView fx:id="gradeTable" layoutX="20.0" layoutY="20.0" onMouseClicked="#itemSelected" prefHeight="560.0" prefWidth="610.0" />
                             </children>
                         </AnchorPane>
                     </content>

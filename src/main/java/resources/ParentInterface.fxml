@@ -4,19 +4,21 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InterfaceParentManager">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InterfaceParentManager">
    <children>
-      <Button fx:id="gradesButton" layoutX="31.0" layoutY="143.0" mnemonicParsing="false" onAction="#switchToGradesScene" prefHeight="50.0" prefWidth="256.0" text="Grades" />
-      <Button fx:id="homeworksLessonsButton" layoutX="31.0" layoutY="219.0" mnemonicParsing="false" onAction="#switchToHomeworksLessonsScene" prefHeight="50.0" prefWidth="256.0" text="Homeworks and Lessons" />
-      <Button fx:id="reportsButton" layoutX="31.0" layoutY="299.0" mnemonicParsing="false" onAction="#switchToReportsScene" prefHeight="50.0" prefWidth="256.0" text="Disciplinary Reports" />
-      <Button fx:id="absencesButton" layoutX="313.0" layoutY="299.0" mnemonicParsing="false" onAction="#switchToAbsencesScene" prefHeight="50.0" prefWidth="256.0" text="Absences" />
-      <Button fx:id="meetingsButton" layoutX="313.0" layoutY="219.0" mnemonicParsing="false" onAction="#switchToMeetingsScene" prefHeight="50.0" prefWidth="256.0" text="Meetings" />
-      <Label layoutX="196.0" layoutY="14.0" text="Parent:" />
-      <Label fx:id="nameParent" layoutX="278.0" layoutY="14.0" text="Name Parent" />
-      <Label layoutX="190.0" layoutY="43.0" text="Student:" />
-      <Label fx:id="nameStudent" layoutX="278.0" layoutY="43.0" text="Name student" />
-      <Label layoutX="200.0" layoutY="80.0" text="Class:" />
-      <Label fx:id="nameClass" layoutX="278.0" layoutY="80.0" text="Name class" />
-      <Button fx:id="averageButton" layoutX="313.0" layoutY="143.0" mnemonicParsing="false" onAction="#switchToAverageScene" prefHeight="50.0" prefWidth="256.0" text="Average" />
+      <Label layoutX="28.0" layoutY="27.0" style="-fx-font-size: 14px;" text="Parent:" />
+      <Label fx:id="nameParent" layoutX="98.0" layoutY="27.0" style="-fx-font-size: 14px;" text="Name Parent" />
+      <Label layoutX="28.0" layoutY="57.0" style="-fx-font-size: 14px;" text="Student:" />
+      <Label fx:id="nameStudent" layoutX="98.0" layoutY="57.0" style="-fx-font-size: 14px;" text="Name Student" />
+      <Label layoutX="28.0" layoutY="87.0" style="-fx-font-size: 14px;" text="Class:" />
+      <Label fx:id="nameClass" layoutX="98.0" layoutY="87.0" style="-fx-font-size: 14px;" text="Name Class" />
+
+      <Button fx:id="gradesButton" layoutX="175.0" layoutY="206.0" mnemonicParsing="false" onAction="#switchToGradesScene" prefHeight="50.0" prefWidth="300.0" style="-fx-font-size: 16px;" text="Grades" />
+      <Button fx:id="homeworksLessonsButton" layoutX="175.0" layoutY="286.0" mnemonicParsing="false" onAction="#switchToHomeworksLessonsScene" prefHeight="50.0" prefWidth="300.0" style="-fx-font-size: 16px;" text="Homeworks and Lessons" />
+      <Button fx:id="reportsButton" layoutX="175.0" layoutY="366.0" mnemonicParsing="false" onAction="#switchToReportsScene" prefHeight="50.0" prefWidth="300.0" style="-fx-font-size: 16px;" text="Disciplinary Reports" />
+
+      <Button fx:id="averageButton" layoutX="525.0" layoutY="206.0" mnemonicParsing="false" onAction="#switchToAverageScene" prefHeight="50.0" prefWidth="300.0" style="-fx-font-size: 16px;" text="Average" />
+      <Button fx:id="meetingsButton" layoutX="525.0" layoutY="286.0" mnemonicParsing="false" onAction="#switchToMeetingsScene" prefHeight="50.0" prefWidth="300.0" style="-fx-font-size: 16px;" text="Meetings" />
+      <Button fx:id="absencesButton" layoutX="525.0" layoutY="366.0" mnemonicParsing="false" onAction="#switchToAbsencesScene" prefHeight="50.0" prefWidth="300.0" style="-fx-font-size: 16px;" text="Absences" />
    </children>
 </AnchorPane>

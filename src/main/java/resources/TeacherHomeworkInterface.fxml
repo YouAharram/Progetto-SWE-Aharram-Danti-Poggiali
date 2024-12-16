@@ -7,56 +7,56 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1087.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherHomeworkManager">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherHomeworkManager">
    <children>
-      <Pane prefHeight="71.0" prefWidth="1087.0" style="-fx-background-color: black;">
-         <children>
-            <Label layoutX="7.0" layoutY="20.0" text="Homework" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="22.0" />
-               </font>
-            </Label>
-         </children></Pane>
-      <Button fx:id="btnLesson" layoutX="42.0" layoutY="174.0" mnemonicParsing="false" onAction="#showHomework" prefHeight="44.0" prefWidth="159.0" stylesheets="@InterfacciaTeacherFrontEnd.css" text="Show homework">
+      <!-- Bottoni -->
+      <Button fx:id="btnLesson" layoutX="42.0" layoutY="100.0" mnemonicParsing="false" onAction="#showHomework" prefHeight="44.0" prefWidth="159.0" stylesheets="@InterfacciaTeacherFrontEnd.css" text="Show homework">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <DatePicker fx:id="datePicker" layoutX="433.0" layoutY="143.0" prefHeight="33.0" prefWidth="183.0" />
-      <Button fx:id="btnAddLesson" layoutX="42.0" layoutY="238.0" mnemonicParsing="false" onAction="#addHomework" prefHeight="44.0" prefWidth="159.0" stylesheets="@InterfacciaTeacherFrontEnd.css" text="Add homework">
+      <Button fx:id="btnAddLesson" layoutX="42.0" layoutY="160.0" mnemonicParsing="false" onAction="#addHomework" prefHeight="44.0" prefWidth="159.0" stylesheets="@InterfacciaTeacherFrontEnd.css" text="Add homework">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="removeButton11" layoutX="42.0" layoutY="298.0" mnemonicParsing="false" onAction="#editHomework" prefHeight="44.0" prefWidth="159.0" stylesheets="@InterfacciaTeacherFrontEnd.css" text="Edit homework">
+      <Button fx:id="removeButton11" layoutX="42.0" layoutY="220.0" mnemonicParsing="false" onAction="#editHomework" prefHeight="44.0" prefWidth="159.0" stylesheets="@InterfacciaTeacherFrontEnd.css" text="Edit homework">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnDeleteLesson" layoutX="42.0" layoutY="355.0" mnemonicParsing="false" onAction="#deleteHomeWork" prefHeight="44.0" prefWidth="159.0" stylesheets="@InterfacciaTeacherFrontEnd.css" text="Delete homework">
+      <Button fx:id="btnDeleteLesson" layoutX="42.0" layoutY="280.0" mnemonicParsing="false" onAction="#deleteHomeWork" prefHeight="44.0" prefWidth="159.0" stylesheets="@InterfacciaTeacherFrontEnd.css" text="Delete homework">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnBack" layoutX="20.0" layoutY="99.0" mnemonicParsing="false" onAction="#backAtTeacherScene" prefHeight="40.0" prefWidth="103.0" stylesheets="@InterfacciaTeacherFrontEnd.css" text="Back">
+      <Button fx:id="btnBack" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#backAtTeacherScene" prefHeight="40.0" prefWidth="103.0" stylesheets="@InterfacciaTeacherFrontEnd.css" text="Back">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TextArea fx:id="taDescription" layoutX="296.0" layoutY="218.0" prefHeight="218.0" prefWidth="511.0" />
-      <TableView fx:id="homeworkTableView" layoutX="82.0" layoutY="489.0" onMouseClicked="#itemSelected" prefHeight="245.0" prefWidth="914.0">
+
+      <!-- DatePicker -->
+      <DatePicker fx:id="datePicker" layoutX="433.0" layoutY="80.0" prefHeight="33.0" prefWidth="183.0" />
+
+      <!-- TextArea -->
+      <TextArea fx:id="taDescription" layoutX="296.0" layoutY="120.0" prefHeight="150.0" prefWidth="511.0" />
+
+      <!-- Tabella per i compiti -->
+      <TableView fx:id="homeworkTableView" layoutX="42.0" layoutY="380.0" onMouseClicked="#itemSelected" prefHeight="200.0" prefWidth="900.0">
          <columns>
-            <TableColumn fx:id="subjectHomeworkColumn" prefWidth="120.0" text="Subject" />
-            <TableColumn fx:id="teacherHomeworkColumn" prefWidth="164.0" text="Teacher" />
-            <TableColumn fx:id="descriptionHomeworkColumn" prefWidth="629.0" text="Description" />
+            <TableColumn fx:id="subjectHomeworkColumn" prefWidth="150.0" text="Subject" />
+            <TableColumn fx:id="teacherHomeworkColumn" prefWidth="200.0" text="Teacher" />
+            <TableColumn fx:id="descriptionHomeworkColumn" prefWidth="550.0" text="Description" />
          </columns>
       </TableView>
-      <Label layoutX="426.0" layoutY="99.0" text="Select Submission Date">
+
+      <!-- Etichetta per il DatePicker -->
+      <Label layoutX="426.0" layoutY="50.0" text="Select Submission Date">
          <font>
-            <Font size="18.0" />
+            <Font size="16.0" />
          </font>
       </Label>
    </children>

@@ -58,7 +58,7 @@ public class InterfaceLoginManager {
 			UserController controller = loginController.login(username, password);
 			
 			if(controller instanceof StudentController) {
-				StudentSceneManager.setController((StudentController) controller);
+				InterfaceStudentManager.setController((StudentController) controller);
 				root = FXMLLoader.load(getClass().getResource("../resources/StudentInterface.fxml"));
 				stage = (Stage) txtUsername.getScene().getWindow();
 			}

@@ -10,22 +10,31 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="839.0" prefWidth="1517.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InterfaceTeacherManager">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InterfaceTeacherManager">
    <children>
-      <HBox prefHeight="839.0" prefWidth="1517.0">
+      <HBox prefHeight="600.0" prefWidth="1000.0" spacing="10.0">
          <children>
-            <AnchorPane prefHeight="703.0" prefWidth="431.0" stylesheets="@InterfacciaTeacherFrontEnd.css">
+            <!-- Left AnchorPane containing teacher information and buttons -->
+            <AnchorPane prefHeight="500.0" prefWidth="400.0" stylesheets="@InterfacciaTeacherFrontEnd.css">
                <children>
                   <Text layoutX="14.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teacher:" wrappingWidth="91.0">
                      <font>
                         <Font name="Arial Bold" size="16.0" />
                      </font>
                   </Text>
+                  <!-- Teacher Name Label -->
                   <Label fx:id="lblTeacherName" layoutX="105.0" layoutY="18.0" text="Name">
                      <font>
                         <Font name="Arial Bold" size="16.0" />
                      </font>
                   </Label>
+                  <!-- Teacher Surname Label -->
+                  <Label fx:id="lblTeacherSurname" layoutX="220.0" layoutY="18.0" text="Surname">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  
                   <Label layoutX="54.0" layoutY="211.0" text="My teachings:">
                      <font>
                         <Font name="Arial Bold" size="16.0" />
@@ -38,25 +47,28 @@
                   </Label>
                   <ChoiceBox fx:id="cbTeachings" layoutX="25.0" layoutY="249.0" prefHeight="44.0" prefWidth="162.0" />
                   <ChoiceBox fx:id="cbClasses" layoutX="220.0" layoutY="249.0" prefHeight="44.0" prefWidth="171.0" />
+
+                  <!-- Buttons with adjusted sizes and positions -->
                   <Button fx:id="btnGrades" layoutX="25.0" layoutY="315.0" mnemonicParsing="false" onAction="#openGrades" prefHeight="44.0" prefWidth="162.0" text="Grades" />
                   <Button fx:id="btnShowStudents" layoutX="220.0" layoutY="315.0" mnemonicParsing="false" onAction="#showStudents" prefHeight="44.0" prefWidth="171.0" text="Show students" />
-                  <Button fx:id="btnAbsence" layoutX="229.0" layoutY="504.0" mnemonicParsing="false" onAction="#openAbsence" prefHeight="44.0" prefWidth="162.0" text="Absences" />
-                  <Button fx:id="btnLesson" layoutX="27.0" layoutY="420.0" mnemonicParsing="false" onAction="#openLesson" prefHeight="44.0" prefWidth="162.0" text="Lesson" />
-                  <Button layoutX="27.0" layoutY="504.0" mnemonicParsing="false" onAction="#openMeeting" prefHeight="44.0" prefWidth="162.0" text="Meeting" />
-                  <Button fx:id="btnHomework" layoutX="224.0" layoutY="420.0" mnemonicParsing="false" onAction="#openHomework" prefHeight="44.0" prefWidth="171.0" text="Homework" />
-                  <Label fx:id="lblTeacherSurname" layoutX="220.0" layoutY="18.0" prefHeight="22.0" prefWidth="118.0" text="Surname" />
-                  <Button layoutX="116.0" layoutY="576.0" mnemonicParsing="false" onAction="#openDisciplinaryReport" prefHeight="44.0" prefWidth="197.0" text="Disciplinary report" />
+                  <Button fx:id="btnAbsence" layoutX="25.0" layoutY="380.0" mnemonicParsing="false" onAction="#openAbsence" prefHeight="44.0" prefWidth="162.0" text="Absences" />
+                  <Button fx:id="btnLesson" layoutX="220.0" layoutY="380.0" mnemonicParsing="false" onAction="#openLesson" prefHeight="44.0" prefWidth="171.0" text="Lesson" />
+                  <Button fx:id="btnHomework" layoutX="25.0" layoutY="445.0" mnemonicParsing="false" onAction="#openHomework" prefHeight="44.0" prefWidth="162.0" text="Homework" />
+                  <Button layoutX="220.0" layoutY="445.0" mnemonicParsing="false" onAction="#openMeeting" prefHeight="44.0" prefWidth="171.0" text="Meeting" />
+                  <Button layoutX="116.0" layoutY="510.0" mnemonicParsing="false" onAction="#openDisciplinaryReport" prefHeight="44.0" prefWidth="197.0" text="Disciplinary report" />
                </children>
             </AnchorPane>
-            <ScrollPane prefHeight="839.0" prefWidth="1091.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="843.0" prefWidth="1096.0">
-                  <children>
-                    <!-- TableView for displaying grades -->
-                    <TableView fx:id="tvGradesStudents" layoutX="-1.0" layoutY="1.0" prefHeight="808.0" prefWidth="1066.0" />
-                  </children>
-                </AnchorPane>
-              </content>
+            
+            <!-- ScrollPane containing TableView for grades -->
+            <ScrollPane prefHeight="600.0" prefWidth="600.0">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="600.0">
+                     <children>
+                        <!-- TableView for displaying grades -->
+                        <TableView fx:id="tvGradesStudents" layoutX="0.0" layoutY="0.0" prefHeight="580.0" prefWidth="580.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
             </ScrollPane>
          </children>
       </HBox>

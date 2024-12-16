@@ -97,9 +97,9 @@ public class ParentAbsencesSceneController {
 	                    } else {
 	                        Absence absence = getTableView().getItems().get(getIndex());
 	                        if (absence.isJustified()) {
-	                            btn.setDisable(true); // Disabilita il pulsante se l'assenza è giustificata
+	                            btn.setDisable(true);
 	                        } else {
-	                            btn.setDisable(false); // Rende abilitato il pulsante se l'assenza non è giustificata
+	                            btn.setDisable(false);
 	                        }
 	                        setGraphic(btn);
 	                    }

@@ -65,7 +65,7 @@ public class TeacherHomeworkManager {
 		stage.show();
 	}
 
-	public void showHomework() throws HomeworkDaoException {
+	public void showHomework() {
 		if (datePicker.getValue() == null) {
 			return;
 		}
@@ -75,8 +75,8 @@ public class TeacherHomeworkManager {
 		try {
 			homeworkIterator = teacherController.getClassHomeworksSubmissionDate(selectedDate,
 					teachingAssignment.getSchoolClass());
-		} catch (DaoConnectionException | SchoolClassDaoException e) {
-			e.printStackTrace();
+		} catch (DaoConnectionException | SchoolClassDaoException | HomeworkDaoException e) {
+			HandlerError.showError(e.getMessage());
 		}
 
 		homeworkIterator.forEachRemaining(homeworks::add);

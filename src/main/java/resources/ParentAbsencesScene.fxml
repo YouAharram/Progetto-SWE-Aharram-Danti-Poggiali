@@ -6,16 +6,18 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ParentAbsencesSceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ParentAbsencesSceneController">
    <children>
-      <TableView fx:id="absenceTableView" layoutX="95.0" layoutY="120.0" prefHeight="200.0" prefWidth="426.0">
-        <columns>
-          <TableColumn fx:id="dateColumn" prefWidth="167.20001220703125" text="Date" />
-            <TableColumn fx:id="statusColumn" prefWidth="136.79998779296875" text="Status" />
-            <TableColumn fx:id="justifyColumn" prefWidth="123.20001220703125" text="Justify" />
-        </columns>
+      <TableView fx:id="absenceTableView" layoutX="200.0" layoutY="150.0" prefHeight="300.0" prefWidth="600.0">
+         <columns>
+            <TableColumn fx:id="dateColumn" prefWidth="200.0" text="Date" />
+            <TableColumn fx:id="statusColumn" prefWidth="200.0" text="Status" />
+            <TableColumn fx:id="justifyColumn" prefWidth="200.0" text="Justify" />
+         </columns>
       </TableView>
-      <Label layoutX="206.0" layoutY="32.0" prefHeight="41.0" prefWidth="203.0" text="Absences for student" />
-      <Button fx:id="back" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#switchToParentScene" prefHeight="30.0" prefWidth="90.0" text="Back" />
+
+      <Label layoutX="411.0" layoutY="60.0" prefHeight="50.0" prefWidth="300.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Absences for Student" />
+
+      <Button fx:id="back" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchToParentScene" prefHeight="40.0" prefWidth="100.0" style="-fx-font-size: 14px;" text="Back" />
    </children>
 </AnchorPane>

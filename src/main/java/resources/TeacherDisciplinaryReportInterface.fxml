@@ -7,24 +7,39 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="972.0" stylesheets="@InterfacciaTeacherFrontEnd.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherDisciplinaryReportManager">
    <children>
-      <TableView fx:id="tvDisciplinaryrReport" layoutX="123.0" layoutY="340.0" prefHeight="289.0" prefWidth="732.0" />
-      <ComboBox fx:id="cbStudents" layoutX="373.0" layoutY="182.0" prefWidth="150.0" styleClass="choice-box" stylesheets="@InterfacciaLoginFrontEnd.css" />
-      <Button layoutX="111.0" layoutY="130.0" mnemonicParsing="false" onAction="#getDisciplinaryReport" text="show Discipplinary report" />
-      <TextArea fx:id="taDesciption" layoutX="562.0" layoutY="155.0" prefHeight="98.0" prefWidth="351.0" />
+
+      <!-- Tabella per visualizzare i report disciplinari -->
+      <TableView fx:id="tvDisciplinaryrReport" layoutX="123.0" layoutY="350.0" prefHeight="200.0" prefWidth="732.0" />
+
+      <!-- ComboBox per selezionare lo studente -->
+      <ComboBox fx:id="cbStudents" layoutX="373.0" layoutY="155.0" prefWidth="150.0" styleClass="choice-box" stylesheets="@InterfacciaLoginFrontEnd.css" />
+
+      <!-- Pulsante per visualizzare il report disciplinare -->
+      <Button layoutX="111.0" layoutY="130.0" mnemonicParsing="false" onAction="#getDisciplinaryReport" prefWidth="200.0" text="Show Disciplinary Report" />
+
+      <!-- Area di testo per scrivere la descrizione -->
+      <TextArea fx:id="taDesciption" layoutX="561.0" layoutY="134.0" prefHeight="98.0" prefWidth="351.0" />
+
+      <!-- DatePicker per selezionare la data -->
       <DatePicker fx:id="datePicker" layoutX="633.0" layoutY="304.0" />
-      <Button layoutX="111.0" layoutY="205.0" mnemonicParsing="false" onAction="#addDisciplinaryReport" text="Assign disciplinary report" />
-      <Button layoutX="113.0" layoutY="279.0" mnemonicParsing="false" onAction="#deleteDisciplinaryReport" text="Delete disciplinary report" />
-      <Label layoutX="378.0" layoutY="140.0" text="Select student">
+
+      <!-- Pulsante per assegnare un report disciplinare -->
+      <Button layoutX="111.0" layoutY="205.0" mnemonicParsing="false" onAction="#addDisciplinaryReport" prefWidth="200.0" text="Assign Disciplinary Report" />
+
+      <!-- Pulsante per cancellare un report disciplinare -->
+      <Button layoutX="113.0" layoutY="279.0" mnemonicParsing="false" onAction="#deleteDisciplinaryReport" prefWidth="200.0" text="Delete Disciplinary Report" />
+
+      <!-- Etichette per guidare l'utente -->
+      <Label layoutX="377.0" layoutY="118.0" text="Select Student">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <Label layoutX="637.0" layoutY="102.0" text="Write description">
+      <Label layoutX="637.0" layoutY="102.0" text="Write Description">
          <font>
             <Font size="21.0" />
          </font>
@@ -34,20 +49,9 @@
             <Font size="21.0" />
          </font>
       </Label>
-      <Label layoutX="17.0" layoutY="30.0" text="Homework" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="22.0" />
-         </font>
-      </Label>
-      <Pane layoutY="-5.0" prefHeight="71.0" prefWidth="972.0" style="-fx-background-color: black;">
-         <children>
-            <Label layoutX="7.0" layoutY="20.0" text="Disciplinary Report" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="22.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <Button fx:id="btnBack" layoutX="17.0" layoutY="72.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+
+      <!-- Pulsante per tornare indietro -->
+      <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+
    </children>
 </AnchorPane>
