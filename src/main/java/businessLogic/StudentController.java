@@ -22,7 +22,7 @@ import exceptions.SchoolClassDaoException;
 import exceptions.StudentDaoException;
 import exceptions.TeachingAssignmentDaoException;
 
-public final class StudentController implements UserController{
+public final class StudentController {
 	private Student student;
 	private DaoFactory daoFactory;
 

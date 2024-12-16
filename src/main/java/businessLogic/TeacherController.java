@@ -34,7 +34,7 @@ import exceptions.StudentDaoException;
 import exceptions.TeacherDaoException;
 import exceptions.TeachingAssignmentDaoException;
 
-public final class TeacherController implements UserController{
+public final class TeacherController {
 	private static final int MINIMUM_GRADE = 1;
 	private static final int MAXIMUM_GRADE = 10;
 	private DaoFactory daoFactory;

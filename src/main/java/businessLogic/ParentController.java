@@ -32,7 +32,7 @@ import exceptions.StudentDaoException;
 import exceptions.TeacherDaoException;
 import exceptions.TeachingAssignmentDaoException;
 
-public final class ParentController implements UserController{
+public final class ParentController {
 	private StudentController studentController;
 	private Parent parent;
 	private DaoFactory daoFactory;
