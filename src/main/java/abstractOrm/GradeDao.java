@@ -1,4 +1,4 @@
-package orm;
+package abstractOrm;
 
 import java.time.LocalDate;
 

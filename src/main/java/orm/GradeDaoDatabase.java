@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import abstractOrm.GradeDao;
 import domainModel.Grade;
 import domainModel.Student;
 import domainModel.TeachingAssignment;

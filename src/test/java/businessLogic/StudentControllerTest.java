@@ -14,6 +14,7 @@ import org.junit.Test;
 import abstractOrm.AbsenceDao;
 import abstractOrm.DaoFactory;
 import abstractOrm.DisciplinaryReportDao;
+import abstractOrm.GradeDao;
 import abstractOrm.HomeworkDao;
 import abstractOrm.LessonDao;
 import abstractOrm.StudentDao;
@@ -35,7 +36,6 @@ import exceptions.LessonDaoException;
 import exceptions.SchoolClassDaoException;
 import exceptions.StudentDaoException;
 import exceptions.TeachingAssignmentDaoException;
-import orm.GradeDao;
 
 public class StudentControllerTest {
 

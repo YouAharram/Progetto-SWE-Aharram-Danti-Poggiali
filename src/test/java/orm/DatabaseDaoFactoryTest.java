@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import abstractOrm.AbsenceDao;
 import abstractOrm.DisciplinaryReportDao;
+import abstractOrm.GradeDao;
 import abstractOrm.HomeworkDao;
 import abstractOrm.LessonDao;
 import abstractOrm.MeetingAvailabilityDao;

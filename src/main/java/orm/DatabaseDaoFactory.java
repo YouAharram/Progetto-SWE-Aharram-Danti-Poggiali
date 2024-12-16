@@ -3,6 +3,7 @@ package orm;
 import abstractOrm.AbsenceDao;
 import abstractOrm.DaoFactory;
 import abstractOrm.DisciplinaryReportDao;
+import abstractOrm.GradeDao;
 import abstractOrm.HomeworkDao;
 import abstractOrm.LessonDao;
 import abstractOrm.MeetingAvailabilityDao;

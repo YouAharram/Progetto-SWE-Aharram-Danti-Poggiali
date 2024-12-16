@@ -1,6 +1,5 @@
 package abstractOrm;
 import exceptions.DaoConnectionException;
-import orm.GradeDao;
 
 public interface DaoFactory {
 	StudentDao createStudentDao() throws DaoConnectionException;

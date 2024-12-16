@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import abstractOrm.DaoFactory;
+import abstractOrm.GradeDao;
 import domainModel.ArithmeticGradeAverageStrategy;
 import domainModel.GeometricGradeAverageStrategy;
 import domainModel.Grade;
@@ -28,7 +29,6 @@ import exceptions.SchoolClassDaoException;
 import exceptions.StudentDaoException;
 import exceptions.TeacherDaoException;
 import exceptions.TeachingAssignmentDaoException;
-import orm.GradeDao;
 
 public class GradeAvarageStrategyTest {
 	private DaoFactory factoryMock;

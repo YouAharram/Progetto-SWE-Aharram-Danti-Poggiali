@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import abstractOrm.DaoFactory;
+import abstractOrm.GradeDao;
 import businessLogic.TeacherController.InvalidGradeValueException;
 import businessLogic.TeacherController.NegativeWeightException;
 import domainModel.Grade;
@@ -20,7 +21,6 @@ import exceptions.GradeDaoException;
 import exceptions.StudentDaoException;
 import exceptions.TeacherDaoException;
 import exceptions.TeachingAssignmentDaoException;
-import orm.GradeDao;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
