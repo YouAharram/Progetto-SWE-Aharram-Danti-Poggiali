@@ -1,6 +1,7 @@
 package businessLogic;
 
-import static org.easymock.EasyMock.createMock; 
+import static org.easymock.EasyMock.createMock;
+ 
 import static org.easymock.EasyMock.expect;
 
 import org.junit.Before;
@@ -19,7 +20,6 @@ import exceptions.ParentDaoException;
 import exceptions.StudentDaoException;
 import exceptions.TeacherDaoException;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.easymock.EasyMock.*;
 
@@ -33,6 +33,7 @@ public class LoginControllerTest {
 	private String username;
 	private String password;
 	private LoginController loginController;
+	private InterfaceCreator interfaceCreatorMock;
 
 	@Before
 	public void setup() throws DaoConnectionException {
@@ -40,11 +41,12 @@ public class LoginControllerTest {
 		studentDaoMock = createMock(StudentDao.class);
 		teacherDaoMock = createMock(TeacherDao.class);
 		parentDaoMock = createMock(ParentDao.class);
+		interfaceCreatorMock = createMock(InterfaceCreator.class);
 
 		loginHandler = new StudentUsernameValidationHandler(
 				new TeacherUsernameValidationHandler(new ParentUsernameValidationHandler(null)));
 
-		loginController = new LoginController(loginHandler, factoryMock);
+		loginController = new LoginController(loginHandler, factoryMock, interfaceCreatorMock);
 
 		expect(factoryMock.createStudentDao()).andReturn(studentDaoMock).anyTimes();
 		expect(factoryMock.creatTeacherDao()).andReturn(teacherDaoMock).anyTimes();
@@ -57,14 +59,19 @@ public class LoginControllerTest {
 	@Test
 	public void testStudentValidCredentials()
 			throws StudentDaoException, DaoConnectionException, IllegalCredentialsException {
-		expect(studentDaoMock.getStudentByUsernameAndPassword(username, password))
-				.andReturn(new Student(1, "Mario", "Rossi", null)).once();
+		Student student = new Student(1, "Mario", "Rossi", null);
+	    
+	    expect(studentDaoMock.getStudentByUsernameAndPassword(username, password))
+	            .andReturn(student).once();
+	    
+	    interfaceCreatorMock.createStudentInterface(anyObject(StudentController.class));
+	    expectLastCall().once();
 
-		replay(factoryMock, studentDaoMock);
+	    replay(factoryMock, studentDaoMock, interfaceCreatorMock);
 
-		assertThat(loginController.login(username, password)).isInstanceOf(StudentController.class);
+	    loginController.login(username, password);
 
-		verify(factoryMock, studentDaoMock);
+	    verify(factoryMock, studentDaoMock, interfaceCreatorMock);
 	}
 
 	@Test
@@ -72,12 +79,16 @@ public class LoginControllerTest {
 			throws StudentDaoException, DaoConnectionException, IllegalCredentialsException, TeacherDaoException {
 		expect(studentDaoMock.getStudentByUsernameAndPassword(username, password)).andThrow(new StudentDaoException(""))
 				.once();
+		Teacher teacher = new Teacher(1, "Mario", "Rossi");
 		expect(teacherDaoMock.getTeacherByUsernameAndPassword(username, password))
-				.andReturn(new Teacher(1, "Mario", "Rossi")).once();
+				.andReturn(teacher).once();
 
+		interfaceCreatorMock.createTeacherInterface(new TeacherController(teacher, factoryMock));
+		expectLastCall().once();
+		 
 		replay(factoryMock, studentDaoMock, teacherDaoMock);
 
-		assertThat(loginController.login(username, password)).isInstanceOf(TeacherController.class);
+		loginController.login(username, password);
 
 		verify(factoryMock, studentDaoMock, teacherDaoMock);
 	}
@@ -89,12 +100,17 @@ public class LoginControllerTest {
 				.once();
 		expect(teacherDaoMock.getTeacherByUsernameAndPassword(username, password)).andThrow(new TeacherDaoException(""))
 				.once();
+		Parent parent = new Parent(1, "Mario", "Rossi", null);
+		
 		expect(parentDaoMock.getParentByUsernameWithPassword(username, password))
-				.andReturn(new Parent(1, "Mario", "Rossi", null)).once();
-
+				.andReturn(parent).once();
+		
+		interfaceCreatorMock.createParentInterface(new ParentController(parent, factoryMock));
+		expectLastCall().once();
+		
 		replay(factoryMock, studentDaoMock, teacherDaoMock, parentDaoMock);
 
-		assertThat(loginController.login(username, password)).isInstanceOf(ParentController.class);
+		loginController.login(username, password);
 
 		verify(factoryMock, studentDaoMock, teacherDaoMock, parentDaoMock);
 	}
