@@ -20,7 +20,7 @@ public class GuiInterfaceCreator implements InterfaceCreator {
 	public void createStudentInterface(StudentController studentController) {
 		InterfaceStudentManager.setController(studentController);
 		try {
-			root = FXMLLoader.load(getClass().getResource("../resources/StudentInterface.fxml"));
+			root = FXMLLoader.load(getClass().getResource("../StudentInterface.fxml"));
 		} catch (IOException e) {
 			HandlerError.showError(e.getMessage());
 		}
@@ -31,7 +31,7 @@ public class GuiInterfaceCreator implements InterfaceCreator {
 	public void createTeacherInterface(TeacherController teacherController) {
 		InterfaceTeacherManager.setController(teacherController);
 		try {
-			root = FXMLLoader.load(getClass().getResource("../resources/TeacherInterface.fxml"));
+			root = FXMLLoader.load(getClass().getResource("../TeacherInterface.fxml"));
 		} catch (IOException e) {
 			HandlerError.showError(e.getMessage());
 		}
@@ -42,7 +42,7 @@ public class GuiInterfaceCreator implements InterfaceCreator {
 	public void createParentInterface(ParentController parentController) {
 		InterfaceParentManager.setController(parentController);
 		try {
-			root = FXMLLoader.load(getClass().getResource("../resources/ParentInterface.fxml"));
+			root = FXMLLoader.load(getClass().getResource("../ParentInterface.fxml"));
 		} catch (IOException e) {
 			HandlerError.showError(e.getMessage());
 		}

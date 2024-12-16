@@ -206,7 +206,7 @@ public class TeacherGradeManager {
 	}
 
 	public void goBack() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../resources/TeacherInterface.fxml"));
+		root = FXMLLoader.load(getClass().getResource("../TeacherInterface.fxml"));
 		stage = (Stage) btnBack.getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);

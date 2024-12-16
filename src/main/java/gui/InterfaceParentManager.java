@@ -72,7 +72,7 @@ public class InterfaceParentManager {
 	
 	
 	public void switchToMeetingsScene() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../resources/ParentMeetingScene.fxml"));
+		root = FXMLLoader.load(getClass().getResource("../ParentMeetingScene.fxml"));
 		stage = (Stage) meetingsButton.getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -80,7 +80,7 @@ public class InterfaceParentManager {
 	}
 	
 	public void switchToHomeworksLessonsScene() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../resources/ParentHomeworksLessonsScene.fxml"));
+		root = FXMLLoader.load(getClass().getResource("../ParentHomeworksLessonsScene.fxml"));
 		stage = (Stage) homeworksLessonsButton.getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -88,7 +88,7 @@ public class InterfaceParentManager {
 	}
 	
 	public void switchToAverageScene() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../resources/ParentAverageScene.fxml"));
+		root = FXMLLoader.load(getClass().getResource("../ParentAverageScene.fxml"));
 		stage = (Stage) averageButton.getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -96,7 +96,7 @@ public class InterfaceParentManager {
 	}
 	
 	public void switchToGradesScene() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../resources/ParentGradesScene.fxml"));
+		root = FXMLLoader.load(getClass().getResource("../ParentGradesScene.fxml"));
 		stage = (Stage) gradesButton.getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -104,7 +104,7 @@ public class InterfaceParentManager {
 	}
 	
 	public void switchToReportsScene() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../resources/ParentDisciplinaryReportsScene.fxml"));
+		root = FXMLLoader.load(getClass().getResource("../ParentDisciplinaryReportsScene.fxml"));
 		stage = (Stage) reportsButton.getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -112,7 +112,7 @@ public class InterfaceParentManager {
 	}
 	
 	public void switchToAbsencesScene() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../resources/ParentAbsencesScene.fxml"));
+		root = FXMLLoader.load(getClass().getResource("../ParentAbsencesScene.fxml"));
 		stage = (Stage) absencesButton.getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);

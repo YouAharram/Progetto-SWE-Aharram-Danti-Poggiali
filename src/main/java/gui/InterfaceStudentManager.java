@@ -59,7 +59,7 @@ public class InterfaceStudentManager {
 	}
 
 	public void switchToGradesScene() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../resources/StudentGradesScene.fxml"));
+		root = FXMLLoader.load(getClass().getResource("../StudentGradesScene.fxml"));
 		stage = (Stage) gradesButton.getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -67,22 +67,22 @@ public class InterfaceStudentManager {
 	}
 
 	public void switchToHomeworkAndLessonScene() throws IOException {
-		String fileFxml = "../resources/StudentHomeworkAndLessonScene.fxml";
+		String fileFxml = "../StudentHomeworkAndLessonScene.fxml";
 		switchScene(fileFxml);
 	}
 
 	public void switchToDisciplinaryReportScene() throws IOException {
-		String fileFxml = "../resources/StudentDisciplinaryReportScene.fxml";
+		String fileFxml = "../StudentDisciplinaryReportScene.fxml";
 		switchScene(fileFxml);
 	}
 	
 	public void switchToAbsenceScene() throws IOException {
-		String fileFxml = "../resources/StudentAbsenceScene.fxml";
+		String fileFxml = "../StudentAbsenceScene.fxml";
 		switchScene(fileFxml);
 	}
 	
 	public void switchToAvarageGradeScene() throws IOException {
-		String fileFxml ="../resources/StudentAvarageGradeScene.fxml";
+		String fileFxml ="../StudentAvarageGradeScene.fxml";
 		switchScene(fileFxml);
 	}
 	

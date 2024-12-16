@@ -159,7 +159,7 @@ public class InterfaceTeacherManager {
 
 	@FXML
 	public void openLesson() throws IOException {
-		openWindow("../resources/TeacherLessonScene.fxml", "Lesson");
+		openWindow("../TeacherLessonScene.fxml", "Lesson");
 		TeacherLessonManager
 				.setTeachingsAssignement(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
 						cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
@@ -167,7 +167,7 @@ public class InterfaceTeacherManager {
 
 	@FXML
 	public void openHomework() throws IOException {
-		openWindow("../resources/TeacherHomeworkScene.fxml", "Homework");
+		openWindow("../TeacherHomeworkScene.fxml", "Homework");
 		TeacherHomeworkManager
 				.setTeachingsAssignement(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
 						cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
@@ -175,7 +175,7 @@ public class InterfaceTeacherManager {
 
 	@FXML
 	public void openMeeting() throws IOException {
-		openWindow("../resources/TeacherMeetingScene.fxml", "Meeting");
+		openWindow("../TeacherMeetingScene.fxml", "Meeting");
 	}
 
 	@FXML
@@ -183,7 +183,7 @@ public class InterfaceTeacherManager {
 		TeacherGradeManager
 				.setTeachingAssignment(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
 						cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
-		openWindow("../resources/TeacherGradesScene.fxml", "Grades");
+		openWindow("../TeacherGradesScene.fxml", "Grades");
 	}
 
 	@FXML
@@ -191,7 +191,7 @@ public class InterfaceTeacherManager {
 		if (cbClasses.getValue() != null && !cbClasses.getValue().isEmpty()) {
 			schoolClass = new SchoolClass(cbClasses.getValue());
 			TeacherAbsenceSceneManager.setSchoolClass(schoolClass);
-			openWindow("../resources/TeacherAbsenceScene.fxml", "Absences");
+			openWindow("../TeacherAbsenceScene.fxml", "Absences");
 		} else HandlerError.showError("Select Class");
 
 	}
@@ -201,7 +201,7 @@ public class InterfaceTeacherManager {
 		TeacherDisciplinaryReportManager
 				.setTeachingAssignment(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
 						cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
-		openWindow("../resources/TeacherDisciplinaryReportScene.fxml", "Disciplinary report");
+		openWindow("../TeacherDisciplinaryReportScene.fxml", "Disciplinary report");
 	}
 
 	private void openWindow(String path, String nameWindow) throws IOException {

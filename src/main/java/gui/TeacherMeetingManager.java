@@ -70,7 +70,7 @@ public class TeacherMeetingManager {
 
     @FXML
     public void switchToPreviousScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/TeacherInterface.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../TeacherInterface.fxml"));
         root = loader.load();
         stage = (Stage) btnBack.getScene().getWindow();
         scene = new Scene(root);

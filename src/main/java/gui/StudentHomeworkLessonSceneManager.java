@@ -79,7 +79,7 @@ public class StudentHomeworkLessonSceneManager {
     private static StudentController studentController;
 
     public void switchToStudentScene() throws IOException {
-        root = FXMLLoader.load(getClass().getResource("../resources/StudentInterface.fxml"));
+        root = FXMLLoader.load(getClass().getResource("../StudentInterface.fxml"));
         stage = (Stage) back.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

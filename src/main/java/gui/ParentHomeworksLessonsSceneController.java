@@ -79,7 +79,7 @@ public class ParentHomeworksLessonsSceneController {
 	private static ParentController parentController;
 
 	public void switchToParentScene() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../resources/ParentInterface.fxml"));
+		root = FXMLLoader.load(getClass().getResource("../ParentInterface.fxml"));
 		stage = (Stage) back.getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
