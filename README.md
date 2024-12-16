@@ -1,4 +1,3 @@
-Ecco un formato per un README in GitHub che puoi usare per il tuo progetto:
 Registro Elettronico
 
 Un'applicazione moderna per la gestione delle informazioni scolastiche, pensata per insegnanti, studenti e genitori.
