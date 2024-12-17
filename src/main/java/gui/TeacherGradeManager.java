@@ -8,6 +8,7 @@ import java.util.List;
 
 import businessLogic.TeacherController;
 import businessLogic.TeacherController.InvalidGradeValueException;
+import businessLogic.TeacherController.NegativeWeightException;
 import domainModel.ArithmeticGradeAverageStrategy;
 import domainModel.GeometricGradeAverageStrategy;
 import domainModel.Grade;
@@ -76,6 +77,12 @@ public class TeacherGradeManager {
 	@FXML
 	private TableView<ObservableList<String>> gradeTable;
 	private int numberOfStudents = 0;
+	private TableColumn<ObservableList<String>, String> idGradeColumn;
+	private TableColumn<ObservableList<String>, String> studentColumn;
+	private TableColumn<ObservableList<String>, String> valueColumn;
+	private TableColumn<ObservableList<String>, String> weightColumn;
+	private TableColumn<ObservableList<String>, String> dateColumn;
+	private TableColumn<ObservableList<String>, String> descriptionColumn;
 
 	@FXML
 	public void initialize() {
@@ -100,6 +107,10 @@ public class TeacherGradeManager {
 		} catch (StudentDaoException | DaoConnectionException | SchoolClassDaoException e) {
 			HandlerError.showError(e.getMessage());
 		}
+		
+		
+		
+		
 		while (students.hasNext()) {
 			Student student = students.next();
 			Iterator<Grade> gradesPerStudent = null;
@@ -112,6 +123,10 @@ public class TeacherGradeManager {
 			}
 			gradesPerStudent.forEachRemaining(gradesList::add);
 		}
+		
+		
+		
+		
 
 		double grade = 1;
 		
@@ -184,14 +199,15 @@ public class TeacherGradeManager {
 		}
 	}
 
-	public void addGrade() {
+	public void addGrade() throws NegativeWeightException {
 		Double gradeValue = cbGrades.getValue();
 		String description = taDescription.getText();
 		Student student = cbStudents.getValue();
 		LocalDate date = datePicker.getValue();
 
 		try {
-			teacherController.assignGradeToStudentInDate(gradeValue, description, teachingAssignment, student, date);
+			teacherController.assignGradeToStudentInDateWithWeight(gradeValue, cbWeight.getValue(),description,teachingAssignment, student, date);
+			handleChoiceBoxChange(cbStudents.getValue());
 		} catch (GradeDaoException | InvalidGradeValueException | DaoConnectionException | StudentDaoException e) {
 			HandlerError.showError(e.getMessage());
 		}
@@ -200,6 +216,7 @@ public class TeacherGradeManager {
 	public void deleteGrade() {
 		try {
 			teacherController.deleteGrade(gradeSelected);
+			handleChoiceBoxChange(cbStudents.getValue());
 		} catch (GradeDaoException | DaoConnectionException e) {
 			HandlerError.showError(e.getMessage());
 		}
@@ -216,6 +233,7 @@ public class TeacherGradeManager {
 		try {
 			teacherController.editGradeValue(gradeSelected, cbGrades.getValue());
 			teacherController.editGradeWeight(gradeSelected, cbWeight.getValue());
+			handleChoiceBoxChange(cbStudents.getValue());
 		} catch (GradeDaoException | DaoConnectionException e) {
 			HandlerError.showError(e.getMessage());
 		}
@@ -241,24 +259,34 @@ public class TeacherGradeManager {
 	}
 	
 	public void itemSelected() {
-		gradeSelected = gradesList.get(gradeTable.getSelectionModel().getSelectedIndex());
-		taDescription.setText(gradeSelected.getDescription());
-		cbWeight.setValue(gradeSelected.getWeight());
-		cbGrades.setValue(gradeSelected.getValue());
+			int id = Integer.valueOf(idGradeColumn.getCellData(gradeTable.getSelectionModel().getSelectedIndex()));
+			double value  = Double.valueOf(valueColumn.getCellData(gradeTable.getSelectionModel().getSelectedIndex()));
+			int weight = Integer.valueOf(weightColumn.getCellData(gradeTable.getSelectionModel().getSelectedIndex()));
+			String description = descriptionColumn.getCellData(gradeTable.getSelectionModel().getSelectedIndex());
+			LocalDate date = LocalDate.parse(dateColumn.getCellData(gradeTable.getSelectionModel().getSelectedIndex()));
+			gradeSelected = new Grade(id, cbStudents.getValue(), teachingAssignment, date, value, weight, description);
+			taDescription.setText(description);
+			cbWeight.setValue(weight);
+			cbGrades.setValue(value);
+			datePicker.setValue(date);
 		}
 
 	@SuppressWarnings("unchecked")
 	private void handleChoiceBoxChange(Student newValue) {
+		
+		
 		gradeTable.getItems().clear();
 		gradeTable.getColumns().clear();
 
-		TableColumn<ObservableList<String>, String> studentColumn = new TableColumn<>("Student");
-		TableColumn<ObservableList<String>, String> valueColumn = new TableColumn<>("Value");
-		TableColumn<ObservableList<String>, String> weightColumn = new TableColumn<>("weght");
-		TableColumn<ObservableList<String>, String> dateColumn = new TableColumn<>("date");
-		TableColumn<ObservableList<String>, String> descriptionColumn = new TableColumn<>("description:");
+		studentColumn = new TableColumn<>("Student");
+		valueColumn = new TableColumn<>("Value");
+		weightColumn = new TableColumn<>("weght");
+		dateColumn = new TableColumn<>("date");
+		descriptionColumn = new TableColumn<>("description:");
+		idGradeColumn = new TableColumn<>("idGrade:");
 
-		gradeTable.getColumns().addAll(studentColumn, valueColumn, weightColumn, dateColumn, descriptionColumn);
+		idGradeColumn.setVisible(false);
+		gradeTable.getColumns().addAll(studentColumn, valueColumn, weightColumn, dateColumn, descriptionColumn,idGradeColumn);
 		
 		Iterator<Grade> grades = null;
 		try {
@@ -271,13 +299,13 @@ public class TeacherGradeManager {
 
 		while (grades.hasNext()) {
 		    Grade grade = grades.next();
-
 		    ObservableList<String> row = FXCollections.observableArrayList();
 		    row.add(grade.getStudent().getName());
 		    row.add(String.valueOf(grade.getValue()));
 		    row.add(String.valueOf(grade.getWeight()));
 		    row.add(grade.getDate().toString());
 		    row.add(grade.getDescription());
+		    row.add(String.valueOf(grade.getId()));
 
 		    data.add(row);
 		}
@@ -289,6 +317,8 @@ public class TeacherGradeManager {
 		weightColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(2)));
 		dateColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(3)));
 		descriptionColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(4)));
+		idGradeColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(5)));
+		
 
 		
 
@@ -325,7 +355,6 @@ public class TeacherGradeManager {
 				row.add("");
 			}
 			// Aggiungi un valore per la colonna nascosta
-			row.add("Hidden Value"); // Può essere lasciato vuoto o modificato in base alla logica
 			rows.add(row);
 		}
 		gradeTable.setItems(rows);

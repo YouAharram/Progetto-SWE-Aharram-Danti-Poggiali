@@ -99,10 +99,11 @@ public class TeacherLessonManager {
 
 	@FXML
 	public void showLesson() {
+		lessonsTableView.getItems().clear();
 		if (datePicker.getValue() == null) {
 			return;
 		}
-
+		
 		LocalDate selectedDate = datePicker.getValue();
 		Iterator<Lesson> lessonsIterator = null;
 		try {
@@ -146,6 +147,11 @@ public class TeacherLessonManager {
 		teacherController.deleteLesson(lessons.get(lessonsTableView.getSelectionModel().getSelectedIndex()));
 	}
 
+	public void itemSelected() {
+		Lesson lesson = lessons.get(lessonsTableView.getSelectionModel().getSelectedIndex());
+		taDescription.setText(lesson.getDescription());
+		datePicker.setValue(lesson.getDate());
+	}
 	public void editLesson() throws NumberFormatException, LessonDaoException {
 		try {
 			teacherController.editLessonDateTime(lessons.get(lessonsTableView.getSelectionModel().getSelectedIndex()),
@@ -166,6 +172,14 @@ public class TeacherLessonManager {
 		} catch (IllegalLessonAccessException e) {
 			HandlerError.showError("Not your lesson");
 		}
+	}
+	
+	public void switchToTeacherScene() throws IOException {
+		root = FXMLLoader.load(getClass().getResource("../TeacherInterface.fxml"));
+		stage = (Stage) btnBack.getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 
 	protected static void setTeachingsAssignement(TeachingAssignment teachingAssignment) {
