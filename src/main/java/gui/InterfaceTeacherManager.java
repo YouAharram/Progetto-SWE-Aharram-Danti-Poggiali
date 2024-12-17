@@ -100,24 +100,30 @@ public class InterfaceTeacherManager {
 
 		Iterator<Student> students = null;
 		try {
-			students = teacherController.getStudentsByClass(new SchoolClass(cbClasses.getValue()));
+			if (cbClasses.getValue() != null) {
+				students = teacherController.getStudentsByClass(new SchoolClass(cbClasses.getValue()));
+				ObservableList<ObservableList<String>> newRows = FXCollections.observableArrayList();
+				int i = 1;
+
+				while (students.hasNext()) {
+					Student student = students.next();
+					ObservableList<String> row = FXCollections.observableArrayList();
+					row.add(String.valueOf(i));
+					row.add(student.getName());
+					row.add(student.getSurname());
+					newRows.add(row);
+					i++;
+				}
+				tvGradesStudents.setItems(newRows);
+				
+			}
+			else {
+				HandlerError.showError("Please select teaching and class");
+			}
 		} catch (StudentDaoException | DaoConnectionException | SchoolClassDaoException e) {
 			HandlerError.showError(e.getMessage());
 		}
-		ObservableList<ObservableList<String>> newRows = FXCollections.observableArrayList();
-		int i = 1;
 
-		while (students.hasNext()) {
-			Student student = students.next();
-			ObservableList<String> row = FXCollections.observableArrayList();
-			row.add(String.valueOf(i));
-			row.add(student.getName());
-			row.add(student.getSurname());
-			newRows.add(row);
-			i++;
-		}
-
-		tvGradesStudents.setItems(newRows);
 	}
 
 	private void handleChoiceBoxChange(String newValue) {
@@ -159,18 +165,30 @@ public class InterfaceTeacherManager {
 
 	@FXML
 	public void openLesson() throws IOException {
-		openWindow("../TeacherLessonScene.fxml", "Lesson");
-		TeacherLessonManager
-				.setTeachingsAssignement(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
-						cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
+		if (cbClasses.getValue() != null) {
+			openWindow("../TeacherLessonScene.fxml", "Lesson");
+			TeacherLessonManager
+					.setTeachingsAssignement(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
+							cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));	
+		}
+		else {
+			HandlerError.showError("Please select teaching and class");
+		}
+
 	}
 
 	@FXML
 	public void openHomework() throws IOException {
-		openWindow("../TeacherHomeworkScene.fxml", "Homework");
-		TeacherHomeworkManager
-				.setTeachingsAssignement(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
-						cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
+		if (cbClasses.getValue() != null) {
+			openWindow("../TeacherHomeworkScene.fxml", "Homework");
+			TeacherHomeworkManager
+					.setTeachingsAssignement(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
+							cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
+			
+		}
+		else {
+			HandlerError.showError("Please select teaching and class");			
+		}
 	}
 
 	@FXML
@@ -180,10 +198,15 @@ public class InterfaceTeacherManager {
 
 	@FXML
 	public void openGrades() throws IOException {
-		TeacherGradeManager
-				.setTeachingAssignment(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
-						cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
-		openWindow("../TeacherGradesScene.fxml", "Grades");
+		if (cbClasses.getValue() != null) {
+			TeacherGradeManager.setTeachingAssignment(new TeachingAssignment(
+					cbTeachings.getSelectionModel().getSelectedIndex() + 1, cbTeachings.getValue(),
+					teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
+			openWindow("../TeacherGradesScene.fxml", "Grades");
+		} else {
+			HandlerError.showError("Please select teaching and class");
+		}
+
 	}
 
 	@FXML
@@ -192,16 +215,24 @@ public class InterfaceTeacherManager {
 			schoolClass = new SchoolClass(cbClasses.getValue());
 			TeacherAbsenceSceneManager.setSchoolClass(schoolClass);
 			openWindow("../TeacherAbsenceScene.fxml", "Absences");
-		} else HandlerError.showError("Select Class");
+		} 
+		else {
+			HandlerError.showError("Please select teaching and class");
+		}
 
 	}
 
 	@FXML
 	public void openDisciplinaryReport() throws IOException {
-		TeacherDisciplinaryReportManager
-				.setTeachingAssignment(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
-						cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
-		openWindow("../TeacherDisciplinaryReportScene.fxml", "Disciplinary report");
+		if (cbClasses.getValue() != null) {
+			TeacherDisciplinaryReportManager.setTeachingAssignment(new TeachingAssignment(
+					cbTeachings.getSelectionModel().getSelectedIndex() + 1, cbTeachings.getValue(),
+					teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
+			openWindow("../TeacherDisciplinaryReportScene.fxml", "Disciplinary report");
+
+		} else {
+			HandlerError.showError("Please select teaching and class");
+		}
 	}
 
 	private void openWindow(String path, String nameWindow) throws IOException {
