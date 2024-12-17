@@ -1,6 +1,5 @@
 package gui;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -36,16 +35,16 @@ public class TeacherDisciplinaryReportManager {
 
 	private static TeacherController teacherController;
 	private static TeachingAssignment teachingAssignment;
-	
+
 	@FXML
 	private TableView<ObservableList<String>> tvDisciplinaryrReport;
-	
+
 	@FXML
 	private TextArea taDesciption;
-	
+
 	@FXML
 	private DatePicker datePicker;
-	
+
 	@FXML
 	private ComboBox<Student> cbStudents;
 	private TableColumn<ObservableList<String>, String> studentColumn;
@@ -54,11 +53,11 @@ public class TeacherDisciplinaryReportManager {
 	private TableColumn<ObservableList<String>, String> dateColumn;
 	@FXML
 	private Button btnBack;
-	
+
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	
+
 	@FXML
 	public void initialize() {
 		Iterator<Student> students = null;
@@ -70,20 +69,20 @@ public class TeacherDisciplinaryReportManager {
 
 		List<Student> listStudents = new ArrayList<Student>();
 		students.forEachRemaining(listStudents::add);
-				cbStudents.setItems(FXCollections.observableArrayList(listStudents));
-				cbStudents.setConverter(new StringConverter<Student>() {
-					@Override
-					public String toString(Student student) {
-						return student != null ? student.getName() + " " + student.getSurname() : "";
-					}
+		cbStudents.setItems(FXCollections.observableArrayList(listStudents));
+		cbStudents.setConverter(new StringConverter<Student>() {
+			@Override
+			public String toString(Student student) {
+				return student != null ? student.getName() + " " + student.getSurname() : "";
+			}
 
-					@Override
-					public Student fromString(String string) {
-						return null;
-					}
-				});
+			@Override
+			public Student fromString(String string) {
+				return null;
+			}
+		});
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void getDisciplinaryReport() {
 		tvDisciplinaryrReport.getItems().clear();
@@ -94,78 +93,79 @@ public class TeacherDisciplinaryReportManager {
 		dateColumn = new TableColumn<>("date");
 
 		tvDisciplinaryrReport.getColumns().addAll(studentColumn, teacherColumn, descriptionColumn, dateColumn);
-		
-		
+
 		Iterator<DisciplinaryReport> disciplinaryReports = null;
 		try {
 			disciplinaryReports = teacherController.getStudentDisciplinaryReports(cbStudents.getValue());
+			ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
+
+			while (disciplinaryReports.hasNext()) {
+				DisciplinaryReport disciplinaryReport = disciplinaryReports.next();
+
+				ObservableList<String> row = FXCollections.observableArrayList();
+				row.add(disciplinaryReport.getStudent().getName() + " " + disciplinaryReport.getStudent().getSurname());
+				row.add(disciplinaryReport.getTeacher().getName() + "  "
+						+ disciplinaryReport.getTeacher().getSurname());
+				row.add(disciplinaryReport.getDescription());
+				row.add(String.valueOf(disciplinaryReport.getDate()));
+				data.add(row);
+			}
+
+			tvDisciplinaryrReport.setItems(data);
+
+			studentColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(0)));
+			teacherColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(1)));
+			descriptionColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(2)));
+			dateColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(3)));
 		} catch (DisciplinaryReportException | DaoConnectionException | StudentDaoException e) {
 			HandlerError.showError(e.getMessage());
-		}
-		
-		ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
-
-		while (disciplinaryReports.hasNext()) {
-		    DisciplinaryReport disciplinaryReport = disciplinaryReports.next();
-
-		    ObservableList<String> row = FXCollections.observableArrayList();
-		    row.add(disciplinaryReport.getStudent().getName() + " " + disciplinaryReport.getStudent().getSurname());
-		    row.add(disciplinaryReport.getTeacher().getName() + "  " + disciplinaryReport.getTeacher().getSurname());
-		    row.add(disciplinaryReport.getDescription());
-		    row.add(String.valueOf(disciplinaryReport.getDate()));
-		    data.add(row);
+		} catch (NullPointerException e) {
+			HandlerError.showError("select a student");
 		}
 
-		tvDisciplinaryrReport.setItems(data);
-
-		studentColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(0)));
-		teacherColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(1)));
-		descriptionColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(2)));
-		dateColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(3)));	
 	}
-	
+
 	public void addDisciplinaryReport() {
 		try {
-			if (cbStudents.getValue() != null &&  datePicker.getValue() != null && taDesciption.getText() != null) {
-				teacherController.assignDisciplinaryReportToStudentInDate(cbStudents.getValue(), taDesciption.getText(), datePicker.getValue());
-			}
-			else {
+			if (cbStudents.getValue() != null && datePicker.getValue() != null && taDesciption.getText() != null) {
+				teacherController.assignDisciplinaryReportToStudentInDate(cbStudents.getValue(), taDesciption.getText(),
+						datePicker.getValue());
+			} else {
 				HandlerError.showError("Please insert all values");
 			}
 		} catch (DisciplinaryReportException | DaoConnectionException | StudentDaoException | TeacherDaoException e) {
 			HandlerError.showError(e.getMessage());
 		}
 	}
-	
+
 	public void deleteDisciplinaryReport() {
 		Iterator<DisciplinaryReport> disciplinaryReports = null;
+		List<DisciplinaryReport> disciplinaryRepostsList = new ArrayList<>();
 		try {
 			disciplinaryReports = teacherController.getStudentDisciplinaryReports(cbStudents.getValue());
-		} catch (DisciplinaryReportException | DaoConnectionException | StudentDaoException e) {
+			disciplinaryReports.forEachRemaining(disciplinaryRepostsList::add);
+			teacherController.deleteDisciplinaryReport(
+					disciplinaryRepostsList.get(tvDisciplinaryrReport.getSelectionModel().getSelectedIndex()));
+		} catch (DisciplinaryReportException | DaoConnectionException | StudentDaoException | IllegalReportAccessException e) {
 			HandlerError.showError(e.getMessage());
+		}catch (NullPointerException e) {
+			HandlerError.showError("Select a disciplinary report");
 		}
-		List<DisciplinaryReport> disciplinaryRepostsList = new ArrayList<>();
-		disciplinaryReports.forEachRemaining(disciplinaryRepostsList::add);
-		
-		try {
-			teacherController.deleteDisciplinaryReport(disciplinaryRepostsList.get(tvDisciplinaryrReport.getSelectionModel().getSelectedIndex()));
-		} catch (IllegalReportAccessException | DisciplinaryReportException | DaoConnectionException e) {
-			HandlerError.showError(e.getMessage());
-		}
+
 	}
-	
-	
+
 	public void goBack() throws IOException {
 		root = FXMLLoader.load(getClass().getResource("../TeacherInterface.fxml"));
 		stage = (Stage) btnBack.getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		stage.show();	}
-	
+		stage.show();
+	}
+
 	protected static void setController(TeacherController teacherController) {
 		TeacherDisciplinaryReportManager.teacherController = teacherController;
 	}
-	
+
 	protected static void setTeachingAssignment(TeachingAssignment teachingAssignment) {
 		TeacherDisciplinaryReportManager.teachingAssignment = teachingAssignment;
 	}

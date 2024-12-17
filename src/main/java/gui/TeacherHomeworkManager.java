@@ -98,11 +98,11 @@ public class TeacherHomeworkManager {
 			try {
 				teacherController.assignNewHomework(teachingAssignment, datePicker.getValue(), taDescription.getText(),
 						datePicker.getValue());
-			} catch (HomeworkDaoException e) {
+			} catch (HomeworkDaoException | TeachingAssignmentDaoException | DaoConnectionException  e) {
 				HandlerError.showError("check arguments");
 			}
-		} catch (TeachingAssignmentDaoException | DaoConnectionException e) {
-			HandlerError.showError("check connection");
+		} catch (NullPointerException e) {
+			HandlerError.showError("Add all parameters");
 		}
 	}
 
@@ -115,11 +115,14 @@ public class TeacherHomeworkManager {
 		} catch (HomeworkDaoException | DaoConnectionException e) {
 			HandlerError.showError("check connection");
 		}
+		catch(IndexOutOfBoundsException e) {
+			HandlerError.showError("Select a homework");
+		}
 	}
 
 	public void editHomework() {
-		Homework homework = homeworks.get(homeworkTableView.getSelectionModel().getSelectedIndex());
 		try {
+			Homework homework = homeworks.get(homeworkTableView.getSelectionModel().getSelectedIndex());
 			teacherController.editHomeworkDescription(homework, taDescription.getText());
 			teacherController.editHomeworkSubmissionDate(
 					homeworks.get(homeworkTableView.getSelectionModel().getSelectedIndex()), datePicker.getValue());
@@ -128,6 +131,8 @@ public class TeacherHomeworkManager {
 			HandlerError.showError("Not your homework");
 		} catch (HomeworkDaoException | DaoConnectionException e) {
 			HandlerError.showError("check connection");
+		} catch(IndexOutOfBoundsException  e) {
+			HandlerError.showError("Select a homework");
 		}
 	}
 

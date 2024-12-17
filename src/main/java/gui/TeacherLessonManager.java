@@ -103,7 +103,7 @@ public class TeacherLessonManager {
 		if (datePicker.getValue() == null) {
 			return;
 		}
-		
+
 		LocalDate selectedDate = datePicker.getValue();
 		Iterator<Lesson> lessonsIterator = null;
 		try {
@@ -139,41 +139,63 @@ public class TeacherLessonManager {
 					LocalTime.of(Integer.valueOf(cbSHours.getValue()), Integer.valueOf(cbSMinutes.getValue())),
 					LocalTime.of(Integer.valueOf(cbFHours.getValue()), Integer.valueOf(cbFMinutes.getValue())));
 		} catch (NumberFormatException | LessonDaoException | DaoConnectionException e) {
-			HandlerError.showError(e.getMessage());
+			HandlerError.showError("add all parameters");
+		} catch (IndexOutOfBoundsException e) {
+			HandlerError.showError("Select a homework");
 		}
 	}
 
-	public void deleteLesson() throws LessonDaoException, IllegalLessonAccessException, DaoConnectionException {
-		teacherController.deleteLesson(lessons.get(lessonsTableView.getSelectionModel().getSelectedIndex()));
+	public void deleteLesson() {	
+		try {
+			teacherController.deleteLesson(lessons.get(lessonsTableView.getSelectionModel().getSelectedIndex()));
+		} catch (IllegalLessonAccessException e) {
+			HandlerError.showError("Not your lesson");
+		} catch (IndexOutOfBoundsException e) {
+			HandlerError.showError("Select a homework");
+		} catch (DaoConnectionException | LessonDaoException e) {
+			HandlerError.showError("check connection");
+		}
 	}
 
 	public void itemSelected() {
-		Lesson lesson = lessons.get(lessonsTableView.getSelectionModel().getSelectedIndex());
-		taDescription.setText(lesson.getDescription());
-		datePicker.setValue(lesson.getDate());
+		try {
+			Lesson lesson = lessons.get(lessonsTableView.getSelectionModel().getSelectedIndex());
+			taDescription.setText(lesson.getDescription());
+			datePicker.setValue(lesson.getDate());
+		} catch (IndexOutOfBoundsException e) {
+			HandlerError.showError("select a lesson");
+		}
+
 	}
+
 	public void editLesson() throws NumberFormatException, LessonDaoException {
 		try {
 			teacherController.editLessonDateTime(lessons.get(lessonsTableView.getSelectionModel().getSelectedIndex()),
 					datePicker.getValue(),
 					LocalTime.of(Integer.valueOf(cbSHours.getValue()), Integer.valueOf(cbFMinutes.getValue())),
 					LocalTime.of(Integer.valueOf(cbFHours.getValue()), Integer.valueOf(cbSMinutes.getValue())));
+			teacherController.editLessonDescription(
+					lessons.get(lessonsTableView.getSelectionModel().getSelectedIndex()), taDescription.getText());
 		} catch (DaoConnectionException e) {
 			HandlerError.showError("check connection");
 		} catch (IllegalLessonAccessException e) {
 			HandlerError.showError("Not your lesson");
-		}
-		
-		try {
-			teacherController.editLessonDescription(lessons.get(lessonsTableView.getSelectionModel().getSelectedIndex()),
-					taDescription.getText());
-		} catch (DaoConnectionException e) {
-			HandlerError.showError("check connection");
-		} catch (IllegalLessonAccessException e) {
-			HandlerError.showError("Not your lesson");
-		}
+		}catch (IndexOutOfBoundsException e) {
+			HandlerError.showError("Select a homework");
+		} 
+
+//		try {
+//			teacherController.editLessonDescription(
+//					lessons.get(lessonsTableView.getSelectionModel().getSelectedIndex()), taDescription.getText());
+//		} catch (DaoConnectionException e) {
+//			HandlerError.showError("check connection");
+//		} catch (IllegalLessonAccessException e) {
+//			HandlerError.showError("Not your lesson");
+//		}catch (IndexOutOfBoundsException e) {
+//			HandlerError.showError("Select a homework");
+//		} 
 	}
-	
+
 	public void switchToTeacherScene() throws IOException {
 		root = FXMLLoader.load(getClass().getResource("../TeacherInterface.fxml"));
 		stage = (Stage) btnBack.getScene().getWindow();

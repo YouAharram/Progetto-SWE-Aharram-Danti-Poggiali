@@ -1,6 +1,6 @@
 package gui;
 
-import java.io.IOException; 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -49,10 +49,10 @@ public class TeacherGradeManager {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	
+
 	@FXML
 	private Button btnBack;
-	
+
 	@FXML
 	private DatePicker datePicker;
 
@@ -61,7 +61,7 @@ public class TeacherGradeManager {
 
 	@FXML
 	private TextArea taAverage;
-	
+
 	@FXML
 	private ComboBox<Student> cbStudents;
 
@@ -73,7 +73,7 @@ public class TeacherGradeManager {
 
 	@FXML
 	private ComboBox<GradeAverageStrategy> cbStrategy;
-	
+
 	@FXML
 	private TableView<ObservableList<String>> gradeTable;
 	private int numberOfStudents = 0;
@@ -100,36 +100,28 @@ public class TeacherGradeManager {
 		}
 		students.forEachRemaining(Liststudents::add);
 
-		cbWeight.getItems().addAll(2, 4, 6);
+		cbWeight.getItems().addAll(1, 2, 3, 4, 5, 6);
 
 		try {
 			students = teacherController.getStudentsByClass(teachingAssignment.getSchoolClass());
 		} catch (StudentDaoException | DaoConnectionException | SchoolClassDaoException e) {
 			HandlerError.showError(e.getMessage());
 		}
-		
-		
-		
-		
+
 		while (students.hasNext()) {
 			Student student = students.next();
 			Iterator<Grade> gradesPerStudent = null;
 			try {
-				gradesPerStudent = teacherController.getAllStudentGradesByTeaching(student,
-						teachingAssignment);
+				gradesPerStudent = teacherController.getAllStudentGradesByTeaching(student, teachingAssignment);
 			} catch (GradeDaoException | DaoConnectionException | StudentDaoException
 					| TeachingAssignmentDaoException e) {
 				HandlerError.showError(e.getMessage());
 			}
 			gradesPerStudent.forEachRemaining(gradesList::add);
 		}
-		
-		
-		
-		
 
 		double grade = 1;
-		
+
 		for (int i = 1; i <= 20; i++) {
 			cbGrades.getItems().add(grade);
 			grade += 0.5;
@@ -147,21 +139,21 @@ public class TeacherGradeManager {
 				return null;
 			}
 		});
-		
+
 		List<GradeAverageStrategy> strategies = new ArrayList<>();
 		strategies.add(new ArithmeticGradeAverageStrategy("Aritmetic average"));
 		strategies.add(new GeometricGradeAverageStrategy("Geometric average"));
 		strategies.add(new WeightedGradeAverageStrategy("Weighted average"));
-		
+
 		cbStrategy.setItems(FXCollections.observableArrayList(strategies));
 		cbStrategy.setConverter(new StringConverter<GradeAverageStrategy>() {
-			
+
 			@Override
 			public String toString(GradeAverageStrategy object) {
-				return object != null ? object.getName(): "";
+				return object != null ? object.getName() : "";
 
 			}
-			
+
 			@Override
 			public GradeAverageStrategy fromString(String string) {
 				return null;
@@ -186,8 +178,7 @@ public class TeacherGradeManager {
 			row.set(0, String.valueOf(student.getName() + " " + student.getSurname()));
 			Iterator<Grade> gradesPerStudent = null;
 			try {
-				gradesPerStudent = teacherController.getAllStudentGradesByTeaching(student,
-						teachingAssignment);
+				gradesPerStudent = teacherController.getAllStudentGradesByTeaching(student, teachingAssignment);
 			} catch (GradeDaoException | DaoConnectionException | StudentDaoException
 					| TeachingAssignmentDaoException e) {
 				HandlerError.showError(e.getMessage());
@@ -200,26 +191,36 @@ public class TeacherGradeManager {
 	}
 
 	public void addGrade() throws NegativeWeightException {
-		Double gradeValue = cbGrades.getValue();
-		String description = taDescription.getText();
-		Student student = cbStudents.getValue();
-		LocalDate date = datePicker.getValue();
-
 		try {
-			teacherController.assignGradeToStudentInDateWithWeight(gradeValue, cbWeight.getValue(),description,teachingAssignment, student, date);
-			handleChoiceBoxChange(cbStudents.getValue());
-		} catch (GradeDaoException | InvalidGradeValueException | DaoConnectionException | StudentDaoException e) {
-			HandlerError.showError(e.getMessage());
+			Double gradeValue = cbGrades.getValue();
+			String description = taDescription.getText();
+			Student student = cbStudents.getValue();
+			LocalDate date = datePicker.getValue();
+			try {
+				teacherController.assignGradeToStudentInDateWithWeight(gradeValue, cbWeight.getValue(), description,
+						teachingAssignment, student, date);
+				handleChoiceBoxChange(cbStudents.getValue());
+			} catch (GradeDaoException | InvalidGradeValueException | DaoConnectionException | StudentDaoException e) {
+				HandlerError.showError(e.getMessage());
+			}
+		} catch (NullPointerException e) {
+			HandlerError.showError("Add all parameters");
 		}
+
 	}
 
 	public void deleteGrade() {
 		try {
-			teacherController.deleteGrade(gradeSelected);
-			handleChoiceBoxChange(cbStudents.getValue());
-		} catch (GradeDaoException | DaoConnectionException e) {
-			HandlerError.showError(e.getMessage());
+			try {
+				teacherController.deleteGrade(gradeSelected);
+				handleChoiceBoxChange(cbStudents.getValue());
+			} catch (GradeDaoException | DaoConnectionException e) {
+				HandlerError.showError(e.getMessage());
+			}
+		} catch (NullPointerException e) {
+			HandlerError.showError("Select a grade");
 		}
+
 	}
 
 	public void goBack() throws IOException {
@@ -227,40 +228,47 @@ public class TeacherGradeManager {
 		stage = (Stage) btnBack.getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		stage.show();	}
+		stage.show();
+	}
 
 	public void editGrade() {
 		try {
-			teacherController.editGradeValue(gradeSelected, cbGrades.getValue());
-			teacherController.editGradeWeight(gradeSelected, cbWeight.getValue());
-			handleChoiceBoxChange(cbStudents.getValue());
-		} catch (GradeDaoException | DaoConnectionException e) {
-			HandlerError.showError(e.getMessage());
+			try {
+				teacherController.editGradeValue(gradeSelected, cbGrades.getValue());
+				teacherController.editGradeWeight(gradeSelected, cbWeight.getValue());
+				handleChoiceBoxChange(cbStudents.getValue());
+			} catch (GradeDaoException | DaoConnectionException e) {
+				HandlerError.showError(e.getMessage());
+			}
+		} catch (NullPointerException e) {
+			HandlerError.showError("Select a grade");
 		}
+
 	}
 
-	
 	public void getAverage() {
 		Double avg = null;
 		try {
-			avg = teacherController.calculateStudentTeachingGradeAverage(cbStudents.getValue(), teachingAssignment, cbStrategy.getValue());
+			avg = teacherController.calculateStudentTeachingGradeAverage(cbStudents.getValue(), teachingAssignment,
+					cbStrategy.getValue());
 		} catch (GradeDaoException | DaoConnectionException | StudentDaoException | TeachingAssignmentDaoException e) {
 			HandlerError.showError(e.getMessage());
 		}
 		taAverage.setText(String.valueOf(avg));
 	}
-	
+
 	protected static void setController(TeacherController teacherController) {
 		TeacherGradeManager.teacherController = teacherController;
 	}
 
 	protected static void setTeachingAssignment(TeachingAssignment teachingAssignment) {
-		 TeacherGradeManager.teachingAssignment = teachingAssignment;
+		TeacherGradeManager.teachingAssignment = teachingAssignment;
 	}
-	
+
 	public void itemSelected() {
+		try {
 			int id = Integer.valueOf(idGradeColumn.getCellData(gradeTable.getSelectionModel().getSelectedIndex()));
-			double value  = Double.valueOf(valueColumn.getCellData(gradeTable.getSelectionModel().getSelectedIndex()));
+			double value = Double.valueOf(valueColumn.getCellData(gradeTable.getSelectionModel().getSelectedIndex()));
 			int weight = Integer.valueOf(weightColumn.getCellData(gradeTable.getSelectionModel().getSelectedIndex()));
 			String description = descriptionColumn.getCellData(gradeTable.getSelectionModel().getSelectedIndex());
 			LocalDate date = LocalDate.parse(dateColumn.getCellData(gradeTable.getSelectionModel().getSelectedIndex()));
@@ -269,12 +277,17 @@ public class TeacherGradeManager {
 			cbWeight.setValue(weight);
 			cbGrades.setValue(value);
 			datePicker.setValue(date);
+		} catch (NumberFormatException e) {
+			HandlerError.showError(e.getMessage());
+		}catch (NullPointerException e) {
+			HandlerError.showError("Select a student");
 		}
+
+	}
 
 	@SuppressWarnings("unchecked")
 	private void handleChoiceBoxChange(Student newValue) {
-		
-		
+
 		gradeTable.getItems().clear();
 		gradeTable.getColumns().clear();
 
@@ -286,28 +299,29 @@ public class TeacherGradeManager {
 		idGradeColumn = new TableColumn<>("idGrade:");
 
 		idGradeColumn.setVisible(false);
-		gradeTable.getColumns().addAll(studentColumn, valueColumn, weightColumn, dateColumn, descriptionColumn,idGradeColumn);
-		
+		gradeTable.getColumns().addAll(studentColumn, valueColumn, weightColumn, dateColumn, descriptionColumn,
+				idGradeColumn);
+
 		Iterator<Grade> grades = null;
 		try {
 			grades = teacherController.getAllStudentGradesByTeaching(newValue, teachingAssignment);
 		} catch (GradeDaoException | DaoConnectionException | StudentDaoException | TeachingAssignmentDaoException e) {
 			HandlerError.showError(e.getMessage());
 		}
-		
+
 		ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
 
 		while (grades.hasNext()) {
-		    Grade grade = grades.next();
-		    ObservableList<String> row = FXCollections.observableArrayList();
-		    row.add(grade.getStudent().getName());
-		    row.add(String.valueOf(grade.getValue()));
-		    row.add(String.valueOf(grade.getWeight()));
-		    row.add(grade.getDate().toString());
-		    row.add(grade.getDescription());
-		    row.add(String.valueOf(grade.getId()));
+			Grade grade = grades.next();
+			ObservableList<String> row = FXCollections.observableArrayList();
+			row.add(grade.getStudent().getName());
+			row.add(String.valueOf(grade.getValue()));
+			row.add(String.valueOf(grade.getWeight()));
+			row.add(grade.getDate().toString());
+			row.add(grade.getDescription());
+			row.add(String.valueOf(grade.getId()));
 
-		    data.add(row);
+			data.add(row);
 		}
 
 		gradeTable.setItems(data);
@@ -318,17 +332,15 @@ public class TeacherGradeManager {
 		dateColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(3)));
 		descriptionColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(4)));
 		idGradeColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue().get(5)));
-		
-
-		
 
 	}
+
 	private void ConfigureColumnForGrade() {
 		gradeTable.getItems().clear();
 		gradeTable.getColumns().clear();
 
 		int size = getMaxNumberOfGrades() + 1;
-		
+
 		for (int i = 0; i < size; i++) {
 			TableColumn<ObservableList<String>, String> column;
 			if (i == 0) {
@@ -347,7 +359,6 @@ public class TeacherGradeManager {
 			column.setOnEditCommit(event -> event.getRowValue().set(colIndex, event.getNewValue()));
 			gradeTable.getColumns().add(column);
 		}
-
 
 		for (int r = 0; r < numberOfStudents; r++) {
 			ObservableList<String> row = FXCollections.observableArrayList();
@@ -372,8 +383,7 @@ public class TeacherGradeManager {
 			numberOfStudents++;
 			Iterator<Grade> gradesPerStudent = null;
 			try {
-				gradesPerStudent = teacherController.getAllStudentGradesByTeaching(students.next(),
-						teachingAssignment);
+				gradesPerStudent = teacherController.getAllStudentGradesByTeaching(students.next(), teachingAssignment);
 			} catch (GradeDaoException | DaoConnectionException | StudentDaoException
 					| TeachingAssignmentDaoException e) {
 				HandlerError.showError(e.getMessage());
