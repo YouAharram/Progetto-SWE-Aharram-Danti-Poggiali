@@ -122,6 +122,7 @@ public class InterfaceTeacherManager {
 			}
 		} catch (StudentDaoException | DaoConnectionException | SchoolClassDaoException e) {
 			HandlerError.showError(e.getMessage());
+			return;
 		}
 
 	}

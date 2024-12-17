@@ -77,6 +77,7 @@ public class TeacherHomeworkManager {
 					teachingAssignment.getSchoolClass());
 		} catch (DaoConnectionException | SchoolClassDaoException | HomeworkDaoException e) {
 			HandlerError.showError(e.getMessage());
+			return;
 		}
 
 		homeworkIterator.forEachRemaining(homeworks::add);
