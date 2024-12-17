@@ -34,6 +34,7 @@ public class TeacherHomeworkManager {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	private Homework homeworkSelected;
 
 	@FXML
 	private DatePicker datePicker;
@@ -65,81 +66,66 @@ public class TeacherHomeworkManager {
 		stage.show();
 	}
 
-	public void showHomework() {
+	public void showHomework() { 
+		homeworkTableView.getItems().clear();
+
 		if (datePicker.getValue() == null) {
 			return;
 		}
 
 		LocalDate selectedDate = datePicker.getValue();
-		Iterator<Homework> homeworkIterator = null;
+
 		try {
-			homeworkIterator = teacherController.getClassHomeworksSubmissionDate(selectedDate,
+			Iterator<Homework> homeworkIterator = teacherController.getClassHomeworksSubmissionDate(selectedDate,
 					teachingAssignment.getSchoolClass());
+
+			ObservableList<Homework> homeworksList = FXCollections.observableArrayList();
+			homeworkIterator.forEachRemaining(homeworksList::add);
+
+			homeworkTableView.setItems(homeworksList);
+
+			subjectHomeworkColumn.setCellValueFactory(
+					cellData -> new SimpleStringProperty(cellData.getValue().getTeaching().getSubject()));
+			teacherHomeworkColumn.setCellValueFactory(
+					cellData -> new SimpleStringProperty(cellData.getValue().getTeaching().getTeacher().getSurname()
+							+ " " + cellData.getValue().getTeaching().getTeacher().getName()));
+			descriptionHomeworkColumn
+					.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
+
 		} catch (DaoConnectionException | SchoolClassDaoException | HomeworkDaoException e) {
 			HandlerError.showError(e.getMessage());
+		}
+	}
+
+	public void addHomework() throws HomeworkDaoException, TeachingAssignmentDaoException, DaoConnectionException {
+		if (datePicker.getValue() == null) {
 			return;
 		}
+		teacherController.assignNewHomework(teachingAssignment, datePicker.getValue(), taDescription.getText(),
+				datePicker.getValue());
 
-		homeworkIterator.forEachRemaining(homeworks::add);
-		ObservableList<Homework> homeworksList = FXCollections.observableArrayList(homeworks);
-		homeworkTableView.setItems(homeworksList);
-
-		subjectHomeworkColumn.setCellValueFactory(
-				cellData -> new SimpleStringProperty(cellData.getValue().getTeaching().getSubject()));
-		teacherHomeworkColumn.setCellValueFactory(
-				cellData -> new SimpleStringProperty(cellData.getValue().getTeaching().getTeacher().getSurname() + " "
-						+ cellData.getValue().getTeaching().getTeacher().getName()));
-		descriptionHomeworkColumn
-				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
 	}
 
-	public void addHomework() {
-		try {
-			try {
-				teacherController.assignNewHomework(teachingAssignment, datePicker.getValue(), taDescription.getText(),
-						datePicker.getValue());
-			} catch (HomeworkDaoException | TeachingAssignmentDaoException | DaoConnectionException  e) {
-				HandlerError.showError("check arguments");
-			}
-		} catch (NullPointerException e) {
-			HandlerError.showError("Add all parameters");
+	public void deleteHomeWork() throws IllegalHomeworkAccessException, HomeworkDaoException, DaoConnectionException {
+		if (homeworkSelected == null) {
+			return;
 		}
+		teacherController.deleteHomework(homeworkSelected);
+
 	}
 
-	public void deleteHomeWork() {
-		try {
-			teacherController.deleteHomework(homeworks.get(homeworkTableView.getSelectionModel().getSelectedIndex()));
-		} catch (IllegalHomeworkAccessException e) {
-			HandlerError.showError("Not your homework");
-			e.printStackTrace();
-		} catch (HomeworkDaoException | DaoConnectionException e) {
-			HandlerError.showError("check connection");
+	public void editHomework() throws HomeworkDaoException, IllegalHomeworkAccessException, DaoConnectionException {
+		if (homeworkSelected == null) {
+			return;
 		}
-		catch(IndexOutOfBoundsException e) {
-			HandlerError.showError("Select a homework");
-		}
-	}
-
-	public void editHomework() {
-		try {
-			Homework homework = homeworks.get(homeworkTableView.getSelectionModel().getSelectedIndex());
-			teacherController.editHomeworkDescription(homework, taDescription.getText());
-			teacherController.editHomeworkSubmissionDate(
-					homeworks.get(homeworkTableView.getSelectionModel().getSelectedIndex()), datePicker.getValue());
-
-		} catch (IllegalHomeworkAccessException e) {
-			HandlerError.showError("Not your homework");
-		} catch (HomeworkDaoException | DaoConnectionException e) {
-			HandlerError.showError("check connection");
-		} catch(IndexOutOfBoundsException  e) {
-			HandlerError.showError("Select a homework");
-		}
+		teacherController.editHomeworkDescription(homeworkSelected, taDescription.getText());
+		teacherController.editHomeworkSubmissionDate(homeworkSelected, datePicker.getValue());
 	}
 
 	public void itemSelected() {
-		Homework homework = homeworkTableView.getSelectionModel().getSelectedItem();
-		taDescription.setText(homework.getDescription());
-		datePicker.setValue(homework.getSubmissionDate());
+		homeworkSelected = homeworkTableView.getSelectionModel().getSelectedItem();
+		taDescription.setText(homeworkSelected.getDescription());
+		datePicker.setValue(homeworkSelected.getSubmissionDate());
 	}
 
 	protected static void setTeachingsAssignement(TeachingAssignment teachingAssignment) {

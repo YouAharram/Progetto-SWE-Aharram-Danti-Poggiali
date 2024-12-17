@@ -247,6 +247,10 @@ public class TeacherGradeManager {
 	}
 
 	public void getAverage() {
+		if(cbStrategy.getValue() == null) {
+			return;
+		}
+		
 		Double avg = null;
 		try {
 			avg = teacherController.calculateStudentTeachingGradeAverage(cbStudents.getValue(), teachingAssignment,
