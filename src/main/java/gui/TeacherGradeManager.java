@@ -122,7 +122,7 @@ public class TeacherGradeManager {
 
 		double grade = 1;
 
-		for (int i = 1; i <= 20; i++) {
+		for (int i = 1; i < 20; i++) {
 			cbGrades.getItems().add(grade);
 			grade += 0.5;
 		}
