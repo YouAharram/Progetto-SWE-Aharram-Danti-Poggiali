@@ -95,26 +95,6 @@ public class TeacherLessonManager {
 			cbSMinutes.getItems().add(String.format("%02d", i));
 			cbFMinutes.getItems().add(String.format("%02d", i));
 		}
-	}
-
-	@FXML
-	public void showLesson() {
-		lessonsTableView.getItems().clear();
-		if (datePicker.getValue() == null) {
-			return;
-		}
-
-		LocalDate selectedDate = datePicker.getValue();
-		Iterator<Lesson> lessonsIterator = null;
-		try {
-			lessonsIterator = teacherController.getClassLessonsInDay(selectedDate, teachingAssignment.getSchoolClass());
-		} catch (DaoConnectionException | LessonDaoException | SchoolClassDaoException e) {
-			HandlerError.showError(e.getMessage());
-		}
-
-		lessonsIterator.forEachRemaining(lessons::add);
-		ObservableList<Lesson> lessonsList = FXCollections.observableArrayList(lessons);
-		lessonsTableView.setItems(lessonsList);
 
 		subjectLessonColumn.setCellValueFactory(
 				cellData -> new SimpleStringProperty(cellData.getValue().getTeaching().getSubject()));
@@ -127,6 +107,32 @@ public class TeacherLessonManager {
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEndHour().toString()));
 		descriptionLessonColumn
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
+
+	}
+
+	@FXML
+	public void showLesson() {
+		lessonsTableView.setItems(FXCollections.observableArrayList());
+		lessons.clear();
+
+		if (datePicker.getValue() == null) {
+			return;
+		}
+
+		LocalDate selectedDate = datePicker.getValue();
+		Iterator<Lesson> lessonsIterator = null;
+
+		try {
+			lessonsIterator = teacherController.getClassLessonsInDay(selectedDate, teachingAssignment.getSchoolClass());
+		} catch (DaoConnectionException | LessonDaoException | SchoolClassDaoException e) {
+			HandlerError.showError(e.getMessage());
+			return;
+		}
+
+		lessonsIterator.forEachRemaining(lessons::add);
+
+		ObservableList<Lesson> lessonsList = FXCollections.observableArrayList(lessons);
+		lessonsTableView.setItems(lessonsList);
 	}
 
 	public static void setController(TeacherController teacherController) {
@@ -145,7 +151,7 @@ public class TeacherLessonManager {
 		}
 	}
 
-	public void deleteLesson() {	
+	public void deleteLesson() {
 		try {
 			teacherController.deleteLesson(lessons.get(lessonsTableView.getSelectionModel().getSelectedIndex()));
 		} catch (IllegalLessonAccessException e) {
@@ -180,9 +186,9 @@ public class TeacherLessonManager {
 			HandlerError.showError("check connection");
 		} catch (IllegalLessonAccessException e) {
 			HandlerError.showError("Not your lesson");
-		}catch (IndexOutOfBoundsException e) {
+		} catch (IndexOutOfBoundsException e) {
 			HandlerError.showError("Select a homework");
-		} 
+		}
 
 //		try {
 //			teacherController.editLessonDescription(

@@ -236,6 +236,7 @@ public class TeacherGradeManager {
 			try {
 				teacherController.editGradeValue(gradeSelected, cbGrades.getValue());
 				teacherController.editGradeWeight(gradeSelected, cbWeight.getValue());
+				teacherController.editGradeDescription(gradeSelected, taDescription.getText());
 				handleChoiceBoxChange(cbStudents.getValue());
 			} catch (GradeDaoException | DaoConnectionException e) {
 				HandlerError.showError(e.getMessage());

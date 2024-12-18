@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InterfaceTeacherManager">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InterfaceTeacherManager">
    <children>
       <HBox prefHeight="600.0" prefWidth="1000.0" spacing="10.0">
          <children>
@@ -29,7 +29,7 @@
                      </font>
                   </Label>
                   <!-- Teacher Surname Label -->
-                  <Label fx:id="lblTeacherSurname" layoutX="220.0" layoutY="18.0" text="Surname">
+                  <Label fx:id="lblTeacherSurname" layoutX="105.0" layoutY="52.0" text="Surname">
                      <font>
                         <Font name="Arial Bold" size="16.0" />
                      </font>
@@ -40,13 +40,7 @@
                         <Font name="Arial Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="259.0" layoutY="211.0" text="My classes:">
-                     <font>
-                        <Font name="Arial Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <ChoiceBox fx:id="cbTeachings" layoutX="25.0" layoutY="249.0" prefHeight="44.0" prefWidth="162.0" />
-                  <ChoiceBox fx:id="cbClasses" layoutX="220.0" layoutY="249.0" prefHeight="44.0" prefWidth="171.0" />
+                  <ChoiceBox fx:id="cbTeachings" layoutX="25.0" layoutY="249.0" onDragDetected="#setTeachingAssignment" prefHeight="44.0" prefWidth="162.0" />
 
                   <!-- Buttons with adjusted sizes and positions -->
                   <Button fx:id="btnGrades" layoutX="25.0" layoutY="315.0" mnemonicParsing="false" onAction="#openGrades" prefHeight="44.0" prefWidth="162.0" text="Grades" />

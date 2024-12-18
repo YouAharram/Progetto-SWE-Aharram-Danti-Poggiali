@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -48,9 +49,7 @@ public class InterfaceTeacherManager {
 	private Label lblTeacherSurname;
 
 	@FXML
-	private ChoiceBox<String> cbTeachings;
-	@FXML
-	private ChoiceBox<String> cbClasses;
+	private ChoiceBox<TeachingAssignment> cbTeachings;
 	@FXML
 	private TableView<ObservableList<String>> tvGradesStudents;
 	private Stage stage;
@@ -58,6 +57,8 @@ public class InterfaceTeacherManager {
 	private Parent root;
 
 	private SchoolClass schoolClass;
+	
+	private TeachingAssignment teachingAssignment;
 
 	@FXML
 	public void initialize() {
@@ -73,16 +74,12 @@ public class InterfaceTeacherManager {
         }
 
 		setControllerForAllScene();
-		cbTeachings.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null) {
-				handleChoiceBoxChange(newValue);
-			}
-		});
 		populateTeachings();
 
 	}
 
 	public void showStudents() {
+		setTeachingAssignment();
 		tvGradesStudents.getItems().clear();
 		tvGradesStudents.getColumns().clear();
 
@@ -100,8 +97,8 @@ public class InterfaceTeacherManager {
 
 		Iterator<Student> students = null;
 		try {
-			if (cbClasses.getValue() != null) {
-				students = teacherController.getStudentsByClass(new SchoolClass(cbClasses.getValue()));
+			if (teachingAssignment != null) {
+				students = teacherController.getStudentsByClass(teachingAssignment.getSchoolClass());
 				ObservableList<ObservableList<String>> newRows = FXCollections.observableArrayList();
 				int i = 1;
 
@@ -127,10 +124,6 @@ public class InterfaceTeacherManager {
 
 	}
 
-	private void handleChoiceBoxChange(String newValue) {
-		populateClass();
-	}
-
 	public void populateTeachings() {
 		if (teacherController != null) {
 			Iterator<TeachingAssignment> teachings = null;
@@ -140,37 +133,30 @@ public class InterfaceTeacherManager {
 				HandlerError.showError(e.getMessage());
 			}
 			while (teachings.hasNext()) {
-				cbTeachings.getItems().add(teachings.next().getSubject());
+				cbTeachings.getItems().add(teachings.next());
 			}
-		}
-	}
+			
+			cbTeachings.setConverter(new StringConverter<TeachingAssignment>() {
+				@Override
+				public String toString(TeachingAssignment teaching) {
+					return teaching != null ? teaching.getSubject() + " " + teaching.getSchoolClass().getClassName() : "";
+				}
 
-	private void populateClass() {
-		if (teacherController != null) {
-			List<TeachingAssignment> classes = null;
-			try {
-				Iterator<TeachingAssignment> teachings = null;
-				String subject = cbTeachings.getValue();
-				teachings = teacherController.getAllMyTeachings();
-				classes = StreamSupport
-						.stream(Spliterators.spliteratorUnknownSize(teachings, Spliterator.ORDERED), false)
-						.filter(t -> t.getSubject().equals(subject)).collect(Collectors.toList());
-			} catch (TeachingAssignmentDaoException | TeacherDaoException | DaoConnectionException e) {
-				HandlerError.showError(e.getMessage());
-			}
-			for (TeachingAssignment ta : classes) {
-				cbClasses.getItems().add(ta.getSchoolClass().getClassName());
-			}
+				@Override
+				public TeachingAssignment fromString(String string) {
+					return null;
+				}
+			});
 		}
 	}
 
 	@FXML
 	public void openLesson() throws IOException {
-		if (cbClasses.getValue() != null) {
+		setTeachingAssignment();
+		if (teachingAssignment != null) {
 			openWindow("../TeacherLessonScene.fxml", "Lesson");
 			TeacherLessonManager
-					.setTeachingsAssignement(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
-							cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));	
+					.setTeachingsAssignement(cbTeachings.getValue());	
 		}
 		else {
 			HandlerError.showError("Please select teaching and class");
@@ -180,11 +166,11 @@ public class InterfaceTeacherManager {
 
 	@FXML
 	public void openHomework() throws IOException {
-		if (cbClasses.getValue() != null) {
+		setTeachingAssignment();
+		if (teachingAssignment != null) {
 			openWindow("../TeacherHomeworkScene.fxml", "Homework");
 			TeacherHomeworkManager
-					.setTeachingsAssignement(new TeachingAssignment(cbTeachings.getSelectionModel().getSelectedIndex() + 1,
-							cbTeachings.getValue(), teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
+					.setTeachingsAssignement(cbTeachings.getValue());
 			
 		}
 		else {
@@ -194,15 +180,15 @@ public class InterfaceTeacherManager {
 
 	@FXML
 	public void openMeeting() throws IOException {
+		setTeachingAssignment();
 		openWindow("../TeacherMeetingScene.fxml", "Meeting");
 	}
 
 	@FXML
 	public void openGrades() throws IOException {
-		if (cbClasses.getValue() != null) {
-			TeacherGradeManager.setTeachingAssignment(new TeachingAssignment(
-					cbTeachings.getSelectionModel().getSelectedIndex() + 1, cbTeachings.getValue(),
-					teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
+		setTeachingAssignment();
+		if (teachingAssignment != null) {
+			TeacherGradeManager.setTeachingAssignment(cbTeachings.getValue());
 			openWindow("../TeacherGradesScene.fxml", "Grades");
 		} else {
 			HandlerError.showError("Please select teaching and class");
@@ -212,9 +198,9 @@ public class InterfaceTeacherManager {
 
 	@FXML
 	public void openAbsence() throws IOException {
-		if (cbClasses.getValue() != null && !cbClasses.getValue().isEmpty()) {
-			schoolClass = new SchoolClass(cbClasses.getValue());
-			TeacherAbsenceSceneManager.setSchoolClass(schoolClass);
+		setTeachingAssignment();
+		if (teachingAssignment != null) {
+			TeacherAbsenceSceneManager.setSchoolClass(teachingAssignment.getSchoolClass());
 			openWindow("../TeacherAbsenceScene.fxml", "Absences");
 		} 
 		else {
@@ -225,10 +211,9 @@ public class InterfaceTeacherManager {
 
 	@FXML
 	public void openDisciplinaryReport() throws IOException {
-		if (cbClasses.getValue() != null) {
-			TeacherDisciplinaryReportManager.setTeachingAssignment(new TeachingAssignment(
-					cbTeachings.getSelectionModel().getSelectedIndex() + 1, cbTeachings.getValue(),
-					teacherController.getTeacher(), new SchoolClass(cbClasses.getValue())));
+		setTeachingAssignment();
+		if (teachingAssignment != null) {
+			TeacherDisciplinaryReportManager.setTeachingAssignment(cbTeachings.getValue());
 			openWindow("../TeacherDisciplinaryReportScene.fxml", "Disciplinary report");
 
 		} else {
@@ -256,5 +241,10 @@ public class InterfaceTeacherManager {
 
 	public static void setController(TeacherController teacherController) {
 		InterfaceTeacherManager.teacherController = teacherController;
+	}
+
+
+	public void setTeachingAssignment() {
+		this.teachingAssignment = cbTeachings.getValue();
 	}
 }
