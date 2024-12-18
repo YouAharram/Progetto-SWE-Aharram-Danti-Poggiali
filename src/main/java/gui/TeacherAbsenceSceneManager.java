@@ -1,10 +1,13 @@
 package gui;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections; 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -22,7 +25,9 @@ import domainModel.Absence;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import businessLogic.TeacherController;
 
@@ -50,22 +55,72 @@ public class TeacherAbsenceSceneManager {
     public static void setTeacherController(TeacherController teacherController) {
         TeacherAbsenceSceneManager.teacherController = teacherController;
     }
+    
+
+    @FXML
+    private void initialize() {
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        justificationColumn.setCellValueFactory(new PropertyValueFactory<>("justification"));
+
+        presenceColumn.setCellValueFactory(cellData -> cellData.getValue().presenceProperty());
+
+        presenceColumn.setCellFactory(column -> new TableCell<>() {
+            private final Button presenceButton = new Button();
+
+            @Override
+            protected void updateItem(String presence, boolean empty) {
+                super.updateItem(presence, empty);
+
+                if (empty || presence == null) {
+                    setGraphic(null);
+                    return;
+                }
+
+                StudentAbsenceInfo currentInfo = getTableView().getItems().get(getIndex());
+                presenceButton.setText(currentInfo.getPresence());
+                presenceButton.setStyle(currentInfo.getPresence().equals("Present")
+                        ? "-fx-background-color: green; -fx-text-fill: white;"
+                        : "-fx-background-color: red; -fx-text-fill: white;");
+                presenceButton.setOnAction(event -> {
+                    if (currentInfo.getPresence().equals("Absent")) {
+                        return;
+                    }
+                    String newState = "Absent";
+                    currentInfo.setPresence(newState);
+                    presenceButton.setText(newState);
+                    presenceButton.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+                    LocalDate selectedDate = datePicker.getValue();
+                    if (selectedDate != null && newState.equals("Absent")) {
+                        addAbsence(currentInfo.getStudent(), selectedDate);
+                    }
+                    getTableView().refresh();
+                });
+
+                setGraphic(presenceButton);
+            }
+        });
+
+    }
 
     @FXML
     public void showAbsences() {
         LocalDate selectedDate = datePicker.getValue();
 
         if (selectedDate == null) {
+            HandlerError.showError("Please select a date");
             return;
         }
 
         Iterator<Student> studentIterator;
-        Iterator<Absence> absenceIterator;
+        List<Absence> absenceList = new ArrayList<>();
+        
         try {
             studentIterator = teacherController.getStudentsByClass(schoolClass);
-            absenceIterator = teacherController.getAbsencesByClassInDate(schoolClass, selectedDate);
+            teacherController.getAbsencesByClassInDate(schoolClass, selectedDate)
+            		.forEachRemaining(absenceList::add);
         } catch (StudentDaoException | AbsenceDaoException | DaoConnectionException | SchoolClassDaoException e) {
-            e.printStackTrace();
+            HandlerError.showError(e.getMessage());
             return;
         }
 
@@ -74,20 +129,15 @@ public class TeacherAbsenceSceneManager {
         while (studentIterator.hasNext()) {
             Student student = studentIterator.next();
             String justification = "";
-            String presenceStatus = "Present";
-
-            while (absenceIterator.hasNext()) {
-                Absence absence = absenceIterator.next();
+            String presenceStatus = "Present"; 
+            for (Absence absence : absenceList) {
                 if (absence.getStudent().equals(student)) {
                     justification = absence.isJustified() ? "Yes" : "No";
                     presenceStatus = "Absent";
-                    break;
                 }
             }
-
             StudentAbsenceInfo info = new StudentAbsenceInfo(
-                student.getName(),
-                student.getSurname(),
+                student,
                 presenceStatus,
                 justification
             );
@@ -95,7 +145,9 @@ public class TeacherAbsenceSceneManager {
         }
 
         studentTableView.setItems(absenceData);
+
     }
+
 
     public void switchToTeacherScene() throws IOException{
     	        root = FXMLLoader.load(getClass().getResource("../TeacherInterface.fxml"));
@@ -105,42 +157,57 @@ public class TeacherAbsenceSceneManager {
     	        stage.show();
    }
 
-    public static class StudentAbsenceInfo {
-        private String firstName;
-        private String lastName;
-        private String presence;
-        private String justification;
 
-        public StudentAbsenceInfo(String firstName, String lastName, String presence, String justification) {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.presence = presence;
-            this.justification = justification;
+    public static class StudentAbsenceInfo {
+        private final Student student;
+        private final StringProperty presence;
+        private final StringProperty justification;
+
+        public StudentAbsenceInfo(Student student, String presence, String justification) {
+            this.student = student;
+            this.presence = new SimpleStringProperty(presence);
+            this.justification = new SimpleStringProperty(justification);
+        }
+
+        public Student getStudent() {
+            return student;
         }
 
         public String getFirstName() {
-            return firstName;
+            return student.getName();
         }
 
         public String getLastName() {
-            return lastName;
+            return student.getSurname();
         }
 
         public String getPresence() {
+            return presence.get();
+        }
+
+        public void setPresence(String presence) {
+            this.presence.set(presence);
+        }
+
+        public StringProperty presenceProperty() {
             return presence;
         }
 
         public String getJustification() {
-            return justification;
+            return justification.get();
         }
+        
     }
 
-    @FXML
-    private void initialize() {
-        firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-        lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        presenceColumn.setCellValueFactory(new PropertyValueFactory<>("presence"));
-        justificationColumn.setCellValueFactory(new PropertyValueFactory<>("justification"));
+
+    private void addAbsence(Student student, LocalDate date) {
+    	try {
+			teacherController.assignAbsenceToStudentInDate(student, date);
+		} catch (AbsenceDaoException | DaoConnectionException | StudentDaoException e) {
+			HandlerError.showError(e.getMessage());
+		}
+    	showAbsences();
+    	
     }
 
     public static void setTeacherAbsence(SchoolClass schoolClass) {
