@@ -16,14 +16,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Spliterator;
-import java.util.Spliterators;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import businessLogic.TeacherController;
-import domainModel.SchoolClass;
 import domainModel.Student;
 import domainModel.TeachingAssignment;
 import exceptions.DaoConnectionException;
@@ -56,7 +50,6 @@ public class InterfaceTeacherManager {
 	private Scene scene;
 	private Parent root;
 
-	private SchoolClass schoolClass;
 	
 	private TeachingAssignment teachingAssignment;
 
