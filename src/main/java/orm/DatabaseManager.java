@@ -12,9 +12,9 @@ public class DatabaseManager {
     private static DatabaseManager instance;
 
     private Connection connection;
-	private static final String url = "jdbc:mysql://34.173.200.107:3306/classFlowDB?connectTimeout=20000";
-	private static final String user = "db_manager";
-	private static final String password = "classFlow@2024";
+	private static final String url = "jdbc:mysql://sql8.freesqldatabase.com:3306/sql8764243?connectTimeout=20000";
+	private static final String user = "sql8764243";
+	private static final String password = "1UkX8QxDFQ";
 
     private DatabaseManager() throws DaoConnectionException {
           try {
